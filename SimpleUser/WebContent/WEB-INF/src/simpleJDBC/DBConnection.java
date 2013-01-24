@@ -24,32 +24,7 @@ public class DBConnection {
 		}
 		catch (Exception e) {
 			System.out.println(e);
-			//TODO: add throws
 		}
 		return conn;
-	}
-	
-	//TODO get rid of this test
-	public void testOut() throws SQLException {
-		Connection conn = null;
-		try {
-			
-			conn = DBConnection.getConnection();
-			
-			String query = "SELECT * FROM role;";
-			
-			PreparedStatement statement = conn.prepareStatement(query);
-			ResultSet rs = statement.executeQuery();
-			
-			while (rs.next()) {
-				System.out.println("description: " + rs.getString("description"));
-			}
-		}
-		catch (Exception e) {
-			System.out.println("oops: " + e);
-		}
-		finally {
-			conn.close();
-		}
 	}
 }
