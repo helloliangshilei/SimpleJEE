@@ -55,8 +55,8 @@
 	UserDAO userDAORemove = UserDAOFactory.getUserDAO("jdbc");
 	User userRemove = new User();
 	userRemove.setUserName("tarantinoq");
-	int test = userDAORemove.removeUser(userRemove);
-	if (test == 1)
+	int remove = userDAORemove.removeUser(userRemove);
+	if (remove == 1)
 		out.println("<br/>  Delete user <b>" + userRemove.getUserName() + "</b> successfull");
 	else
 		out.println("<br/> Deleting user failed");
