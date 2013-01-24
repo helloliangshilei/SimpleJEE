@@ -12,5 +12,4 @@ public class UserDAOFactory {
 			return new UserDAOImplSimple();
 		}
 	}
-
 }
