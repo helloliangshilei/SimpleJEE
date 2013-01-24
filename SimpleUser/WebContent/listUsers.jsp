@@ -17,7 +17,7 @@
 	UserDAO userDAO2 = UserDAOFactory.getUserDAO("jdbc");
 	User userREmove = new User();
 	
-	
+	//adfadf
 	%>
 
 	 
