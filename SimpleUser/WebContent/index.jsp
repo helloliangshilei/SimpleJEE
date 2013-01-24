@@ -11,7 +11,6 @@
 <title>Welcome to Jason's simple User App</title>
 </head>
 <body>
-Need to start with a login page
 
 </body>
 </html>
