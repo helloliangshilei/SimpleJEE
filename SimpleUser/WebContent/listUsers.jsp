@@ -12,6 +12,13 @@
 	User user = userDAO.getUser("mckerrj");
 	out.println("Lastname is: " + user.getLastName());
 	%>
+	
+	<%
+	UserDAO userDAO2 = UserDAOFactory.getUserDAO("jdbc");
+	User userREmove = new User();
+	
+	
+	%>
 
 	 
 </body>
