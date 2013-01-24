@@ -65,6 +65,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 insert into user (username, firstname, lastname, password) values ('mckerrj', 'Jason', 'Mckerr', 'mckerrj314');
 insert into user (username, firstname, lastname, password) values ('gordond', 'Dexter', 'Gordon', 'gordond314');
+insert into user (username, firstname, lastname, password) values ('test1', 'testfirst', 'testlast', 'passtest1');
 commit;
 insert into role (role, description) values ('administrator', 'this person administrates..er..administrators..admmins...administers stuff');
 insert into role (role, description) values ('developer', 'this person develops stuff');
