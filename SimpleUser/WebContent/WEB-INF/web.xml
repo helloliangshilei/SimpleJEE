@@ -29,6 +29,10 @@
 	<servlet>
   	<servlet-name>ServletTestRunner</servlet-name>
   	<servlet-class>org.apache.cactus.server.runner.ServletTestRunner</servlet-class>
+  	<init-param>
+        <param-name>xsl-stylesheet</param-name>
+        <param-value>cactus-report.xsl</param-value>
+    </init-param>
 	</servlet>
 
 	<servlet-mapping>
