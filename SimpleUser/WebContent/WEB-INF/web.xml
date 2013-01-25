@@ -16,4 +16,28 @@
       <res-type>javax.sql.DataSource</res-type>
       <res-auth>Container</res-auth>
   </resource-ref>
+
+	<servlet>
+  	<servlet-name>ServletRedirector</servlet-name>
+  	<servlet-class>org.apache.cactus.server.ServletTestRedirector</servlet-class>
+  	<init-param>
+    	<param-name>param1</param-name>
+    	<param-value>value1 used for testing</param-value>
+  	</init-param>
+	</servlet>
+
+	<servlet>
+  	<servlet-name>ServletTestRunner</servlet-name>
+  	<servlet-class>org.apache.cactus.server.runner.ServletTestRunner</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+    <servlet-name>ServletRedirector</servlet-name>
+    <url-pattern>/ServletRedirector</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+    <servlet-name>ServletTestRunner</servlet-name>
+    <url-pattern>/ServletTestRunner</url-pattern>
+	</servlet-mapping>
 </web-app>
