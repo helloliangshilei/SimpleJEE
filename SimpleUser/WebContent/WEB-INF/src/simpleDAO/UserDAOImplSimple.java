@@ -6,11 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import object.User;
 import simpleJDBC.DBConnection;
 
 public class UserDAOImplSimple implements UserDAO {
+	
+	private static Logger log = LoggerFactory.getLogger(UserDAOImplSimple.class);
 
 	@Override
 	public int saveUser(User user) throws SQLException {
@@ -30,10 +34,11 @@ public class UserDAOImplSimple implements UserDAO {
 			throw new SQLException(sqle);
 		}
 		catch(Exception e) {
-			System.out.println("oops: " + e);
+			log.error("Exception happened in UserDAOImplSimple.saveUser: " + e);
 		}
 		finally {
 			conn.close();
+			log.debug("Connection closed in UserDAOImplSimple.saveUser");
 		}
 		return status;
 	}
@@ -57,10 +62,11 @@ public class UserDAOImplSimple implements UserDAO {
 			throw new SQLException(sqle);
 		}
 		catch(Exception e) {
-			System.out.println("oops: " + e);
+			log.error("Exception happened in UserDAOImplSimple.changeUser: " + e);
 		}
 		finally {
 			conn.close();
+			log.debug("Connection closed in: UserDAOImplSimple.changeUser");
 		}
 		return status;
 	}
@@ -82,15 +88,17 @@ public class UserDAOImplSimple implements UserDAO {
 			user.setLastName(result.getString("lastname"));
 			user.setUserName(result.getString("username"));
 			user.setPassword(result.getString("password"));
+			
 		}
 		catch (SQLException sqle) {
 			throw new SQLException(sqle);
 		}
 		catch (Exception e) {
-			System.out.println("oops: " + e);
+			log.error("Exception happened in UserDAOImplSimple.getUser: " + e);
 		}
 		finally {
 			conn.close();
+			log.debug("Connection closed in: UserDAOImplSimple.getUser");
 		}
 		return user;
 	}
@@ -109,10 +117,11 @@ public class UserDAOImplSimple implements UserDAO {
 			throw new SQLException(sqle);
 		}
 		catch (Exception e) {
-			System.out.println("oops: " + e);
+			log.error("Exception happened in UserDAOImplSimple.removeUser: " + e);
 		}
 		finally {
 			conn.close();
+			log.debug("Connection closed in: UserDAOImplSimple.removeUser");
 		}
 		return status;
 	}
@@ -141,10 +150,11 @@ public class UserDAOImplSimple implements UserDAO {
 			throw new SQLException(sqle);
 		}
 		catch (Exception e) {
-			System.out.println("oops: " + e);
+			log.error("Exception happened in UserDAOImplSimple.listAllUsers: " + e);
 		}
 		finally {
 			conn.close();
+			log.debug("Connection closed in: UserDAOImplSimple.listAllUsers");
 		}
 	  return t;
   }
