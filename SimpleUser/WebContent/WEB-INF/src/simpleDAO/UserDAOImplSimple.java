@@ -26,6 +26,9 @@ public class UserDAOImplSimple implements UserDAO {
 			insertUserStmt.setString(4, user.getPassword());
 			status = insertUserStmt.executeUpdate();
 		}
+		catch (SQLException sqle) {
+			throw new SQLException(sqle);
+		}
 		catch(Exception e) {
 			System.out.println("oops: " + e);
 		}
@@ -49,6 +52,9 @@ public class UserDAOImplSimple implements UserDAO {
 			insertUserStmt.setString(3, user.getPassword());
 			insertUserStmt.setString(4, user.getUserName());
 			status = insertUserStmt.executeUpdate();
+		}
+		catch (SQLException sqle) {
+			throw new SQLException(sqle);
 		}
 		catch(Exception e) {
 			System.out.println("oops: " + e);
@@ -75,6 +81,10 @@ public class UserDAOImplSimple implements UserDAO {
 			user.setFirstName(result.getString("firstname"));
 			user.setLastName(result.getString("lastname"));
 			user.setUserName(result.getString("username"));
+			user.setPassword(result.getString("password"));
+		}
+		catch (SQLException sqle) {
+			throw new SQLException(sqle);
 		}
 		catch (Exception e) {
 			System.out.println("oops: " + e);
@@ -94,6 +104,9 @@ public class UserDAOImplSimple implements UserDAO {
 			PreparedStatement deleteUserStmt = conn.prepareStatement("DELETE FROM user WHERE username = ?");
 			deleteUserStmt.setString(1, user.getUserName());
 			status = deleteUserStmt.executeUpdate();
+		}
+		catch (SQLException sqle) {
+			throw new SQLException(sqle);
 		}
 		catch (Exception e) {
 			System.out.println("oops: " + e);
@@ -123,6 +136,9 @@ public class UserDAOImplSimple implements UserDAO {
 				user.setPassword(result.getString("password"));
 				t.add(user);
 			}
+		}
+		catch (SQLException sqle) {
+			throw new SQLException(sqle);
 		}
 		catch (Exception e) {
 			System.out.println("oops: " + e);
