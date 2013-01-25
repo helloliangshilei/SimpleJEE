@@ -63,7 +63,7 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-insert into user (username, firstname, lastname, password) values ('mckerrj', 'Jason', 'Mckerr', 'mckerrj314');
+insert into user (username, firstname, lastname, password) values ('mckerrj', 'Jason', 'McKerr', 'mckerrj314');
 insert into user (username, firstname, lastname, password) values ('gordond', 'Dexter', 'Gordon', 'gordond314');
 commit;
 insert into role (role, description) values ('administrator', 'this person administrates..er..administrators..admmins...administers stuff');
