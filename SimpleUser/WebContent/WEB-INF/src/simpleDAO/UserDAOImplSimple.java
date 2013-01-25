@@ -135,9 +135,7 @@ public class UserDAOImplSimple implements UserDAO {
 			PreparedStatement getUserStmt = conn.prepareStatement("SELECT * FROM user");
 			ResultSet result = getUserStmt.executeQuery();
 			
-			if(!result.next())
-				return null;
-			else while (result.next()) {
+			while (result.next()) {
 				User user = new User();
 				user.setUserName(result.getString("username"));
 				user.setFirstName(result.getString("firstname"));
