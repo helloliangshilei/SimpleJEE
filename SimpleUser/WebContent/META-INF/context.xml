@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-    <!-- Specify a JDBC datasource -->
+    <!-- JDBC datasource -->
     <Resource name="jdbc/simpleapp" 
               auth="Container"
               type="javax.sql.DataSource" 
@@ -13,7 +13,7 @@
               maxIdle="4"
               maxWait="1000"/>
 
-    <!-- Specify the security realm and location of the users file
+    <!-- Security realm and location of the users file
     <Realm className="org.apache.catalina.realm.MemoryRealm" 
            pathname="/tomcat/webapps/ROOT/WEB-INF/users.xml" />
     -->
