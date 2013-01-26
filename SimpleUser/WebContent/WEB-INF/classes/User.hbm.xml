@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+<hibernate-mapping>
+ 	<class name="object.User" table="user">
+
+ 	 	<id column="username" name="userName" type="java.lang.String">
+ 	 	 	<generator class="assigned"/>
+ 	 	</id>
+		<property column="firstname" length="100" name="firstName" not-null="true" type="java.lang.String"/>
+		<property column="lastname" length="100" name="lastName" type="java.lang.String"/>
+		<property column="password" length="100" name="password" type="java.lang.String"/>
+
+ 	</class>
+</hibernate-mapping> 
