@@ -15,7 +15,7 @@ import commonDAO.UserDAOFactory;
 import simpleDAO.UserDAO;
 
 /*
- * I know that my tests are chained rather than propre setup and breakdown for each
+ * I know that my tests are chained rather than proper setup and breakdown for each
  * but it's just a sample app. :)
  */
 
