@@ -12,12 +12,12 @@ import org.slf4j.LoggerFactory;
 import object.User;
 import simpleJDBC.DBConnection;
 
-public class UserDAOImplSimple implements UserDAO {
+public class UserDAOImplSimple implements UserDAOSimple {
 	
 	private static Logger log = LoggerFactory.getLogger(UserDAOImplSimple.class);
 
 	@Override
-	public int saveUser(User user) throws SQLException {
+	public int save(User user) throws SQLException {
 		Connection conn = null;
 		int status = 0;
 		try {
@@ -44,7 +44,7 @@ public class UserDAOImplSimple implements UserDAO {
 	}
 
 	@Override
-	public int changeUser(User user) throws SQLException {
+	public int change(User user) throws SQLException {
 		Connection conn = null;
 		int status = 0;
 		try {
@@ -72,7 +72,7 @@ public class UserDAOImplSimple implements UserDAO {
 	}
 
 	@Override
-	public User getUser(String username) throws SQLException {
+	public User find(String username) throws SQLException {
 		Connection conn = null;
 		User user = new User();
 		try {
@@ -104,7 +104,7 @@ public class UserDAOImplSimple implements UserDAO {
 	}
 
 	@Override
-	public int removeUser(User user) throws SQLException {
+	public int remove(User user) throws SQLException {
 		Connection conn = null;
 		int status = 0;
 		try {
@@ -127,7 +127,7 @@ public class UserDAOImplSimple implements UserDAO {
 	}
 
 	@Override
-  public List<User> listAllUsers() throws SQLException {
+  public List<User> listAll() throws SQLException {
 		Connection conn = null;
 		List<User> t = new ArrayList<User>();
 		try {
