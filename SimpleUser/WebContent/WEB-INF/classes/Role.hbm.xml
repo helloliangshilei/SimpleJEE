@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+<hibernate-mapping>
+ 	<class name="object.Role" table="role">
+
+ 	 	<id column="role" name="role" type="java.lang.String">
+ 	 	 	<generator class="assigned"/>
+ 	 	</id>
+		<property column="description" length="100" name="description" not-null="true" type="java.lang.String"/>
+		<set name="users" table="user_role" cascade="all">
+			<key column="role" />
+			<many-to-many column="userName"  class="object.User" />
+		</set>
+ 	</class>
+</hibernate-mapping> 
