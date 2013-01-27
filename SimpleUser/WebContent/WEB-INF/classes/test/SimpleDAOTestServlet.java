@@ -9,10 +9,8 @@ import object.User;
 
 import org.apache.cactus.ServletTestCase;
 
-
-import commonDAO.UserDAOFactory;
-
-import simpleDAO.UserDAO;
+import simpleDAO.UserDAOSimple;
+import simpleDAO.UserDAOFactory;
 
 /*
  * I know that my tests are chained rather than proper setup and breakdown for each
@@ -33,8 +31,8 @@ public class SimpleDAOTestServlet extends ServletTestCase {
 		User userGet = new User();
 		
 		try {
-			UserDAO userDAOGet = UserDAOFactory.getUserDAO("jdbc");
-			userGet = userDAOGet.getUser("mckerrj");
+			UserDAOSimple userDAOGet = UserDAOFactory.getUserDAO("jdbc");
+			userGet = userDAOGet.find("mckerrj");
 		} 
 		catch (Exception e) {
 			fail("Test failed with exception: " + e);
@@ -49,13 +47,13 @@ public class SimpleDAOTestServlet extends ServletTestCase {
 		int add = 0;
 
 		try {
-			UserDAO userDAOAdd = UserDAOFactory.getUserDAO("jdbc");
+			UserDAOSimple userDAOAdd = UserDAOFactory.getUserDAO("jdbc");
 			User userAdd = new User();
 			userAdd.setUserName("tarantinoq");
 			userAdd.setFirstName("Quentin");
 			userAdd.setLastName("Tarantino");
 			userAdd.setPassword("asdfasdf");
-			add = userDAOAdd.saveUser(userAdd);
+			add = userDAOAdd.save(userAdd);
 		}
 		catch (Exception e) {
 			fail("Test failed with exception: " + e);
@@ -67,13 +65,13 @@ public class SimpleDAOTestServlet extends ServletTestCase {
 		int change = 0;
 		
 		try {
-			UserDAO userDAOChange = UserDAOFactory.getUserDAO("jdbc");
+			UserDAOSimple userDAOChange = UserDAOFactory.getUserDAO("jdbc");
 			User userChange = new User();
 			userChange.setUserName("tarantinoq");
 			userChange.setFirstName("Quentin");
 			userChange.setLastName("TarantinoChanged");
 			userChange.setPassword("asdfasdf");
-			change = userDAOChange.changeUser(userChange);
+			change = userDAOChange.change(userChange);
 		}
 		catch(Exception e) {
 			fail("Test failed with exception: " + e);
@@ -85,8 +83,8 @@ public class SimpleDAOTestServlet extends ServletTestCase {
 		int size = 0;
 		
 		try {
-			UserDAO userDAOList = UserDAOFactory.getUserDAO("jdbc");
-			List<User> userList = userDAOList.listAllUsers();
+			UserDAOSimple userDAOList = UserDAOFactory.getUserDAO("jdbc");
+			List<User> userList = userDAOList.listAll();
 			size = userList.size();
 		}
 		catch (Exception e) {
@@ -99,10 +97,10 @@ public class SimpleDAOTestServlet extends ServletTestCase {
 		int remove = 0;
 
 		try {
-			UserDAO userDAORemove = UserDAOFactory.getUserDAO("jdbc");
+			UserDAOSimple userDAORemove = UserDAOFactory.getUserDAO("jdbc");
 			User userRemove = new User();
 			userRemove.setUserName("tarantinoq");
-			remove = userDAORemove.removeUser(userRemove);
+			remove = userDAORemove.remove(userRemove);
 		}
 		catch (Exception e) {
 			fail("Test failed with exception: " + e);
