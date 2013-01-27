@@ -59,7 +59,7 @@ public class SimpleHibernateTestServlet extends ServletTestCase {
 		
 		session.save(user);
 		tx.commit();
-		session.close();
+		//session.close() and session flush needed if switch to managed sessions
 	}
 
 }
