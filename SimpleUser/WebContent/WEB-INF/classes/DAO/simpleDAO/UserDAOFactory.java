@@ -1,7 +1,5 @@
-package simpleDAO;
+package DAO.simpleDAO;
 
-import simpleDAO.UserDAOSimple;
-import simpleDAO.UserDAOImplSimple;
 
 public class UserDAOFactory {
 	// TODO clean up.

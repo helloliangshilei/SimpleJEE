@@ -1,4 +1,4 @@
-package simpleDAO;
+package DAO.simpleDAO;
 
 import java.util.List;
 

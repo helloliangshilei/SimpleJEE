@@ -45,7 +45,7 @@ public class SimpleHibernateTestServlet extends ServletTestCase {
 	}
 	
 	//TODO cleanup and add exception handling
-	public void testUserGet() {
+	public void testUserSave() {
 		User user = new User();
 		
 		Session session = sessionFactory.getCurrentSession();
@@ -59,7 +59,8 @@ public class SimpleHibernateTestServlet extends ServletTestCase {
 		
 		session.save(user);
 		tx.commit();
-		//session.close() and session flush needed if switch to managed sessions
 	}
+	
+	
 
 }
