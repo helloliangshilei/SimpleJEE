@@ -3,34 +3,17 @@ package test;
 import object.User;
 
 import org.apache.cactus.ServletTestCase;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
+
+import DAO.hibernateDAO.HibernateUtility;
+import DAO.hibernateDAO.UserDAO;
+import DAO.hibernateDAO.UserDAOImpl;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 public class SimpleHibernateTestServlet extends ServletTestCase {
-	
-	private static SessionFactory sessionFactory;
-	private static ServiceRegistry serviceRegistry;
-	
-	//TODO move this to a class for general use
-	private static SessionFactory configureSessionFactory() {
-    try {
-			Configuration configuration = new Configuration();
-			configuration.configure();
-			serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();        
-			sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return sessionFactory;
-	}
 	
 	public SimpleHibernateTestServlet(String theName) {
 		super(theName);
@@ -40,27 +23,23 @@ public class SimpleHibernateTestServlet extends ServletTestCase {
 		return new TestSuite(SimpleHibernateTestServlet.class);
 	}
 	
-	public void setUp() {
-		configureSessionFactory();
-	}
-	
-	//TODO cleanup and add exception handling
 	public void testUserSave() {
 		User user = new User();
-		
-		Session session = sessionFactory.getCurrentSession();
-		
-		Transaction tx = session.beginTransaction();
 		
 		user.setFirstName("Anne");
 		user.setLastName("Halgren");
 		user.setUserName("halgrena");
 		user.setPassword("anne314");
 		
-		session.save(user);
+		UserDAO userDAO = new UserDAOImpl(); 
+		userDAO.save(user);
+		
+		//Now load without using DAO structure and compare
+		Session session = HibernateUtility.getSession();
+		Transaction tx = session.beginTransaction();
+		User user2 = (User) session.get(User.class, user.getUserName());
 		tx.commit();
+		assertNotNull(user2);
+		assertEquals("halgrena", user2.getUserName());
 	}
-	
-	
-
 }
