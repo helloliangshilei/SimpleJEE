@@ -9,8 +9,9 @@ import object.User;
 
 import org.apache.cactus.ServletTestCase;
 
-import simpleDAO.UserDAOSimple;
-import simpleDAO.UserDAOFactory;
+import DAO.simpleDAO.UserDAOFactory;
+import DAO.simpleDAO.UserDAOSimple;
+
 
 /*
  * I know that my tests are chained rather than proper setup and breakdown for each
