@@ -8,8 +8,8 @@
  	 	</id>
 		<property column="description" length="100" name="description" not-null="true" type="java.lang.String"/>
 		<set name="users" table="user_role" cascade="all">
-			<key column="role" />
-			<many-to-many column="userName"  class="object.User" />
+			<key column="role_role" />
+			<many-to-many column="user_userName"  class="object.User" />
 		</set>
  	</class>
 </hibernate-mapping> 
