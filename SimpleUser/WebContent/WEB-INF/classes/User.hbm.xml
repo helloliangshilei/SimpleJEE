@@ -9,8 +9,8 @@
 		<property column="lastname" length="100" name="lastName" type="java.lang.String"/>
 		<property column="password" length="100" name="password" type="java.lang.String"/>
 		<set name="roles" table="user_role" cascade="all">
-			<key column="username" />
-			<many-to-many column="role"  class="object.Role" />
+			<key column="user_username" />
+			<many-to-many column="role_role"  class="object.Role" />
 		</set>
  	</class>
 </hibernate-mapping> 
