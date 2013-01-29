@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import DAO.simpleDAO.UserDAOImplSimple;
 
 import object.User;
 
 //TODO Add logging to exceptions
 public class UserDAOImpl extends CommonDAOImpl<User> implements UserDAO {
+	
+	private static Logger log = LoggerFactory.getLogger(UserDAOImpl.class);
 
 	public void saveUser(User user) {
 		try {
@@ -17,7 +23,7 @@ public class UserDAOImpl extends CommonDAOImpl<User> implements UserDAO {
 			HibernateUtility.commitTx();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			log.error("Exception happened in DAO.hibernateDAO.UserDAOImpl.saveUser: " + e);
 			HibernateUtility.rollBackTx();
 		}
 	}
@@ -29,7 +35,7 @@ public class UserDAOImpl extends CommonDAOImpl<User> implements UserDAO {
 			HibernateUtility.commitTx();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			log.error("Exception happened in DAO.hibernateDAO.UserDAOImpl.updateUser: " + e);
 			HibernateUtility.rollBackTx();
 		}
 	}
@@ -42,7 +48,7 @@ public class UserDAOImpl extends CommonDAOImpl<User> implements UserDAO {
 			HibernateUtility.commitTx();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			log.error("Exception happened in DAO.hibernateDAO.UserDAOImpl.findUserByUsername: " + e);
 			HibernateUtility.rollBackTx();
 		}
 		return user;
@@ -55,7 +61,7 @@ public class UserDAOImpl extends CommonDAOImpl<User> implements UserDAO {
 			HibernateUtility.commitTx();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			log.error("Exception happened in DAO.hibernateDAO.UserDAOImpl.deleteUser: " + e);
 			HibernateUtility.rollBackTx();
 		}
 	}
@@ -68,7 +74,7 @@ public class UserDAOImpl extends CommonDAOImpl<User> implements UserDAO {
 			HibernateUtility.commitTx();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			log.error("Exception happened in DAO.hibernateDAO.UserDAOImpl.listUsers: " + e);
 			HibernateUtility.rollBackTx();
 		}
 		return users;
@@ -86,7 +92,7 @@ public class UserDAOImpl extends CommonDAOImpl<User> implements UserDAO {
 			HibernateUtility.commitTx();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			log.error("Exception happened in DAO.hibernateDAO.UserDAOImpl.listUsersByRoles: " + e);
 			HibernateUtility.rollBackTx();
 		}
 		return users;
