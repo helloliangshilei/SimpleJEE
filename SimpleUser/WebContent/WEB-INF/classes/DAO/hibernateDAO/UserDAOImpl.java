@@ -11,7 +11,6 @@ import DAO.simpleDAO.UserDAOImplSimple;
 
 import object.User;
 
-//TODO Add logging to exceptions
 public class UserDAOImpl extends CommonDAOImpl<User> implements UserDAO {
 	
 	private static Logger log = LoggerFactory.getLogger(UserDAOImpl.class);
