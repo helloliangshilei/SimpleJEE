@@ -35,7 +35,7 @@ public class SimpleHibernateTestServlet extends ServletTestCase {
 		user.setPassword("anne314");
 		
 		UserDAO userDAO = new UserDAOImpl(); 
-		userDAO.save(user);
+		userDAO.saveUser(user);
 		
 		//Now load without using DAO structure and compare
 		Session session = HibernateUtility.getSessionFactory().openSession();
@@ -54,7 +54,7 @@ public class SimpleHibernateTestServlet extends ServletTestCase {
 		user.setPassword("anne3142");
 		
 		UserDAO userDAO = new UserDAOImpl(); 
-		userDAO.update(user);
+		userDAO.updateUser(user);
 		
 		//Now load without using DAO structure and compare
 		Session session = HibernateUtility.getSessionFactory().openSession();
@@ -69,7 +69,7 @@ public class SimpleHibernateTestServlet extends ServletTestCase {
 		User user = new User();
 		
 		UserDAO userDAO = new UserDAOImpl(); 
-		user = userDAO.find(User.class, "halgrena");
+		user = userDAO.findUserByUsername("halgrena");
 		
 		assertEquals("Halgren2", user.getLastName());
 		assertEquals("Anne2", user.getFirstName());
@@ -81,7 +81,7 @@ public class SimpleHibernateTestServlet extends ServletTestCase {
 		user.setUserName("halgrena");
 		
 		UserDAO userDAO = new UserDAOImpl(); 
-		userDAO.delete(user);
+		userDAO.deleteUser(user);
 		
 		//Now load without using DAO structure and compare
 		Session session = HibernateUtility.getSessionFactory().openSession();
@@ -95,12 +95,20 @@ public class SimpleHibernateTestServlet extends ServletTestCase {
 		List<User> userList = new ArrayList<User>(); 
 		
 		UserDAO userDAO = new UserDAOImpl();
-		userList = userDAO.findAll(User.class);
-		for (int i = 0; i < userList.size(); i++) {
-			User user = (User)userList.get(i);
-			System.out.println(user.getLastName());
-		}
+		userList = userDAO.listUsers();
 		
+		assertEquals(2, userList.size());
 	}
 	
+	public void testUserFindByRole() {
+		List<User> userList = new ArrayList<User>();
+		List<User> userList2 = new ArrayList<User>();
+		
+		UserDAO userDAO = new UserDAOImpl();
+		userList = userDAO.listUsersByRoles("developer");
+		userList2 = userDAO.listUsersByRoles("administrator");
+		
+		assertEquals(1, userList.size());
+		assertEquals(2, userList2.size());
+	}
 }
