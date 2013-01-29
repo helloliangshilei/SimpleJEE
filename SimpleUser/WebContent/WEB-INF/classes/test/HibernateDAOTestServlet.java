@@ -16,14 +16,14 @@ import DAO.hibernateDAO.UserDAOImpl;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-public class SimpleHibernateTestServlet extends ServletTestCase {
+public class HibernateDAOTestServlet extends ServletTestCase {
 	
-	public SimpleHibernateTestServlet(String theName) {
+	public HibernateDAOTestServlet(String theName) {
 		super(theName);
 	}
 
 	public static Test suite() {
-		return new TestSuite(SimpleHibernateTestServlet.class);
+		return new TestSuite(HibernateDAOTestServlet.class);
 	}
 	
 	public void testUserSave() {
