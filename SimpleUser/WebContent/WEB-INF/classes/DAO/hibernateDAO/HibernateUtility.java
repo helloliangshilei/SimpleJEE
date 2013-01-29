@@ -34,7 +34,7 @@ public class HibernateUtility {
 			return sessionFactory;
 	}
 
-	public static Session BeginTx() {
+	public static Session beginTx() {
 		Session hibernateSession = HibernateUtility.getSession();
 		hibernateSession.beginTransaction();
 		return hibernateSession;
@@ -44,7 +44,7 @@ public class HibernateUtility {
 		HibernateUtility.getSession().getTransaction().commit();
 	}
 
-	public static void rollBack() {
+	public static void rollBackTx() {
 		HibernateUtility.getSession().getTransaction().rollback();
 	}
 
