@@ -2,7 +2,7 @@ package DAO.simpleDAO;
 
 
 public class UserDAOFactory {
-	// TODO clean up.
+	// A simple factory just for the hell of it.
 	public static UserDAOSimple getUserDAO(String dao) {
 		if (dao.equalsIgnoreCase("jdbc")) {
 			return new UserDAOImplSimple();
