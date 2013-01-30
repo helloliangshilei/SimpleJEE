@@ -12,7 +12,7 @@ import DAO.simpleDAO.UserDAOImplSimple;
 import object.User;
 
 public class UserDAOImpl extends CommonDAOImpl<User> implements UserDAO {
-	
+
 	private static Logger log = LoggerFactory.getLogger(UserDAOImpl.class);
 
 	public void saveUser(User user) {
@@ -83,11 +83,12 @@ public class UserDAOImpl extends CommonDAOImpl<User> implements UserDAO {
 	public List<User> listUsersByRoles(String role) {
 		List<User> users = new ArrayList<User>();
 		try {
-			String sql = "select new User(user.userName, user.firstName, user.lastName, user.password) " +
-										"from User as user inner join user.roles role where role.role = :role";
+			String sql = "select new User(user.userName, user.firstName, user.lastName, user.password) "
+								 + "from User as user inner join user.roles role where role.role = :role";
 			HibernateUtility.beginTx();
-			Query query = HibernateUtility.getSession().createQuery(sql).setParameter("role", role);
-			users = (List<User>)query.list();
+			Query query = HibernateUtility.getSession().createQuery(sql);
+			query.setParameter("role", role);
+			users = (List<User>) query.list();
 			HibernateUtility.commitTx();
 		}
 		catch (Exception e) {
