@@ -43,9 +43,9 @@
 		<url-pattern>/ServletTestRunner</url-pattern>
 	</servlet-mapping>
 	<context-param>
-		<param-name>persistenceType</param-name>
-		<param-value>HibernateStandard</param-value>
-		<!-- param-value>HibernateJPA</param-value -->
+		<param-name>HibernateConfigFile</param-name>
+		<!-- blank runs standard hibernate mapping, if you want JPA value should be "hibernateAnnotations.cfg.xml" -->
+		<param-value>hibernateAnnotations.cfg.xml</param-value>
 	</context-param>
 	<context-param>
 		<param-name>JNDISourceLocation</param-name>
