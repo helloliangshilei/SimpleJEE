@@ -17,64 +17,64 @@ public class UserDAOImpl extends CommonDAOImpl<User> implements UserDAO {
 
 	public void saveUser(User user) {
 		try {
-			HibernateUtility.beginTx();
+			HibUtil.beginTx();
 			this.save(user);
-			HibernateUtility.commitTx();
+			HibUtil.commitTx();
 		}
 		catch (Exception e) {
 			log.error("Exception happened in DAO.hibernateDAO.UserDAOImpl.saveUser: " + e);
-			HibernateUtility.rollBackTx();
+			HibUtil.rollBackTx();
 		}
 	}
 
 	public void updateUser(User user) {
 		try {
-			HibernateUtility.beginTx();
+			HibUtil.beginTx();
 			this.update(user);
-			HibernateUtility.commitTx();
+			HibUtil.commitTx();
 		}
 		catch (Exception e) {
 			log.error("Exception happened in DAO.hibernateDAO.UserDAOImpl.updateUser: " + e);
-			HibernateUtility.rollBackTx();
+			HibUtil.rollBackTx();
 		}
 	}
 
 	public User findUserByUsername(String username) {
 		User user = null;
 		try {
-			HibernateUtility.beginTx();
+			HibUtil.beginTx();
 			user = (User) this.find(User.class, username);
-			HibernateUtility.commitTx();
+			HibUtil.commitTx();
 		}
 		catch (Exception e) {
 			log.error("Exception happened in DAO.hibernateDAO.UserDAOImpl.findUserByUsername: " + e);
-			HibernateUtility.rollBackTx();
+			HibUtil.rollBackTx();
 		}
 		return user;
 	}
 
 	public void deleteUser(User user) {
 		try {
-			HibernateUtility.beginTx();
+			HibUtil.beginTx();
 			this.delete(user);
-			HibernateUtility.commitTx();
+			HibUtil.commitTx();
 		}
 		catch (Exception e) {
 			log.error("Exception happened in DAO.hibernateDAO.UserDAOImpl.deleteUser: " + e);
-			HibernateUtility.rollBackTx();
+			HibUtil.rollBackTx();
 		}
 	}
 
 	public List<User> listUsers() {
 		List<User> users = new ArrayList<User>();
 		try {
-			HibernateUtility.beginTx();
+			HibUtil.beginTx();
 			users = this.findAll(User.class);
-			HibernateUtility.commitTx();
+			HibUtil.commitTx();
 		}
 		catch (Exception e) {
 			log.error("Exception happened in DAO.hibernateDAO.UserDAOImpl.listUsers: " + e);
-			HibernateUtility.rollBackTx();
+			HibUtil.rollBackTx();
 		}
 		return users;
 	}
@@ -85,15 +85,15 @@ public class UserDAOImpl extends CommonDAOImpl<User> implements UserDAO {
 		try {
 			String sql = "select new User(user.userName, user.firstName, user.lastName, user.password) "
 								 + "from User as user inner join user.roles role where role.role = :role";
-			HibernateUtility.beginTx();
-			Query query = HibernateUtility.getSession().createQuery(sql);
+			HibUtil.beginTx();
+			Query query = HibUtil.getSession().createQuery(sql);
 			query.setParameter("role", role);
 			users = (List<User>) query.list();
-			HibernateUtility.commitTx();
+			HibUtil.commitTx();
 		}
 		catch (Exception e) {
 			log.error("Exception happened in DAO.hibernateDAO.UserDAOImpl.listUsersByRoles: " + e);
-			HibernateUtility.rollBackTx();
+			HibUtil.rollBackTx();
 		}
 		return users;
 	}
