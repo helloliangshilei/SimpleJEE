@@ -6,7 +6,6 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -19,7 +18,6 @@ public class Role implements Serializable {
 	
 	@Id 
 	@Column(name="role", nullable=false, length=100)
-	//@GeneratedValue(generator="assigned")
 	private String role = null;
 	
 	@Column(name="description", nullable=false, length=100)
