@@ -19,8 +19,8 @@ public class ServletInitPropsContextListener implements ServletContextListener{
 		ServletContext c = event.getServletContext();
 		Map<String, String> props = new HashMap<String, String>();
 		if (c != null) {
-	    if (c.getInitParameter("persistenceType") != null) {       
-	      props.put("persistenceType",  c.getInitParameter("persistenceType")); 
+	    if (c.getInitParameter("HibernateConfigFile") != null) {       
+	      props.put("HibernateConfigFile",  c.getInitParameter("HibernateConfigFile")); 
 	    }
 	    if (c.getInitParameter("JNDISourceLocation") != null) {       
 	    	props.put("JNDISourceLocation",  c.getInitParameter("JNDISourceLocation")); 
@@ -28,5 +28,4 @@ public class ServletInitPropsContextListener implements ServletContextListener{
 	  }
 		ConfigurationInit config = new ConfigurationInit(props);
 	}
-	
 }
