@@ -11,7 +11,7 @@ public abstract class CommonDAOImpl<T extends Serializable> implements
 		CommonDAO<T> {
 
 	protected Session getSession() {
-		return HibernateUtility.getSession();
+		return HibUtil.getSession();
 	}
 
 	@Override
