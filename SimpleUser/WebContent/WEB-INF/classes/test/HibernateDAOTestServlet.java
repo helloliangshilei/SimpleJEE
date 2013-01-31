@@ -7,9 +7,8 @@ import object.User;
 
 import org.apache.cactus.ServletTestCase;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
-import DAO.hibernateDAO.HibernateUtility;
+import DAO.hibernateDAO.HibUtil;
 import DAO.hibernateDAO.UserDAO;
 import DAO.hibernateDAO.UserDAOImpl;
 
@@ -38,7 +37,7 @@ public class HibernateDAOTestServlet extends ServletTestCase {
 		userDAO.saveUser(user);
 		
 		//Now load without using DAO structure and compare
-		Session session = HibernateUtility.getSessionFactory().openSession();
+		Session session = HibUtil.getSessionFactory().openSession();
 		User user2 = (User) session.get(User.class, user.getUserName());
 		session.close();
 		assertNotNull(user2);
@@ -57,7 +56,7 @@ public class HibernateDAOTestServlet extends ServletTestCase {
 		userDAO.updateUser(user);
 		
 		//Now load without using DAO structure and compare
-		Session session = HibernateUtility.getSessionFactory().openSession();
+		Session session = HibUtil.getSessionFactory().openSession();
 		User user2 = (User) session.get(User.class, user.getUserName());
 		session.close();
 		assertNotNull(user2);
@@ -84,7 +83,7 @@ public class HibernateDAOTestServlet extends ServletTestCase {
 		userDAO.deleteUser(user);
 		
 		//Now load without using DAO structure and compare
-		Session session = HibernateUtility.getSessionFactory().openSession();
+		Session session = HibUtil.getSessionFactory().openSession();
 		User user2 = (User) session.get(User.class, "halgrena");
 		
 		session.close();
