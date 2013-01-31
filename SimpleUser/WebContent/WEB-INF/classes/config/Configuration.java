@@ -4,7 +4,7 @@ import java.util.Map;
 
 public abstract class Configuration {
 	
-	private static String persistenceType;
+	private static String hibernateConfigFile;
 	private static String JNDISourceLocation;
 	
 	protected boolean initialized = false;
@@ -12,12 +12,12 @@ public abstract class Configuration {
 	public Configuration() {
 	}
 	
-	public static String getPersistenceType() {
-		return persistenceType;
+	public static String getHibernateConfigFile() {
+		return hibernateConfigFile;
 	}
 
-	private static void setPersistenceType(String string) {
-		persistenceType = string;
+	private static void setHibernateConfigFile(String string) {
+		hibernateConfigFile = string;
 	}
 	
 	public static String getJNDISourceLocation() {
@@ -29,7 +29,7 @@ public abstract class Configuration {
 	}
 	
 	public void load(Map<String, String> properties) throws Exception {
-		setPersistenceType(properties.get("persistenceType"));
-		setJNDISourceLocation(properties.get("JNDISourceLocation"));
+			setHibernateConfigFile(properties.get("HibernateConfigFile"));
+			setJNDISourceLocation(properties.get("JNDISourceLocation"));
 	}
 }
