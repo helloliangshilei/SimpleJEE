@@ -12,7 +12,8 @@ is setup as a MySQL database using InnoDB:
   	- If you want hibernate to NOT use Tomcat's JNDI facility, you'll need to change 
   		"WebContent/WEB-INF/classes/hibernate.cfg.xml" and or "hobernateAnnotations.cfg.xml  
 
-1) First example is a simple JDBC application that stores, changes, retrieves data in a single table USER.
+1) Simple JDBC
+First example is a simple JDBC application that stores, changes, retrieves data in a single table USER.
 All actions are based on the base objects in the "classes/object" package.  There are two primary classes, 
 User and Role following conventional Javabean standards with the addition of an constructors added simply 
 for me to mess around.
@@ -25,8 +26,10 @@ for me to mess around.
 	  and displays the status.  You can see the test implementations (which shows use of various patterns and
 	  implementation) in "classes/test/<classes>".  For example they'll show calls to the factory and creation
 	  of DAO objects.  For this one, click the "Go to the Simple JDBC Tests" link.
+	- The test servlet is test.SimpleDAOTestServlet
 	  
-2) The second example is sort of two examples combined into one.  The fist one is standard Hibernate using the
+2) Put on the fancy shoes: Hobernate, DAO, Generics 
+The second example is sort of two examples combined into one.  The fist one is standard Hibernate using the
 standard hibernate.cfg.xml style of development with mappings included in the related files.  To use the example, 
 you need to edit the WEB-INF/web.xml file and remove the VALUE of the HibernateConfigFile param.  So you'd have
 the param and the value looks like <param-value></param-value>.  Then run it and click the 
@@ -53,14 +56,20 @@ I'm also using DAO.hibernateDAO.HibUtil to manage sessions, transactions, that s
 I know some people like to use a "Manager" style DAO as another level of indirection, but I figured I'd gone far 
 enough for my purposes.
 
-3) The third example show's use of JPA annotations for the implementation, but in all other ways is exactly the same
+The test servlet is test.HibernateDAOTestServlet.
+
+3) Fancy shoes with @ signs.  JPA/Annotations
+The third example show's use of JPA annotations for the implementation, but in all other ways is exactly the same
 as the one above.  If you changed it, you need to change the web.xml file back to it's original state using the
 <param-value>hibernateAnnotations.cfg.xml</param-value>.  Then a different hibernate config file will be loaded at
 runtime which tells the system to use annotations instead of standard hibernate config.  I know it's not a true
 JPA application since I'm using Hibernate's session stuff rather than EntityManager convention.  So it's not a 
 truly portable JPA application.
 
-4) Spring with hibernate example.
+Run the same test servlet as in example 2.  Fun. 
+
+4) Shoes with a Spring in your step.  
+Not filled out yet.
 	  
 	  
 	  
