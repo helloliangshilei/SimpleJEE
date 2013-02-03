@@ -26,6 +26,7 @@ public class ServletInitPropsContextListener implements ServletContextListener{
 	    	props.put("JNDISourceLocation",  c.getInitParameter("JNDISourceLocation")); 
 	    }
 	  }
+		@SuppressWarnings("unused")
 		ConfigurationInit config = new ConfigurationInit(props);
 	}
 }
