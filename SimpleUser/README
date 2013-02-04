@@ -11,6 +11,9 @@ is setup as a MySQL database using InnoDB:
   	file and update the "url" property to point to the proper host.
   	- If you want hibernate to NOT use Tomcat's JNDI facility, you'll need to change 
   		"WebContent/WEB-INF/classes/hibernate.cfg.xml" and or "hobernateAnnotations.cfg.xml  
+  - You'll need to run Maven to get the required dependencies.  Assuming some unix like environment, go to the 
+  	"SimpleUser" directory and run "mvn dependency:copy-dependencies" which will download the necessary JAR files for
+  	the application. //TODO, need to test build off of Eclipse
 
 1) Simple JDBC
 First example is a simple JDBC application that stores, changes, retrieves data in a single table USER.
