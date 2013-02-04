@@ -10,7 +10,7 @@ import org.hibernate.Session;
 
 import DAO.hibernateDAO.HibUtil;
 import DAO.hibernateDAO.UserDAO;
-import DAO.hibernateDAO.UserDAOImpl;
+import DAO.hibernateDAO.UserDAOHibOnlyImpl;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -33,7 +33,7 @@ public class HibernateDAOTestServlet extends ServletTestCase {
 		user.setUserName("halgrena");
 		user.setPassword("anne314");
 		
-		UserDAO userDAO = new UserDAOImpl(); 
+		UserDAO userDAO = new UserDAOHibOnlyImpl(); 
 		userDAO.saveUser(user);
 		
 		//Now load without using DAO structure and compare
@@ -52,7 +52,7 @@ public class HibernateDAOTestServlet extends ServletTestCase {
 		user.setUserName("halgrena");
 		user.setPassword("anne3142");
 		
-		UserDAO userDAO = new UserDAOImpl(); 
+		UserDAO userDAO = new UserDAOHibOnlyImpl(); 
 		userDAO.updateUser(user);
 		
 		//Now load without using DAO structure and compare
@@ -67,7 +67,7 @@ public class HibernateDAOTestServlet extends ServletTestCase {
 	public void testUserFind() {
 		User user = new User();
 		
-		UserDAO userDAO = new UserDAOImpl(); 
+		UserDAO userDAO = new UserDAOHibOnlyImpl(); 
 		user = userDAO.findUserByUsername("halgrena");
 		
 		assertEquals("Halgren2", user.getLastName());
@@ -79,7 +79,7 @@ public class HibernateDAOTestServlet extends ServletTestCase {
 		
 		user.setUserName("halgrena");
 		
-		UserDAO userDAO = new UserDAOImpl(); 
+		UserDAO userDAO = new UserDAOHibOnlyImpl(); 
 		userDAO.deleteUser(user);
 		
 		//Now load without using DAO structure and compare
@@ -93,7 +93,7 @@ public class HibernateDAOTestServlet extends ServletTestCase {
 	public void testUserFindAll() {
 		List<User> userList = new ArrayList<User>(); 
 		
-		UserDAO userDAO = new UserDAOImpl();
+		UserDAO userDAO = new UserDAOHibOnlyImpl();
 		userList = userDAO.listUsers();
 		
 		assertEquals(2, userList.size());
@@ -103,7 +103,7 @@ public class HibernateDAOTestServlet extends ServletTestCase {
 		List<User> userList = new ArrayList<User>();
 		List<User> userList2 = new ArrayList<User>();
 		
-		UserDAO userDAO = new UserDAOImpl();
+		UserDAO userDAO = new UserDAOHibOnlyImpl();
 		userList = userDAO.listUsersByRoles("developer");
 		userList2 = userDAO.listUsersByRoles("administrator");
 		
