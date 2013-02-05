@@ -37,7 +37,7 @@
 		</property>
 	</bean>
 
-	<bean id="userDAO" class="DAO.hibernateDAO.UserDAOHibSpringTemplateImpl">
+	<bean id="userDAO" class="DAO.hibernateDAO.UserDAOHibSpringImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
