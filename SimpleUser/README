@@ -82,3 +82,9 @@ OTHER
   - I know my tests aren't traditional setup/teardown style.  They're really just servlets using Cactus/JUnit
   	to make sure stuff works and show the concepts of DAO, Factory, Hibernate, stuff like that.
   	
+ HUGE TODO's
+ - Refactor CommonDAOImpl, or write another one that is Springified.  Use it with UserDAOHibSpring
+ - Move everything to a standard JEE directory structure for Maven
+ - Ant build.
+ - Tests for Spring stuff.
+  	
