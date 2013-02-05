@@ -9,7 +9,11 @@ import org.slf4j.LoggerFactory;
 
 import object.User;
 
-public class UserDAOHibOnlyImpl extends CommonDAOImpl<User> implements UserDAO {
+/*
+ * Simple direct implementation.  It makes the bad assumption of transactions only happening 
+ * within the scope of method.  But it's a good example of the DAO generic implementation.
+ */
+public class UserDAOHibOnlyImpl extends CommonDAOHibernateImpl<User> implements UserDAO {
 
 	private static Logger log = LoggerFactory.getLogger(UserDAOHibOnlyImpl.class);
 
