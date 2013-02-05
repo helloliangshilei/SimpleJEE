@@ -44,7 +44,8 @@
 	</servlet-mapping>
 	<context-param>
 		<param-name>HibernateConfigFile</param-name>
-		<!-- blank runs standard hibernate mapping, if you want JPA value should be "hibernateAnnotations.cfg.xml" -->
+		<!-- leaving this blank blank runs standard hibernate mapping, if you want 
+			JPA value should be "hibernateAnnotations.cfg.xml" -->
 		<param-value>hibernateAnnotations.cfg.xml</param-value>
 	</context-param>
 	<context-param>
@@ -54,4 +55,24 @@
 	<listener>
 		<listener-class>config.ServletInitPropsContextListener</listener-class>
 	</listener>
+
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/user/*</url-pattern>
+	</servlet-mapping>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+
 </web-app>
