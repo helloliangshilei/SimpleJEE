@@ -16,7 +16,8 @@ import object.User;
 public class UserDAOHibOnlyImpl extends CommonDAOHibernateImpl<User> implements UserDAO {
 
 	private static Logger log = LoggerFactory.getLogger(UserDAOHibOnlyImpl.class);
-
+	
+	@Override
 	public void saveUser(User user) {
 		try {
 			HibUtil.beginTx();
@@ -29,6 +30,7 @@ public class UserDAOHibOnlyImpl extends CommonDAOHibernateImpl<User> implements 
 		}
 	}
 
+	@Override
 	public void updateUser(User user) {
 		try {
 			HibUtil.beginTx();
@@ -41,6 +43,7 @@ public class UserDAOHibOnlyImpl extends CommonDAOHibernateImpl<User> implements 
 		}
 	}
 
+	@Override
 	public User findUserByUsername(String username) {
 		User user = null;
 		try {
@@ -55,6 +58,7 @@ public class UserDAOHibOnlyImpl extends CommonDAOHibernateImpl<User> implements 
 		return user;
 	}
 
+	@Override
 	public void deleteUser(User user) {
 		try {
 			HibUtil.beginTx();
@@ -67,6 +71,7 @@ public class UserDAOHibOnlyImpl extends CommonDAOHibernateImpl<User> implements 
 		}
 	}
 
+	@Override
 	public List<User> listUsers() {
 		List<User> users = new ArrayList<User>();
 		try {
@@ -81,6 +86,7 @@ public class UserDAOHibOnlyImpl extends CommonDAOHibernateImpl<User> implements 
 		return users;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<User> listUsersByRoles(String role) {
 		List<User> users = new ArrayList<User>();
