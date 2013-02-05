@@ -19,7 +19,6 @@ public class User implements Serializable {
 
 	@Id 
 	@Column(name="username", nullable=false, length=100)
-	//@GeneratedValue(generator="assigned")
 	private String userName = null;
 	
 	@Column(name="firstName", nullable=false, length=100)
