@@ -24,7 +24,7 @@ public class HibernateDAOTestServlet extends ServletTestCase {
 	public static Test suite() {
 		return new TestSuite(HibernateDAOTestServlet.class);
 	}
-	
+	//TODO add HibUtil.begin, finish, close to each since you're using openSession.
 	public void testUserSave() {
 		User user = new User();
 		
@@ -38,8 +38,11 @@ public class HibernateDAOTestServlet extends ServletTestCase {
 		
 		//Now load without using DAO structure and compare
 		Session session = HibUtil.getSessionFactory().openSession();
+		HibUtil.beginTx();
 		User user2 = (User) session.get(User.class, user.getUserName());
-		session.close();
+		HibUtil.commitTx();
+		HibUtil.closeSession();
+		
 		assertNotNull(user2);
 		assertEquals("halgrena", user2.getUserName());
 	}
@@ -57,8 +60,11 @@ public class HibernateDAOTestServlet extends ServletTestCase {
 		
 		//Now load without using DAO structure and compare
 		Session session = HibUtil.getSessionFactory().openSession();
+		HibUtil.beginTx();
 		User user2 = (User) session.get(User.class, user.getUserName());
-		session.close();
+		HibUtil.commitTx();
+		HibUtil.closeSession();
+		
 		assertNotNull(user2);
 		assertEquals("Halgren2", user2.getLastName());
 		assertEquals("Anne2", user2.getFirstName());
@@ -84,9 +90,11 @@ public class HibernateDAOTestServlet extends ServletTestCase {
 		
 		//Now load without using DAO structure and compare
 		Session session = HibUtil.getSessionFactory().openSession();
+		HibUtil.beginTx();
 		User user2 = (User) session.get(User.class, "halgrena");
+		HibUtil.commitTx();
+		HibUtil.closeSession();
 		
-		session.close();
 		assertNull(user2);
 	}
 	
