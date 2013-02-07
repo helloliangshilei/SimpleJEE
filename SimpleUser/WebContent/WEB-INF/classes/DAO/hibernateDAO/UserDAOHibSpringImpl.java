@@ -33,13 +33,15 @@ public class UserDAOHibSpringImpl extends CommonDAOSpringImpl<User> implements U
 		this.delete(user);
 	}
 
+	@Transactional(readOnly = true)
 	public List<User> listUsers() {
 		List<User> users = new ArrayList<User>();
-		this.findAll(User.class);
+		users = this.findAll(User.class);
 		return users;
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
 	public List<User> listUsersByRoles(String role) {
 		List<User> users = new ArrayList<User>();
 		String sql = "select new User(user.userName, user.firstName, user.lastName, user.password) "
