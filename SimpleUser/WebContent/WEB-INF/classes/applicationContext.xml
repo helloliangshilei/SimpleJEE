@@ -37,18 +37,23 @@
 		</property>
 	</bean>
 
-	<bean id="userDAO" class="DAO.hibernateDAO.UserDAOHibSpringImpl">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<tx:annotation-driven transaction-manager="transactionManager" />
-	
+	<!-- set annotation driven, use proxy because of the Generic DAO setup I used.  requires CGLib style proxies instead of JDK -->
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
+
 	<!-- Register @Autowired annotation -->
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+
+	<!-- Scan packages, use repository annotation -->
+	<context:component-scan base-package="DAO.hibernateDAO">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+	</context:component-scan>
+
+	<!-- <context:annotation-config /> -->
 
 </beans>
