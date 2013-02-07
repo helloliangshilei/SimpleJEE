@@ -1,6 +1,6 @@
 SimpleApp is a simple application to show various conventions for using JEE technologies and patterns.
 
-CONFIGURATION:  The application has been tested and run on Tomcat 7.  So you'll need that.  The database
+CONFIGURATION:  The application has been tested and run on Tomcat 7.  So you'll need that or something similar.  The database
 is setup as a MySQL database using InnoDB:
   - You'll need a schema called "simpleapp" 
   - A user called "simpleapp", password: "simple314"
@@ -13,15 +13,16 @@ is setup as a MySQL database using InnoDB:
   		"WebContent/WEB-INF/classes/hibernate.cfg.xml" and or "hobernateAnnotations.cfg.xml  
   - You'll need to run Maven to get the required dependencies.  Assuming some unix like environment, go to the 
   	"SimpleUser" directory and run "mvn dependency:copy-dependencies" which will download the necessary JAR files for
-  	the application. //TODO, need to test build off of Eclipse
+  	the application.  I'm using Maven for repository and dependency management only, not for build function.   
+  	//TODO, need to test build off of Eclipse
 
 1) Simple JDBC
-First example is a simple JDBC application that stores, changes, retrieves data in a single table USER.
+First example is a simple JDBC application that stores, changes, retrieves data in a single table SIMPLEAPP.USER.
 All actions are based on the base objects in the "classes/object" package.  There are two primary classes, 
 User and Role following conventional Javabean standards with the addition of an constructors added simply 
 for me to mess around.
-	- I use simple DAO pattern for this found in clases "UserDAO"(interface) and "UserDAOImplSimple"
-		(implementation) in the "simpleDAO" package.  
+	- I use simple DAO pattern for this found in classes/DAO.simpleDAO: "UserDAO"(interface) and "UserDAOImplSimple"
+		(implementation).  
 	- There's also a simple Factory pattern show in "classes/commonDAO"
 	- Connections to the database are managed through the "DBConnection" class in the "simpleJDBC" package.
 	- Once you've set everything up and are ready to run it, go to <yourhost:port>/SimpleApp
@@ -35,8 +36,8 @@ for me to mess around.
 The second example is sort of two examples combined into one.  The fist one is standard Hibernate using the
 standard hibernate.cfg.xml style of development with mappings included in the related files.  To use the example, 
 you need to edit the WEB-INF/web.xml file and remove the VALUE of the HibernateConfigFile param.  So you'd have
-the param and the value looks like <param-value></param-value>.  Then run it and click the 
-"Go to the DAO Hibernate Tests."  This tests all of the primary methods in DAO.hibernateDAO.UserDAOImpl thos have the
+the param set and the value should be blank: "<param-value></param-value>".  Then run it and click the 
+"Go to the DAO Hibernate Tests."  This tests all of the primary methods in DAO.hibernateDAO.UserDAOImpl with the
 following method signatures:
 - public void saveUser(User user) {...}
 - public void updateUser(User user) {...}
@@ -44,15 +45,16 @@ following method signatures:
 - public void deleteUser(User user) {...}
 - public List<User> listUsers() {...}
 - public List<User> listUsersByRoles(String role) {...} (This one is to show successful implementation of the 
-Many-to-Many relationship and the use of HQL and the HQL Entity facility.
+Many-to-Many relationship and the use of HQL and the HQL Entity facility and adding functionality subclasses).
 
 You can understand the database structure by looking at the createstuff.sql file, the hibernate config files, or the 
 object.User and object.Role files by looking at the JPA annotations.
 
 This sample also shows a much more advanced DAO strategy than that of the SimpleJDBC stuff using a stronger 
 inheritance and calling model including generic type persistence objects which can be seen in 
-DAO.hibernateDAO.CommonDAO and DAO.hibernateDAO.CommonDAOImpl.  The DAO.hibernateDAO.UserDAOImpl shos the 
-actual implementation, the transactions, and the HQL if any.
+DAO.hibernateDAO.CommonDAO and DAO.hibernateDAO.CommonDAOImpl.  The DAO.hibernateDAO.UserDAOImpl shows the 
+actual implementation, the transactions, and the HQL if any.  Finally a UserDAOHibOnlyImpl for instantiation pattern for
+this example.
 
 I'm also using DAO.hibernateDAO.HibUtil to manage sessions, transactions, that sort of thing.
 
@@ -67,7 +69,7 @@ as the one above.  If you changed it, you need to change the web.xml file back t
 <param-value>hibernateAnnotations.cfg.xml</param-value>.  Then a different hibernate config file will be loaded at
 runtime which tells the system to use annotations instead of standard hibernate config.  I know it's not a true
 JPA application since I'm using Hibernate's session stuff rather than EntityManager convention.  So it's not a 
-truly portable JPA application.
+truly portable JPA application. 
 
 Run the same test servlet as in example 2.  Fun. 
 
@@ -83,8 +85,7 @@ OTHER
   	to make sure stuff works and show the concepts of DAO, Factory, Hibernate, stuff like that.
   	
  HUGE TODO's
- - Refactor CommonDAOImpl, or write another one that is Springified.  Use it with UserDAOHibSpring
  - Move everything to a standard JEE directory structure for Maven
  - Ant build.
- - Tests for Spring stuff.
+ - Tests for Spring stuff servlet stuff.
   	
