@@ -1,4 +1,4 @@
-<project name="SimpleApp" default="war" basedir="." xmlns:artifact="antlibrg.apache.maven.artifact.ant">
+<project name="SimpleApp" default="war" basedir=".">
 
 	<!-- Properties needed-->
 	<property name="mvn.home" value="" description="The home dir for your maven install" />
@@ -16,7 +16,6 @@
       		</fileset>
     	</path>
 
-
 	<target name="clean" description="Removing the all generated files.">
 		<delete>
 		    <fileset dir="${dir.root}/${dir.dest}" includes="**/*.class"/>
@@ -32,5 +31,4 @@
 	<target name="war" depends="compile" description="make a war">
 		<jar jarfile="${dir.dest}/simpleapp.war" basedir="${dir.build}" />
 	</target>
-
 </project>
