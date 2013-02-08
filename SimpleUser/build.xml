@@ -34,13 +34,13 @@
 		</javac>
 	</target>
 
-	<target name="createDB_MySQL">
+	<target name="createdb">
 		<sql driver="${sql.driver}" 
 			url="${sql.url}" 
 			userid="${sql.user}" 
 			password="${sql.pass}" 
 			classpathref="lib-classpath" 
-			src="${dir.root}/$dir.dql}/createstuff.sql" />
+			src="${dir.root}/${dir.sql}/createstuff.sql" />
 	</target>
 
 	<target name="war" depends="compile" description="make a war">
