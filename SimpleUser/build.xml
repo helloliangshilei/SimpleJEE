@@ -9,23 +9,38 @@
 	<property name="dir.src" value="WEB-INF/classes" />
 	<property name="dir.dest" value="WEB-INF/classes" />
 	<property name="lib.dir" value="WEB-INF/lib" />
+	<property name="dir.sql" value="WEB-INF/database" />
+	<property name="sql.file" value="createstuff.sql" />
+	<property name="sql.driver" value="com.mysql.jdbc.Driver" />
+	<property name="sql.url" value="jdbc:mysql://localhost:3306/simpleapp?autoReconnect=true" />
+	<property name="sql.user" value="simpleapp" />
+	<property name="sql.pass" value="simple314" />
 
 	<path id="lib-classpath">
-      		<fileset dir="${dir.root}/${lib.dir}">
-        		<include name="**/*.jar"/>
-      		</fileset>
-    	</path>
+		<fileset dir="${dir.root}/${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
 
 	<target name="clean" description="Removing the all generated files.">
 		<delete>
-		    <fileset dir="${dir.root}/${dir.dest}" includes="**/*.class"/>
-		  </delete>
+			<fileset dir="${dir.root}/${dir.dest}" includes="**/*.class" />
+		</delete>
 	</target>
 
 	<target name="compile" depends="clean" description="Compilation of all source code.">
 		<javac srcdir="${dir.root}/${dir.src}" destdir="${dir.root}/${dir.dest}">
-			<classpath refid="lib-classpath"/>
+			<classpath refid="lib-classpath" />
 		</javac>
+	</target>
+
+	<target name="createDB_MySQL">
+		<sql driver="${sql.driver}" 
+			url="${sql.url}" 
+			userid="${sql.user}" 
+			password="${sql.pass}" 
+			classpathref="lib-classpath" 
+			src="${dir.root}/$dir.dql}/createstuff.sql" />
 	</target>
 
 	<target name="war" depends="compile" description="make a war">
