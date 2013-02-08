@@ -8,6 +8,13 @@
 	<property name="dir.root" value="WebContent" />
 	<property name="dir.src" value="WEB-INF/classes" />
 	<property name="dir.dest" value="WEB-INF/classes" />
+	<property name="lib.dir" value="WEB-INF/lib" />
+
+	<path id="lib-classpath">
+      		<fileset dir="${dir.root}/${lib.dir}">
+        		<include name="**/*.jar"/>
+      		</fileset>
+    	</path>
 
 
 	<target name="clean" description="Removing the all generated files.">
@@ -16,13 +23,10 @@
 		  </delete>
 	</target>
 
-	<target name="prepare" depends="clean">
-		<mkdir dir="${dir.build}" />
-		<mkdir dir="${dir.dest}" />
-	</target>
-
-	<target name="compile" depends="prepare" description="Compilation of all source code.">
-		<javac srcdir="${dir.root}/${dir.src}" destdir="${dir.root}/${dir.build}" />
+	<target name="compile" depends="clean" description="Compilation of all source code.">
+		<javac srcdir="${dir.root}/${dir.src}" destdir="${dir.root}/${dir.dest}">
+			<classpath refid="lib-classpath"/>
+		</javac>
 	</target>
 
 	<target name="war" depends="compile" description="make a war">
