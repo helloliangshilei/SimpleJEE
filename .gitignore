@@ -1,0 +1,8 @@
+.gitignore.swp
+.classpath
+.project
+SimpleUser/.settings/*
+SimpleUser/WebContent/WEB-INF/lib/*.jar
+.jdtscope
+*.class
+SimpleUser/build/*
