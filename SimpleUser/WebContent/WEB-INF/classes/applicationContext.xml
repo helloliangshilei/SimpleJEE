@@ -11,7 +11,7 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://advisor.local:3306/simpleapp" />
+		<property name="url" value="jdbc:mysql://localhost:3306/simpleapp" />
 		<property name="username" value="simpleapp" />
 		<property name="password" value="simple314" />
 		<property name="initialSize" value="2" />
