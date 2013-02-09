@@ -34,15 +34,14 @@
 	</target>
 
 	<target name="createdb">
-		<sql driver="${sql.driver}" 
-			url="${sql.url}" 
-			userid="${sql.user}" 
-			password="${sql.pass}" 
-			classpathref="lib-classpath" 
-			src="${dir.root}/${dir.sql}/createstuff.sql" />
+		<sql driver="${sql.driver}" url="${sql.url}" userid="${sql.user}" password="${sql.pass}" classpathref="lib-classpath" src="${dir.root}/${dir.sql}/createstuff.sql" />
 	</target>
 
-	<target name="war" depends="compile" description="make a war">
-		<jar jarfile="${dir.dest}/simpleapp.war" basedir="${dir.build}" />
+	<target name="war" depends="compile">
+		<war destfile="SimpleApp.war" webxml="WebContent/WEB-INF/web.xml">
+			<fileset dir="WebContent" />
+			<lib dir="WebContent/WEB-INF/lib" />
+			<classes dir="WebContent/WEB-INF/classes" />
+		</war>
 	</target>
 </project>
