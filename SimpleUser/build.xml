@@ -1,9 +1,5 @@
 <project name="SimpleApp" default="war" basedir=".">
 
-	<!-- Properties needed-->
-	<property name="mvn.home" value="" description="The home dir for your maven install" />
-	<property name="tomcat.home" value="" description="The root directory of your tomcat server" />
-
 	<property name="dir.root" value="WebContent" />
 	<property name="dir.src" value="WEB-INF/classes" />
 	<property name="dir.dest" value="WEB-INF/classes" />
@@ -38,7 +34,8 @@
 	</target>
 
 	<target name="war" depends="compile">
-		<war destfile="SimpleApp.war" webxml="WebContent/WEB-INF/web.xml">
+		<input message="Please enter path to your tomcat webapps dir" addproperty="tomcat.dir" defaultvalue="."/>
+		<war destfile="${tomcat.dir}/SimpleApp.war" webxml="WebContent/WEB-INF/web.xml">
 			<fileset dir="WebContent" />
 			<lib dir="WebContent/WEB-INF/lib" />
 			<classes dir="WebContent/WEB-INF/classes" />
