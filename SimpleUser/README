@@ -5,16 +5,18 @@ is setup as a MySQL database using InnoDB:
   - You'll need a schema called "simpleapp" 
   - A user called "simpleapp", password: "simple314"
   - You'll need to run the database DDL script using the file "WebContent/database/createstuff.sql"
-  - You'll either need to add a hosts entry for "advisor.local" or point the app at your database in 
-  	two places.  
-  	- If you want to use Tomcat/JNDI JDBC setup, you'll only need to change the "WebContent/META-INF/context.xml"
-  	file and update the "url" property to point to the proper host.
-  	- If you want hibernate to NOT use Tomcat's JNDI facility, you'll need to change 
-  		"WebContent/WEB-INF/classes/hibernate.cfg.xml" and or "hobernateAnnotations.cfg.xml  
-  - You'll need to run Maven to get the required dependencies.  Assuming some unix like environment, go to the 
+  - JDBC Connections are assumed to use "localhost:3306" for mysql database.  If you want something else, you'll need to change,
+  	"META-INF/context.xml." Everything in Spring, JDBC, and Hibernate uses the JNDI datasource from context.xml  
+
+Building:
+	- Download the project using git clone. <Address>
+	- You'll need to run Maven to get the required dependencies.  Assuming some unix like environment, go to the 
   	"SimpleUser" directory and run "mvn dependency:copy-dependencies" which will download the necessary JAR files for
   	the application.  I'm using Maven for repository and dependency management only, not for build function.   
-  	//TODO, need to test build off of Eclipse
+	- In the same directory, run "ant createdb".  Assuming you're MySQL is localhost, it'll create the required database artifacts and insert some records. 
+	- Use ant to build to build the project <command and dir>
+	- Drop into your tomcate webapps
+  - Go to:
 
 1) Simple JDBC
 First example is a simple JDBC application that stores, changes, retrieves data in a single table SIMPLEAPP.USER.
@@ -74,9 +76,14 @@ truly portable JPA application.
 Run the same test servlet as in example 2.  Fun. 
 
 4) Shoes with a Spring in your step.  
-Not filled out yet.
-	  
-	  
+The Spring sample is built using the sample DAO structure and inheritance structure as the Hibernate ones.  It's just using Spring
+injection to manage the session, transactions, all that sort of thing.  You can see the samples in CommonDAOSpringImpl, UserDAOHibSpringImpl which
+use the CommonDAO and UserDAO just as the last two examples did.
+
+The link to run the cactus tests for this is on the index page and the Servlet is test.HibernateSpringDAOTestServlet.
+
+I also wrote a simple servlet using Spring MVC to show a sample of that as well both running and using annotation.  That's the
+"Add a Person..." link on the index page.
 	  
 OTHER
   - I use Logback for logging.  right now it's a very simple setup to send everything to the console.
@@ -86,6 +93,5 @@ OTHER
   	
  HUGE TODO's
  - Move everything to a standard JEE directory structure for Maven
- - Ant build.
  - Tests for Spring stuff servlet stuff.
   	
