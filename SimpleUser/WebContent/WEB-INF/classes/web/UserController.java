@@ -31,6 +31,37 @@ public class UserController {
 
 		userDAO.saveUser(user);
 
+		model.addAttribute("addUser", "true");
+		return "/result.jsp";
+	}
+	
+	@RequestMapping(value = "/removeUser", method = RequestMethod.POST)
+	public String removeUser(@RequestParam("userName") String userName,
+													Model model) {
+		User user = new User();
+		user.setUserName(userName);
+
+		userDAO.deleteUser(user);
+		
+		model.addAttribute("removeUser", "true");
+		return "/result.jsp";
+	}
+	
+	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+	public String updateUser(@RequestParam("userName") String userName,
+													@RequestParam("password") String password,
+													@RequestParam("firstName") String firstName,
+													@RequestParam("lastName") String lastName, 
+													Model model) {
+		User user = new User();
+		user.setUserName(userName);
+		user.setPassword(password);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+
+		userDAO.updateUser(user);
+
+		model.addAttribute("updateUser", "true");
 		return "/result.jsp";
 	}
 }

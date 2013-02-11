@@ -7,6 +7,15 @@
 		<title>Result page</title>
 	</head>
 	<body>
-		Person added
+		Request param: <% out.println(pageContext.findAttribute("addUser")); %><br/>
+		<% if (pageContext.findAttribute("addUser") != null && pageContext.findAttribute("addUser").equals("true")) %>
+		User added
+		<% else if (pageContext.findAttribute("removeUser") != null && pageContext.findAttribute("removeUser").equals("true")) %>
+		User Removed
+		<% else if (pageContext.findAttribute("updateUser") != null && pageContext.findAttribute("updateUser").equals("true")) %>
+		User Updated.
+		<% else %>
+		No Action requested.
+		
 	</body>
 </html>
