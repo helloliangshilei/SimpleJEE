@@ -34,7 +34,7 @@ for me to mess around.
 	  of DAO objects.  For this one, click the "Go to the Simple JDBC Tests" link.
 	- The test servlet is test.SimpleDAOTestServlet
 	  
-2) Put on the fancy shoes: Hobernate, DAO, Generics 
+2) Put on the fancy shoes: Hibernate, DAO, Generics 
 The second example is sort of two examples combined into one.  The fist one is standard Hibernate using the
 standard hibernate.cfg.xml style of development with mappings included in the related files.  To use the example, 
 you need to edit the WEB-INF/web.xml file and remove the VALUE of the HibernateConfigFile param.  So you'd have
@@ -80,6 +80,8 @@ The Spring sample is built using the sample DAO structure and inheritance struct
 injection to manage the session, transactions, all that sort of thing.  You can see the samples in CommonDAOSpringImpl, UserDAOHibSpringImpl which
 use the CommonDAO and UserDAO just as the last two examples did.
 
+This example also uses Entity Manager for true javax.persistence rather than hibernate's SessionFactory.
+
 The link to run the cactus tests for this is on the index page and the Servlet is test.HibernateSpringDAOTestServlet.
 
 I also wrote a simple servlet using Spring MVC to show a sample of that as well both running and using annotation.  That's the
@@ -95,4 +97,3 @@ OTHER
  - Move everything to a standard JEE directory structure for Maven
  - Tests for Spring stuff servlet stuff.
   	
---Branch Info, EntityManagerV1
