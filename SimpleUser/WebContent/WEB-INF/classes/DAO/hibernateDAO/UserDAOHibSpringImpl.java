@@ -6,10 +6,10 @@ import java.util.List;
 import object.User;
 
 import org.hibernate.Query;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-@Component("userDAO") //Added manual component name so I can get bean out of context with autoscan
+@Repository("userDAO") //Added manual component name so I can get bean out of context with autoscan
 public class UserDAOHibSpringImpl extends CommonDAOSpringImpl<User> implements UserDAO {
 
 	@Transactional(readOnly = false)
