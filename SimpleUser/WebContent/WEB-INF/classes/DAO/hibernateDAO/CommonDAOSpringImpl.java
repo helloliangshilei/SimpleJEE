@@ -25,35 +25,29 @@ public abstract class CommonDAOSpringImpl<T extends Serializable> implements Com
   }
   
 	@Override
-	@Transactional(readOnly = false)
 	public void save(T entity) {
-		//sessionFactory.getCurrentSession().save(entity);
-		entityManager.persist(entity);
+		entityManager.merge(entity);
 	}
 
 	@Override
-	@Transactional(readOnly = false)
 	public void update(T entity) {
 		entityManager.merge(entity);
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public T find(Class<?> classy, String id) {
-		return (T) entityManager.find(classy,  id);
+		return (T) entityManager.find(classy, id);
 
 	}
 
 	@Override
-	@Transactional(readOnly = false)
 	public void delete(T entity) {
-		entityManager.remove(entity);
+		entityManager.remove(entityManager.merge(entity));
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional(readOnly = true)
 	public List<T> findAll(Class<?> classy) {
 		Query query = entityManager.createQuery("select o from :class o");
 		query.setParameter(":class", classy);
