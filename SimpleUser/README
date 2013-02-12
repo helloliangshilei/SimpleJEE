@@ -95,3 +95,4 @@ OTHER
  - Move everything to a standard JEE directory structure for Maven
  - Tests for Spring stuff servlet stuff.
   	
+--Branch Info, EntityManagerV1
