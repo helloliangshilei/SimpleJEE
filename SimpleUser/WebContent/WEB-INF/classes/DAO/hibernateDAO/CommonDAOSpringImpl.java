@@ -7,9 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-
 /*
  * A simple Generic DAO Implementation using hibernate and spring together conventions.  
  * The object is to test the generic DAO strategy, hibernate, and the hibernate XML and Annotation mappings.
@@ -34,8 +31,8 @@ public abstract class CommonDAOSpringImpl<T extends Serializable> implements Com
 		entityManager.merge(entity);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional(readOnly = true)
 	public T find(Class<?> classy, String id) {
 		return (T) entityManager.find(classy, id);
 
