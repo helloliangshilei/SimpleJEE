@@ -3,10 +3,12 @@ package DAO.hibernateDAO;
 import java.io.Serializable;
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /*
  * A simple Generic DAO Implementation using hibernate and spring together conventions.  
@@ -15,40 +17,46 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public abstract class CommonDAOSpringImpl<T extends Serializable> implements CommonDAO<T> {
 	
-	@Autowired
-	protected SessionFactory sessionFactory;
+	protected EntityManager entityManager;
+
+  @PersistenceContext
+  public void setEntityManager(EntityManager entityManager) {
+      this.entityManager = entityManager;
+  }
   
 	@Override
+	@Transactional(readOnly = false)
 	public void save(T entity) {
-		sessionFactory.getCurrentSession().save(entity);
+		//sessionFactory.getCurrentSession().save(entity);
+		entityManager.persist(entity);
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void update(T entity) {
-		sessionFactory.getCurrentSession().update(entity);
+		entityManager.merge(entity);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
 	public T find(Class<?> classy, String id) {
-		T t;
-		Session session = sessionFactory.getCurrentSession();
-		t = (T) session.get(classy, id);
-		return t;
+		return (T) entityManager.find(classy,  id);
+
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void delete(T entity) {
-		sessionFactory.getCurrentSession().delete(entity);
+		entityManager.remove(entity);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional(readOnly = true)
 	public List<T> findAll(Class<?> classy) {
-		Session session = sessionFactory.getCurrentSession();
-		List<T> list = null;
-		Query queryResult = session.createQuery("from " + classy.getName());
-		list = queryResult.list();
-		return list;
+		Query query = entityManager.createQuery("select o from :class o");
+		query.setParameter(":class", classy);
+		return query.getResultList();
 	}
 }

@@ -44,11 +44,11 @@ public class UserDAOHibSpringImpl extends CommonDAOSpringImpl<User> implements U
 	@Transactional(readOnly = true)
 	public List<User> listUsersByRoles(String role) {
 		List<User> users = new ArrayList<User>();
-		String sql = "select new User(user.userName, user.firstName, user.lastName, user.password) "
-				+ "from User as user inner join user.roles role where role.role = :role";
-		Query query = super.sessionFactory.getCurrentSession().createQuery(sql);
-		query.setParameter("role", role);
-		users = (List<User>) query.list();
+		//String sql = "select new User(user.userName, user.firstName, user.lastName, user.password) "
+		//		+ "from User as user inner join user.roles role where role.role = :role";
+		//Query query = super.sessionFactory.getCurrentSession().createQuery(sql);
+		//query.setParameter("role", role);
+		//users = (List<User>) query.list();
 		return users;
 	}
 }
