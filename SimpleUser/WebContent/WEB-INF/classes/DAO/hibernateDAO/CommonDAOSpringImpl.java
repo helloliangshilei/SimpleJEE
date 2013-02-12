@@ -46,8 +46,7 @@ public abstract class CommonDAOSpringImpl<T extends Serializable> implements Com
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findAll(Class<?> classy) {
-		Query query = entityManager.createQuery("select o from :class o");
-		query.setParameter(":class", classy);
+		Query query = entityManager.createQuery("from " + classy.getName());
 		return query.getResultList();
 	}
 }
