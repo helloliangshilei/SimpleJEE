@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add user</title>
+<title>Remove user</title>
 </head>
 <body>
 	<form action="user/removeUser" method="post">
