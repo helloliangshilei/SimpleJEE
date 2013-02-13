@@ -14,13 +14,9 @@ import javax.persistence.Query;
  */
 public abstract class CommonDAOSpringImpl<T extends Serializable> implements CommonDAO<T> {
 	
+	@PersistenceContext
 	protected EntityManager entityManager;
 
-  @PersistenceContext
-  public void setEntityManager(EntityManager entityManager) {
-      this.entityManager = entityManager;
-  }
-  
 	@Override
 	public void save(T entity) {
 		entityManager.merge(entity);
