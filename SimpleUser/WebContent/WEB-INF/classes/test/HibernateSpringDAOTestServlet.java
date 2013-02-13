@@ -115,9 +115,8 @@ public class HibernateSpringDAOTestServlet extends ServletTestCase {
 		UserDAO userDAO = (UserDAO)context.getBean("userDAO");
 		userList = userDAO.listUsers();
 		
-		//Just for giggles.
 		for (User user : userList) {
-			System.out.println("Last Name: " + user.getLastName());
+			log.debug("Last Name: " + user.getLastName());
     }
 		
 		assertEquals(2, userList.size());
