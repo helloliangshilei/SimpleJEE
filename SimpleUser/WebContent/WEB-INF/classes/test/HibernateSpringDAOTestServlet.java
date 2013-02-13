@@ -7,16 +7,21 @@ import object.User;
 
 import org.apache.cactus.ServletTestCase;
 import org.hibernate.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import DAO.hibernateDAO.HibUtil;
 import DAO.hibernateDAO.UserDAO;
+import DAO.hibernateDAO.UserDAOHibOnlyImpl;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 public class HibernateSpringDAOTestServlet extends ServletTestCase {
+	
+	private static Logger log = LoggerFactory.getLogger(HibernateSpringDAOTestServlet.class);
 	
 	ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml"); 
 	
@@ -127,11 +132,11 @@ public class HibernateSpringDAOTestServlet extends ServletTestCase {
 		userList2 = userDAO.listUsersByRoles("administrator");
 		
 		for (User user : userList) {
-			System.out.println("Last Name List 1 findByRole: " + user.getLastName());
+			log.debug("Last Name List 1 findByRole: " + user.getLastName());
     }
 		
 		for (User user : userList2) {
-			System.out.println("Last Name List 2 findByRole: " + user.getLastName());
+			log.debug("Last Name List 2 findByRole: " + user.getLastName());
     }
 		
 		assertEquals(1, userList.size());
