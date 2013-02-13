@@ -14,7 +14,7 @@ import javax.persistence.Query;
  */
 public abstract class CommonDAOSpringImpl<T extends Serializable> implements CommonDAO<T> {
 	
-	@PersistenceContext
+	@PersistenceContext(unitName="userPU")
 	protected EntityManager entityManager;
 
 	@Override
