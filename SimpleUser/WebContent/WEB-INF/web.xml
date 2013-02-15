@@ -69,7 +69,7 @@
 	
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>/service/*</url-pattern>
+		<url-pattern>/userRest/*</url-pattern>
 	</servlet-mapping>
 
 	<listener>
