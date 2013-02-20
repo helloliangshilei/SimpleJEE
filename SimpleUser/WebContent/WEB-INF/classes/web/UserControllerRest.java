@@ -29,7 +29,7 @@ public class UserControllerRest {
 	@RequestMapping(method=RequestMethod.GET, value="/getUser/{userName}")
 	public ModelAndView getUser(@PathVariable String userName) {
 		User user = userDAO.findUserByUsername(userName);
-		return new ModelAndView("users", "object", user);
+		return new ModelAndView("employees", "object", user);
 	}
 
 	/*@RequestMapping(value = "/addUser", method = RequestMethod.POST)

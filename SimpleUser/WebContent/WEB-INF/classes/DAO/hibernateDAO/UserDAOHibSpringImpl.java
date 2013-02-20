@@ -10,6 +10,10 @@ import object.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElement;
+
+@XmlRootElement(name="employees")
 @Repository("userDAO") //Added manual component name so I can get bean out of context with autoscan
 public class UserDAOHibSpringImpl extends CommonDAOSpringImpl<User> implements UserDAO {
 
@@ -23,6 +27,7 @@ public class UserDAOHibSpringImpl extends CommonDAOSpringImpl<User> implements U
 		this.update(user);
 	}
 
+	@XmlElement(name="employee")
 	@Transactional(readOnly = true)
 	public User findUserByUsername(String username) {
 		User user = (User) this.find(User.class, username);

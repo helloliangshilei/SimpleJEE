@@ -12,9 +12,12 @@ import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name="user", schema="simpleapp")
+@XmlRootElement(name="employee")
 public class User implements Serializable {
 
 	@Id 

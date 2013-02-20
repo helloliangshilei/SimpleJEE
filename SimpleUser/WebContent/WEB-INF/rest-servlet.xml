@@ -17,11 +17,12 @@
 			<list>
 				<value>object.User</value>
 				<value>object.Role</value>
+				<value>DAO.hibernateDAO.UserDAOHibSpringImpl</value>
 			</list>
 		</property>
 	</bean>
 
-	<bean id="users" class="org.springframework.web.servlet.view.xml.MarshallingView">
+	<bean id="employees" class="org.springframework.web.servlet.view.xml.MarshallingView">
 		<constructor-arg ref="jaxbMarshaller" />
 	</bean>
 
