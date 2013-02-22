@@ -25,11 +25,12 @@
 	<!-- set annotation driven, use proxy because of the Generic DAO setup I 
 		used. requires CGLib style proxies instead of JDK -->
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" /> 
-	<!-- <tx:annotation-driven mode="aspectj" transaction-manager="transactionManager" proxy-target-class="true" /> -->
 	
 	<!-- Register @Autowired annotation -->
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
-
+	
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+	
 	<!-- Scan packages, use repository annotation -->
 	<context:component-scan base-package="DAO.hibernateDAO">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
