@@ -10,7 +10,7 @@ import object.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-@Repository("userDAO") //Added manual component name so I can get bean out of context with autoscan
+@Repository("userDAO")
 public class UserDAOHibSpringImpl extends CommonDAOSpringImpl<User> implements UserDAO {
 
 	@Transactional(readOnly = false)
@@ -45,8 +45,8 @@ public class UserDAOHibSpringImpl extends CommonDAOSpringImpl<User> implements U
 	@Transactional(readOnly = true)
 	public List<User> listUsersByRoles(String role) {
 		List<User> users = new ArrayList<User>();
-		String sql = "select new User(user.userName, user.firstName, user.lastName, user.password) "
-				+ "from User as user inner join user.roles role where role.role = :role";
+
+		String sql = "from User as user inner join fetch User.roles as role where role.role = :role";
 		Query query = super.entityManager.createQuery(sql);
 		query.setParameter("role", role);
 		users = (List<User>) query.getResultList();
