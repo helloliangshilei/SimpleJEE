@@ -64,8 +64,14 @@
 			<artifactId>ant</artifactId>
 			<version>1.8.4</version>
 		</dependency>
-		<!-- End Hibernate -->
 
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>4.1.9.Final</version>
+		</dependency>
+		<!-- End Hibernate -->
+		
 		<!-- Spring dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
