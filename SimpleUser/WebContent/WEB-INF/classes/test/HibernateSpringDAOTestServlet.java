@@ -3,6 +3,7 @@ package test;
 import java.util.ArrayList;
 import java.util.List;
 
+import object.Role;
 import object.User;
 
 import org.apache.cactus.ServletTestCase;
@@ -14,7 +15,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import DAO.hibernateDAO.HibUtil;
 import DAO.hibernateDAO.UserDAO;
-import DAO.hibernateDAO.UserDAOHibOnlyImpl;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -132,10 +132,16 @@ public class HibernateSpringDAOTestServlet extends ServletTestCase {
 		
 		for (User user : userList) {
 			log.debug("Last Name List 1 findByRole: " + user.getLastName());
+			for (Role role : user.getRoles()) {
+				log.debug("   Roles List 1: " + role.getRole());
+			}
     }
 		
 		for (User user : userList2) {
 			log.debug("Last Name List 2 findByRole: " + user.getLastName());
+			for (Role role : user.getRoles()) {
+				log.debug("   Roles List 2: " + role.getRole());
+			}
     }
 		
 		assertEquals(1, userList.size());
