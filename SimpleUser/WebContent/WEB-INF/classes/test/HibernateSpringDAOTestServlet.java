@@ -98,7 +98,6 @@ public class HibernateSpringDAOTestServlet extends ServletTestCase {
 		user.setUserName("halgrena");
 		
 		UserDAO userDAO = (UserDAO)context.getBean("userDAO");
-		userDAO.update(user);
 		userDAO.deleteUser(user);
 		
 		//Now load without using DAO structure and compare
@@ -119,9 +118,9 @@ public class HibernateSpringDAOTestServlet extends ServletTestCase {
 		
 		for (User user : userList) {
 			log.debug("Last Name (Find All): " + user.getLastName());
-			for (Role role : user.getRoles()) {
+			/*for (Role role : user.getRoles()) {
 				log.debug("   Roles List 1: " + role.getRole());
-			}
+			}*/
     }
 		assertEquals(2, userList.size());
 	}

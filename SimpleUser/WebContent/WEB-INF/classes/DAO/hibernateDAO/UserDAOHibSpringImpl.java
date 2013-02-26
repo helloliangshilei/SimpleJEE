@@ -3,7 +3,7 @@ package DAO.hibernateDAO;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Query;
+import org.hibernate.Query;
 
 import object.User;
 
@@ -48,10 +48,10 @@ public class UserDAOHibSpringImpl extends CommonDAOSpringImpl<User> implements U
 	public List<User> listUsersByRoles(String role) {
 		List<User> users = new ArrayList<User>();
 
-		String sql = "from User as user inner join fetch User.roles as role where role.role = :role";
-		Query query = super.entityManager.createQuery(sql);
+		String sql = "from User as user inner join fetch user.roles as role where role.role = :role";
+		Query query = super.sessionFactory.getCurrentSession().createQuery(sql);
 		query.setParameter("role", role);
-		users = (List<User>) query.getResultList();
+		users = (List<User>) query.list();
 		return users;
 	}
 }

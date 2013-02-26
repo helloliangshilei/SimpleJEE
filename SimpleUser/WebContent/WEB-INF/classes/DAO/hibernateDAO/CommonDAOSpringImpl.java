@@ -3,9 +3,10 @@ package DAO.hibernateDAO;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /*
  * A simple Generic DAO Implementation using hibernate and spring together conventions.  
@@ -14,35 +15,40 @@ import javax.persistence.Query;
  */
 public abstract class CommonDAOSpringImpl<T extends Serializable> implements CommonDAO<T> {
 	
-	@PersistenceContext(unitName="userPU")
-	protected EntityManager entityManager;
+	@Autowired
+	protected SessionFactory sessionFactory;
 
 	@Override
 	public void save(T entity) {
-		entityManager.merge(entity);
+		sessionFactory.getCurrentSession().save(entity);
 	}
 
 	@Override
 	public void update(T entity) {
-		entityManager.merge(entity);
+		sessionFactory.getCurrentSession().update(entity);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public T find(Class<?> classy, String id) {
-		return (T) entityManager.find(classy, id);
-
+		T t;
+		Session session = sessionFactory.getCurrentSession();
+		t = (T) session.get(classy, id);
+		return t;
 	}
 
 	@Override
 	public void delete(T entity) {
-		entityManager.remove(entityManager.merge(entity));
+		sessionFactory.getCurrentSession().delete(entity);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findAll(Class<?> classy) {
-		Query query = entityManager.createQuery("from " + classy.getName());
-		return query.getResultList();
+		Session session = sessionFactory.getCurrentSession();
+		List<T> list = null;
+		Query queryResult = session.createQuery("from " + classy.getName());
+		list = queryResult.list();
+		return list;
 	}
 }
