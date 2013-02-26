@@ -1,7 +1,9 @@
 package test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import object.Role;
 import object.User;
@@ -116,9 +118,11 @@ public class HibernateSpringDAOTestServlet extends ServletTestCase {
 		userList = userDAO.listUsers();
 		
 		for (User user : userList) {
-			log.debug("Last Name: " + user.getLastName());
+			log.debug("Last Name (Find All): " + user.getLastName());
+			for (Role role : user.getRoles()) {
+				log.debug("   Roles List 1: " + role.getRole());
+			}
     }
-		
 		assertEquals(2, userList.size());
 	}
 	
@@ -143,7 +147,6 @@ public class HibernateSpringDAOTestServlet extends ServletTestCase {
 				log.debug("   Roles List 2: " + role.getRole());
 			}
     }
-		
 		assertEquals(1, userList.size());
 		assertEquals(2, userList2.size());
 	}
