@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import object.User;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,7 @@ public class UserDAOHibSpringImpl extends CommonDAOSpringImpl<User> implements U
 	@Transactional(readOnly = true)
 	public User findUserByUsername(String username) {
 		User user = (User) this.find(User.class, username);
+		Hibernate.initialize(user.getRoles());
 		return user;
 	}
 
@@ -40,7 +42,7 @@ public class UserDAOHibSpringImpl extends CommonDAOSpringImpl<User> implements U
 		users = this.findAll(User.class);
 		return users;
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<User> listUsersByRoles(String role) {
