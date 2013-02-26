@@ -96,4 +96,6 @@ OTHER
  HUGE TODO's
  - Move everything to a standard JEE directory structure for Maven
  - Tests for Spring stuff servlet stuff.
+ 
+ SesionManagerV2
   	
