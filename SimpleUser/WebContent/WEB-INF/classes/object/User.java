@@ -6,15 +6,24 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name="user", schema="simpleapp")
+@NamedQueries({
+	@NamedQuery(name="object.user.listUsersByRole",
+	query="from User as user inner join fetch user.roles as role where role.role = :role"
+	)
+})
 public class User implements Serializable {
 
 	@Id 
@@ -30,7 +39,8 @@ public class User implements Serializable {
 	@Column(name="password", nullable=false, length=100)
 	private String password = null;
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
+	//@Cascade(CascadeType.ALL)
   @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_username") }, inverseJoinColumns = { @JoinColumn(name = "role_role") })
 	private Set<Role> roles = new HashSet<Role>(0);
 
