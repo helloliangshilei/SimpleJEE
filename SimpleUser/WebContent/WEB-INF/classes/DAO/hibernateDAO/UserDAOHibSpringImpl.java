@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository("userDAO")
 public class UserDAOHibSpringImpl extends CommonDAOSpringImpl<User> implements UserDAO {
-
+	
 	@Transactional(readOnly = false)
 	public void saveUser(User user) {
 		this.save(user);
@@ -48,8 +48,9 @@ public class UserDAOHibSpringImpl extends CommonDAOSpringImpl<User> implements U
 	public List<User> listUsersByRoles(String role) {
 		List<User> users = new ArrayList<User>();
 
-		String sql = "from User as user inner join fetch user.roles as role where role.role = :role";
-		Query query = super.sessionFactory.getCurrentSession().createQuery(sql);
+		//String sql = "from User as user inner join fetch user.roles as role where role.role = :role";
+		//Query query = super.sessionFactory.getCurrentSession().createQuery(sql);
+		Query query = super.sessionFactory.getCurrentSession().getNamedQuery("object.user.listUsersByRole");
 		query.setParameter("role", role);
 		users = (List<User>) query.list();
 		return users;
