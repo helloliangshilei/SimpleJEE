@@ -95,7 +95,7 @@ public class HibernateSpringDAOTestServlet extends ServletTestCase {
 		user = userDAO.findUserByUsername("halgrena");
 		
 		for (Role role : user.getRoles()) {
-			log.debug("   Roles for: " + user.getUserName() +" are " + role.getRole());
+			log.debug("  (testUserFind) Roles for: " + user.getUserName() +" are " + role.getRole());
 		}
 		
 		assertEquals(1, user.getRoles().size());
@@ -129,7 +129,7 @@ public class HibernateSpringDAOTestServlet extends ServletTestCase {
 		for (User user : userList) {
 			log.debug("Last Name (Find All): " + user.getLastName());
 			for (Role role : user.getRoles()) {
-				log.debug("   Roles List 1: " + role.getRole());
+				log.debug("   (testUserfindAll) Roles List 1: " + role.getRole());
 			}
     }
 		assertEquals(2, userList.size());
@@ -144,16 +144,16 @@ public class HibernateSpringDAOTestServlet extends ServletTestCase {
 		userList2 = userDAO.listUsersByRoles("administrator");
 		
 		for (User user : userList) {
-			log.debug("Last Name List 1 findByRole: " + user.getLastName());
+			log.debug("(testUserFindByRole) Last Name List 1 findByRole: " + user.getLastName());
 			for (Role role : user.getRoles()) {
-				log.debug("   Roles List 1: " + role.getRole());
+				log.debug("   (testUserFindByRole)Roles List 1: " + role.getRole());
 			}
     }
 		
 		for (User user : userList2) {
-			log.debug("Last Name List 2 findByRole: " + user.getLastName());
+			log.debug("(testUserFindByRole) Last Name List 2 findByRole: " + user.getLastName());
 			for (Role role : user.getRoles()) {
-				log.debug("   Roles List 2: " + role.getRole());
+				log.debug("   (testUserFindByRole) Roles List 2: " + role.getRole());
 			}
     }
 		assertEquals(1, userList.size());
