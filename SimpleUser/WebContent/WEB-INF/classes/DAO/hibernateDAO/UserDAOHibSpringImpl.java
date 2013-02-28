@@ -27,7 +27,6 @@ public class UserDAOHibSpringImpl extends CommonDAOSpringImpl<User> implements U
 	@Transactional(readOnly = true)
 	public User findUserByUsername(String username) {
 		User user = (User) this.find(User.class, username);
-		Hibernate.initialize(user.getRoles());
 		return user;
 	}
 
