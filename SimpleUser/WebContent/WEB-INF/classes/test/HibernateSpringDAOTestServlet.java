@@ -42,6 +42,11 @@ public class HibernateSpringDAOTestServlet extends ServletTestCase {
 		user.setLastName("Halgren");
 		user.setUserName("halgrena");
 		user.setPassword("anne314");
+		Role role = new Role();
+		role.setRole("administrator");
+		Set<Role> roles = new HashSet<Role>();
+		roles.add(role);
+		user.setRoles(roles);
 		
 		UserDAO userDAO = (UserDAO)context.getBean("userDAO");
 		userDAO.saveUser(user);
@@ -60,13 +65,14 @@ public class HibernateSpringDAOTestServlet extends ServletTestCase {
 	
 	public void testUserUpdatee() {
 		User user = new User();
+		//Load object
+		UserDAO userDAO = (UserDAO)context.getBean("userDAO");
+		user = userDAO.findUserByUsername("halgrena");
 		
 		user.setFirstName("Anne2");
 		user.setLastName("Halgren2");
-		user.setUserName("halgrena");
 		user.setPassword("anne3142");
 		
-		UserDAO userDAO = (UserDAO)context.getBean("userDAO");
 		userDAO.updateUser(user);
 		((ClassPathXmlApplicationContext) context).close(); 
 		
@@ -88,6 +94,11 @@ public class HibernateSpringDAOTestServlet extends ServletTestCase {
 		UserDAO userDAO = (UserDAO)context.getBean("userDAO"); 
 		user = userDAO.findUserByUsername("halgrena");
 		
+		for (Role role : user.getRoles()) {
+			log.debug("   Roles for: " + user.getUserName() +" are " + role.getRole());
+		}
+		
+		assertEquals(1, user.getRoles().size());
 		assertEquals("Halgren2", user.getLastName());
 		assertEquals("Anne2", user.getFirstName());
 	}
@@ -95,9 +106,8 @@ public class HibernateSpringDAOTestServlet extends ServletTestCase {
 	public void testUserDelete() {
 		User user = new User();
 		
-		user.setUserName("halgrena");
-		
 		UserDAO userDAO = (UserDAO)context.getBean("userDAO");
+		user = userDAO.findUserByUsername("halgrena");
 		userDAO.deleteUser(user);
 		
 		//Now load without using DAO structure and compare
@@ -118,9 +128,9 @@ public class HibernateSpringDAOTestServlet extends ServletTestCase {
 		
 		for (User user : userList) {
 			log.debug("Last Name (Find All): " + user.getLastName());
-			/*for (Role role : user.getRoles()) {
+			for (Role role : user.getRoles()) {
 				log.debug("   Roles List 1: " + role.getRole());
-			}*/
+			}
     }
 		assertEquals(2, userList.size());
 	}
