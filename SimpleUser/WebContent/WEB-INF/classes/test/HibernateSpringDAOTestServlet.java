@@ -119,9 +119,6 @@ public class HibernateSpringDAOTestServlet extends ServletTestCase {
 		
 		for (User user : userList) {
 			log.debug("Last Name (Find All): " + user.getLastName());
-			for (Role role : user.getRoles()) {
-				log.debug("   Roles List 1: " + role.getRole());
-			}
     }
 		assertEquals(2, userList.size());
 	}
