@@ -25,7 +25,7 @@ public abstract class CommonDAOSpringImpl<T extends Serializable> implements Com
 
 	@Override
 	public void update(T entity) {
-		sessionFactory.getCurrentSession().update(entity);
+		sessionFactory.getCurrentSession().merge(entity);
 	}
 
 	@Override
