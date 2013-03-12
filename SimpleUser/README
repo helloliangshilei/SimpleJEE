@@ -97,5 +97,5 @@ OTHER
  - Move everything to a standard JEE directory structure for Maven
  - Tests for Spring stuff servlet stuff.
  
- SesionManagerV2
+ MavenRefactor1.0
   	
