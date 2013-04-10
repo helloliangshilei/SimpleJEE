@@ -1,5 +1,7 @@
 SimpleApp is a simple application to show various conventions for using JEE technologies and patterns.
 
+TODO: NEED TO REWRITE THIS WHOLE THING SINCE MAVEN CONVERSION.  EITHER ELIMINATE OR FIX ANT BUILD.
+
 CONFIGURATION:  The application has been tested and run on Tomcat 7.  So you'll need that or something similar.  The database
 is setup as a MySQL database using InnoDB:
   - You'll need a schema called "simpleapp" 
