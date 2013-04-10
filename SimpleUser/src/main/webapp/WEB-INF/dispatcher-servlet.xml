@@ -7,7 +7,7 @@ http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
 	<!-- Used for scan Controller Spring annotations -->
-	<context:component-scan base-package="web" />
+	<context:component-scan base-package="com.wickedhobo.web" />
 
 	<!-- <bean id="jspViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -16,4 +16,12 @@ http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 		<property name="prefix" value="/SimpleApp/" />
 		<property name="suffix" value="/jsp/" />
 	</bean> -->
+	
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<property name="cache" value="false" />
+<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+<property name="prefix" value="/WEB-INF/JSP/" />
+<property name="suffix" value=".jsp" />
+</bean>
 </beans>

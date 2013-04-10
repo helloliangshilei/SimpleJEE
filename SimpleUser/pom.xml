@@ -71,7 +71,7 @@
 			<version>4.1.9.Final</version>
 		</dependency>
 		<!-- End Hibernate -->
-		
+
 		<!-- Spring dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -193,6 +193,13 @@
 		</dependency>
 		<!-- End Spring -->
 
+		<!-- JSTL -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
 		<!-- Logging, Logback and slf4j -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -218,18 +225,40 @@
 			<groupId>org.apache.cactus</groupId>
 			<artifactId>cactus.core.framework.uberjar.javaEE.15</artifactId>
 			<version>1.8.1</version>
-		</dependency>
-		<!-- These seem to be some odd cactus requirement. -->
-		<dependency>
-			<groupId>tomcat</groupId>
-			<artifactId>jasper-compiler</artifactId>
-			<version>4.1.30</version>
-		</dependency>
-		<dependency>
-			<groupId>tomcat</groupId>
-			<artifactId>jasper-runtime</artifactId>
-			<version>4.1.30</version>
-		</dependency>
+			<exclusions>
+				<exclusion>
+					<groupId>tomcat</groupId>
+					<artifactId>jasper-compiler</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>tomcat</groupId>
+					<artifactId>jasper-runtime</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>tomcat</groupId>
+					<artifactId>jasper-runtime</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.servlet</groupId>
+					<artifactId>servlet-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.servlet</groupId>
+					<artifactId>servlet-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.servlet</groupId>
+					<artifactId>jsp-api</artifactId>
+				</exclusion>
+			</exclusions>
+			
+		</dependency>	
+ 		
+ 
+ <!-- These seem to be some odd cactus requirement. -->
+		<!-- <dependency> <groupId>tomcat</groupId> <artifactId>jasper-compiler</artifactId> 
+			<version>4.1.30</version> </dependency> <dependency> <groupId>tomcat</groupId> 
+			<artifactId>jasper-runtime</artifactId> <version>4.1.30</version> </dependency> -->
 
 	</dependencies>
 
@@ -249,6 +278,16 @@
 							</configuration>
 						</execution>
 					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.1</version>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>

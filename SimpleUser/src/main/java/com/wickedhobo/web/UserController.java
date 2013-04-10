@@ -32,7 +32,7 @@ public class UserController {
 		userDAO.saveUser(user);
 
 		model.addAttribute("addUser", "true");
-		return "/result.jsp";
+		return "/result";
 	}
 	
 	@RequestMapping(value = "/removeUser", method = RequestMethod.POST)
@@ -44,7 +44,7 @@ public class UserController {
 		userDAO.deleteUser(user);
 		
 		model.addAttribute("removeUser", "true");
-		return "/result.jsp";
+		return "/result";
 	}
 	
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
@@ -62,6 +62,6 @@ public class UserController {
 		userDAO.updateUser(user);
 
 		model.addAttribute("updateUser", "true");
-		return "/result.jsp";
+		return "/result";
 	}
 }

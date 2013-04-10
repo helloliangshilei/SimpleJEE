@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context debug="1" reloadable="true">
+<Context antiJARLocking="true" path="" debug="1" reloadable="true">
     <!-- JDBC datasource -->
+    <!-- <ResourceLink global="jdbc/simpleapp" name="jdbc/simpleapp" type="javax.sql.DataSource" />  -->
     <Resource name="jdbc/simpleapp" 
               auth="Container"
               type="javax.sql.DataSource" 
@@ -12,6 +13,7 @@
               maxActive="10" 
               maxIdle="4"
               maxWait="1000"/>
+    
 
     <!-- Security realm and location of the users file
     <Realm className="org.apache.catalina.realm.MemoryRealm" 

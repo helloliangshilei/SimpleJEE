@@ -53,7 +53,7 @@
 		<param-value>java:comp/env/jdbc/simpleapp</param-value>
 	</context-param>
 	<listener>
-		<listener-class>config.ServletInitPropsContextListener</listener-class>
+		<listener-class>com.wickedhobo.config.ServletInitPropsContextListener</listener-class>
 	</listener>
 
 	<servlet>

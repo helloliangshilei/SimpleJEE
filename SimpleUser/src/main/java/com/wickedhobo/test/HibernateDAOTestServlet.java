@@ -6,6 +6,7 @@ import java.util.List;
 import com.wickedhobo.object.User;
 
 import org.apache.cactus.ServletTestCase;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import com.wickedhobo.DAO.hibernateDAO.HibUtil;
@@ -26,25 +27,25 @@ public class HibernateDAOTestServlet extends ServletTestCase {
 	}
 	//TODO add HibUtil.begin, finish, close to each since you're using openSession.
 	public void testUserSave() {
-		User user = new User();
-		
-		user.setFirstName("Anne");
-		user.setLastName("Halgren");
-		user.setUserName("halgrena");
-		user.setPassword("anne314");
-		
-		UserDAO userDAO = new UserDAOHibOnlyImpl(); 
-		userDAO.saveUser(user);
-		
-		//Now load without using DAO structure and compare
-		Session session = HibUtil.getSessionFactory().openSession();
-		HibUtil.beginTx();
-		User user2 = (User) session.get(User.class, user.getUserName());
-		HibUtil.commitTx();
-		HibUtil.closeSession();
-		
-		assertNotNull(user2);
-		assertEquals("halgrena", user2.getUserName());
+			User user = new User();
+			
+			user.setFirstName("Anne");
+			user.setLastName("Halgren");
+			user.setUserName("halgrena");
+			user.setPassword("anne314");
+			
+			UserDAO userDAO = new UserDAOHibOnlyImpl(); 
+			userDAO.saveUser(user);
+			
+			//Now load without using DAO structure and compare
+			Session session = HibUtil.getSessionFactory().openSession();
+			HibUtil.beginTx();
+			User user2 = (User) session.get(User.class, user.getUserName());
+			HibUtil.commitTx();
+			HibUtil.closeSession();
+			
+			assertNotNull(user2);
+			assertEquals("halgrena", user2.getUserName());
 	}
 	
 	public void testUserUpdatee() {
