@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd//hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+ 	<class name="com.wickedhobo.object.User" table="user">
+ 	 	<id column="username" name="userName" type="java.lang.String">
+ 	 	 	<generator class="assigned"/>
+ 	 	</id>
+		<property column="firstname" length="100" name="firstName" not-null="true" type="java.lang.String"/>
+		<property column="lastname" length="100" name="lastName" type="java.lang.String"/>
+		<property column="password" length="100" name="password" type="java.lang.String"/>
+		<set name="roles" table="user_role" cascade="all">
+			<key column="user_username" />
+			<many-to-many column="role_role"  class="com.wickedhobo.object.Role" />
+		</set>
+ 	</class>
+</hibernate-mapping> 
