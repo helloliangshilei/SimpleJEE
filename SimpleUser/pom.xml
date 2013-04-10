@@ -251,11 +251,17 @@
 					<artifactId>jsp-api</artifactId>
 				</exclusion>
 			</exclusions>
-			
-		</dependency>	
- 		
- 
- <!-- These seem to be some odd cactus requirement. -->
+
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+
+
+		<!-- These seem to be some odd cactus requirement. -->
 		<!-- <dependency> <groupId>tomcat</groupId> <artifactId>jasper-compiler</artifactId> 
 			<version>4.1.30</version> </dependency> <dependency> <groupId>tomcat</groupId> 
 			<artifactId>jasper-runtime</artifactId> <version>4.1.30</version> </dependency> -->
