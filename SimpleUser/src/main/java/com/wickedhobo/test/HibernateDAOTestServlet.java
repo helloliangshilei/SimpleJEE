@@ -48,7 +48,7 @@ public class HibernateDAOTestServlet extends ServletTestCase {
 			assertEquals("halgrena", user2.getUserName());
 	}
 	
-	public void testUserUpdatee() {
+	public void testUserUpdate() {
 		User user = new User();
 		
 		user.setFirstName("Anne2");
