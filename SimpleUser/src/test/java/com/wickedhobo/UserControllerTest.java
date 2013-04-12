@@ -1,6 +1,7 @@
 package com.wickedhobo;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -48,6 +49,7 @@ public class UserControllerTest {
 				.param("firstName", "Anne")
 				.param("lastName", "halgren")
 				.param("password", "password"))
+				.andDo(print())
 				.andExpect(status().isOk())
 				.andExpect(view().name("/result"))
 				.andExpect(forwardedUrl("/WEB-INF/JSP/result.jsp"))
