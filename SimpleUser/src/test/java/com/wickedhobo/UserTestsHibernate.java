@@ -20,7 +20,7 @@ import com.wickedhobo.object.User;
 @ContextConfiguration(locations = { "classpath:applicationContext.xml" })
 public class UserTestsHibernate {
 	
-	private static Logger log = LoggerFactory.getLogger(UserTests.class);
+	private static Logger log = LoggerFactory.getLogger(UserTestsHibernate.class);
 	
 	@Test
 	public void testUserSave() {
