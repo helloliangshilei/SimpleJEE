@@ -8,7 +8,6 @@
 </head>
 <body>
 <a href="http://localhost:8080/SimpleApp/ServletTestRunner?suite=com.wickedhobo.test.SimpleDAOTestServlet&transform=yes">Go to the Simple JDBC Tests</a><br/>
-<a href="http://localhost:8080/SimpleApp/ServletTestRunner?suite=com.wickedhobo.test.HibernateDAOTestServlet&transform=yes">Go to the DAO Hibernate Tests</a><br/>
 <a href="addUser.jsp">Add a Person using Spring/Hibernate stuff.</a><br/>
 <a href="updateUser.jsp">Update a Person using Spring/Hibernate stuff.</a><br/>
 <a href="removeUser.jsp">Remove a Person using Spring/Hibernate stuff.</a><br/>
