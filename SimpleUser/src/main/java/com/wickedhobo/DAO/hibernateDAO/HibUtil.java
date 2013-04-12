@@ -15,6 +15,7 @@ import com.wickedhobo.DAO.simpleDAO.UserDAOImplSimple;
 public class HibUtil {
 	
 	private static String hibernateConfigFile = ConfigurationInit.getHibernateConfigFile();
+	private static String NOCONTEXTCONFIG = "hibernateAnnotations.cfg.xml";
 	private static final SessionFactory sessionFactory = buildSessionFactory();
 	private static ServiceRegistry serviceRegistry;
 	
@@ -23,9 +24,13 @@ public class HibUtil {
 	private static SessionFactory buildSessionFactory() {
 		Configuration configuration = new Configuration();
 		try {
-			if (!hibernateConfigFile.isEmpty() && hibernateConfigFile.equals("hibernateAnnotations.cfg.xml")) {
+			if (hibernateConfigFile != null && !hibernateConfigFile.isEmpty() && hibernateConfigFile.equals("hibernateAnnotations.cfg.xml")) {
 				configuration = new Configuration();
 				configuration.configure(hibernateConfigFile);
+			}
+			else if (NOCONTEXTCONFIG != null && hibernateConfigFile == null) {
+				configuration = new Configuration();
+				configuration.configure(NOCONTEXTCONFIG);
 			}
 			else {
 				configuration = new Configuration();
@@ -38,12 +43,16 @@ public class HibUtil {
 			log.error("Initial SessionFactory creation failed." + eiie);
 			throw new ExceptionInInitializerError(eiie);
 		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
-
+	
 	public static SessionFactory getSessionFactory() {
 			return sessionFactory;
 	}
-
+	
 	public static Session beginTx() {
 		Session hibernateSession = HibUtil.getSession();
 		hibernateSession.beginTransaction();
