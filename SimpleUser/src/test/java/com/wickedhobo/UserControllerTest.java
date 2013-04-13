@@ -1,8 +1,11 @@
 package com.wickedhobo;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasProperty;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
@@ -20,8 +23,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -41,13 +42,10 @@ public class UserControllerTest {
 
 	@Autowired
 	private WebApplicationContext ctx;
-	
 	@Autowired
 	UserDAOHibSpringImpl userDAO;
-
-	private static Logger log = LoggerFactory.getLogger(UserControllerTest.class);
-
 	private MockMvc mockMvc;
+	private static Logger log = LoggerFactory.getLogger(UserControllerTest.class);
 
 	@Before
 	public void setUp() {
@@ -59,7 +57,7 @@ public class UserControllerTest {
 	//@Rollback(false)  //Left here for debug purposes.
 	public void testAddUserController() throws Exception {
 		mockMvc.perform(post("/addUser")
-				.accept(MediaType.TEXT_HTML)
+				.accept(MediaType.APPLICATION_FORM_URLENCODED)
 				.param("userName", "halgrena")
 				.param("firstName", "Anne")
 				.param("lastName", "Halgren")
@@ -68,7 +66,7 @@ public class UserControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(view().name("/result"))
 				.andExpect(forwardedUrl("/WEB-INF/JSP/result.jsp"))
-				.andExpect(model().attribute("addUser", "true"));
+				.andExpect(model().attribute("userAction", "addUser"));
 		log.debug("testAddUserController has passed all tests!");
 	}
 	
@@ -91,7 +89,7 @@ public class UserControllerTest {
 		userDAO.saveUser(user);
 		
 		mockMvc.perform(post("/updateUser")
-				.accept(MediaType.TEXT_HTML)
+				.accept(MediaType.APPLICATION_FORM_URLENCODED)
 				.param("userName", "halgrena")
 				.param("firstName", "Anne2")
 				.param("lastName", "Halgren2")
@@ -100,19 +98,18 @@ public class UserControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(view().name("/result"))
 				.andExpect(forwardedUrl("/WEB-INF/JSP/result.jsp"))
-				.andExpect(model().attribute("updateUser", "true"));
+				.andExpect(model().attribute("userAction", "updateUser"));
 		
-		User user3 = userDAO.findUserByUsername("halgrena");
+		User user2 = userDAO.findUserByUsername("halgrena");
 
-		assertNotNull(user3);
-		assertEquals("Halgren2", user3.getLastName());
-		assertEquals("Anne2", user3.getFirstName());
-		assertEquals("password2", user3.getPassword());
+		assertNotNull(user2);
+		assertEquals("Halgren2", user2.getLastName());
+		assertEquals("Anne2", user2.getFirstName());
+		assertEquals("password2", user2.getPassword());
 		log.debug("testUpdateUserController has passed all tests!");
 	}
 	
 	@Test
-	//@Transactional() //Doing sequential remove, so don't want Transactional
 	public void testRemoveUserController() throws Exception {
 		
 		User user = new User();
@@ -130,13 +127,13 @@ public class UserControllerTest {
 		userDAO.saveUser(user);
 		
 		mockMvc.perform(post("/removeUser")
-				.accept(MediaType.TEXT_HTML)
+				.accept(MediaType.APPLICATION_FORM_URLENCODED)
 				.param("userName", "halgrena"))
 				.andDo(print())
 				.andExpect(status().isOk())
 				.andExpect(view().name("/result"))
 				.andExpect(forwardedUrl("/WEB-INF/JSP/result.jsp"))
-				.andExpect(model().attribute("removeUser", "true"));
+				.andExpect(model().attribute("userAction", "removeUser"));
 		
 		User user2 = userDAO.findUserByUsername("halgrena");
 
@@ -144,5 +141,35 @@ public class UserControllerTest {
 		log.debug("testRemoveUserController has passed all tests!");
 	}
 	
-	
+	@Test
+	@Transactional()
+	public void testFindUserByUsernameController() throws Exception {
+		
+		User user = new User();
+
+		user.setFirstName("Anne");
+		user.setLastName("Halgren");
+		user.setUserName("halgrena");
+		user.setPassword("anne314");
+		Role role = new Role();
+		role.setRole("administrator");
+		Set<Role> roles = new HashSet<Role>();
+		roles.add(role);
+		user.setRoles(roles);
+
+		userDAO.saveUser(user);
+		
+		mockMvc.perform(get("/findUserByUsername")
+				.param("userName", "halgrena"))
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(view().name("/result"))
+				.andExpect(forwardedUrl("/WEB-INF/JSP/result.jsp"))
+				.andExpect(model().attribute("userAction", "findUserByUsername"))
+				.andExpect(model().attribute("user", hasProperty("firstName", equalTo("Anne"))))
+				.andExpect(model().attribute("user", hasProperty("lastName", equalTo("Halgren"))))
+				.andExpect(model().attribute("user", hasProperty("password", equalTo("anne314"))))
+				;
+		log.debug("testFindUserByUsernameController has passed all tests!");
+	}
 }
