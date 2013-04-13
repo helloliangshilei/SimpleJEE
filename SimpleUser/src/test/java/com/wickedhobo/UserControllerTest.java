@@ -56,7 +56,7 @@ public class UserControllerTest {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
 
-/*	@Test
+	@Test
 	@Transactional()
 	// @Rollback(false) //Left here for debug purposes.
 	public void testAddUserController() throws Exception {
@@ -163,7 +163,7 @@ public class UserControllerTest {
 				.andExpect(model().attribute("user", hasProperty("lastName", equalTo("Halgren"))))
 				.andExpect(model().attribute("user", hasProperty("password", equalTo("anne314"))));
 		log.debug("testFindUserByUsernameController has passed all tests!");
-	}*/
+	}
 
 	@Test
 	@Transactional
@@ -187,6 +187,60 @@ public class UserControllerTest {
                         																		 	 hasProperty("userName", equalTo("gordond")),
                         																		 	 hasProperty("firstName", equalTo("Dexter")),
                         																		 	 hasProperty("lastName", equalTo("Gordon"))))));
-		log.debug("testFindUserByUsernameController has passed all tests!");
+		log.debug("testListUsersController has passed all tests!");
+	}
+	
+	@Test
+	@Transactional
+	//I know, test depends on external data, but source the creatStuff.sql file and test passes.
+	//Hey, it's an integration test.  Integrate.
+	public void testListUsersByRoleController() throws Exception {
+		mockMvc.perform(get("/listUsersByRole")
+				.param("roleName", "administrator"))
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(view().name("/result"))
+				.andExpect(forwardedUrl("/WEB-INF/JSP/result.jsp"))
+				.andExpect(model().attribute("userAction", "listUsersByRole"))
+				.andExpect(model().attribute("userList", hasSize(2)))
+        .andExpect(model().attribute("userList", hasItem(
+                   															 				 allOf(
+                   															 						 	 hasProperty("userName", equalTo("mckerrj")),
+                   															 						 	 hasProperty("firstName", equalTo("Jason")),
+                   															 						 	 hasProperty("lastName", equalTo("McKerr"))))))
+        .andExpect(model().attribute("userList", hasItem(
+                        																 allOf(
+                        																		 	 hasProperty("userName", equalTo("gordond")),
+                        																		 	 hasProperty("firstName", equalTo("Dexter")),
+                        																		 	 hasProperty("lastName", equalTo("Gordon"))))));
+		
+		mockMvc.perform(get("/listUsersByRole")
+				.param("roleName", "developer"))
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(view().name("/result"))
+				.andExpect(forwardedUrl("/WEB-INF/JSP/result.jsp"))
+				.andExpect(model().attribute("userAction", "listUsersByRole"))
+				.andExpect(model().attribute("userList", hasSize(1)))
+        .andExpect(model().attribute("userList", hasItem(
+                   															 				 allOf(
+                   															 						 	 hasProperty("userName", equalTo("mckerrj")),
+                   															 						 	 hasProperty("firstName", equalTo("Jason")),
+                   															 						 	 hasProperty("lastName", equalTo("McKerr"))))));
+		
+		mockMvc.perform(get("/listUsersByRole")
+				.param("roleName", "saxplayer"))
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(view().name("/result"))
+				.andExpect(forwardedUrl("/WEB-INF/JSP/result.jsp"))
+				.andExpect(model().attribute("userAction", "listUsersByRole"))
+				.andExpect(model().attribute("userList", hasSize(1)))
+        .andExpect(model().attribute("userList", hasItem(
+                   															 				 allOf(
+                   															 						 	 hasProperty("userName", equalTo("gordond")),
+                   															 						 	 hasProperty("firstName", equalTo("Dexter")),
+                   															 						 	 hasProperty("lastName", equalTo("Gordon"))))));
+		log.debug("testListUsersByRoleController has passed all tests!");
 	}
 }
