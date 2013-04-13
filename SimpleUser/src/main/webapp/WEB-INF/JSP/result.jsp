@@ -7,14 +7,24 @@
 		<title>Result page</title>
 	</head>
 	<body>
-	<% String addUser = (String)pageContext.findAttribute("addUser"); %>
-	<% String removeUser = (String)pageContext.findAttribute("removeUser"); %>
-	<% String updateUser = (String)pageContext.findAttribute("updateUser"); %>
+	<% String userAction = (String)pageContext.findAttribute("userAction"); %>
 	
 	<c:choose>
-		<c:when test="${addUser}">User Was Added</c:when>
-		<c:when test="${removeUser}">User Was Removed</c:when>
-		<c:when test="${updateUser}">User Was Updated</c:when>
+		<c:when test="${userAction eq 'addUser'}">User Was Added</c:when>
+		<c:when test="${userAction eq 'removeUser'}">User Was Removed</c:when>
+		<c:when test="${userAction eq 'updateUser'}">User Was Updated</c:when>
+		<c:when test="${userAction eq 'findUserByUsername' }">
+			<c:choose>
+				<c:when test="${empty user}">
+					User not found.
+				</c:when>
+				<c:when test="${not empty user}">
+					User Name: ${user.userName} </br>
+					First Name: ${user.firstName} </br>
+					Last Name: ${user.lastName} </br>
+				</c:when>
+			</c:choose>
+		</c:when>
 		<c:otherwise>No request specified</c:otherwise>
 	</c:choose>
 	</body>
