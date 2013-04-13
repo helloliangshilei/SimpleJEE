@@ -133,9 +133,11 @@ public class UserTestsSpringHibernate {
 
 		User user2 = userDAO.findUserByUsername("halgrena");
 		userDAO.deleteUser(user2);
-
+		
 		User user3 = userDAO.findUserByUsername("halgrena");
+		
 		assertNull(user3);
+		log.debug("testUserDelete has passed all tests!");
 	}
 
 	@Test
