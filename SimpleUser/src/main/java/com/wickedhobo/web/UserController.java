@@ -31,7 +31,7 @@ public class UserController {
 
 		userDAO.saveUser(user);
 
-		model.addAttribute("addUser", "true");
+		model.addAttribute("userAction", "addUser");
 		return "/result";
 	}
 	
@@ -43,7 +43,7 @@ public class UserController {
 
 		userDAO.deleteUser(user);
 		
-		model.addAttribute("removeUser", "true");
+		model.addAttribute("userAction", "removeUser");
 		return "/result";
 	}
 	
@@ -61,7 +61,20 @@ public class UserController {
 
 		userDAO.updateUser(user);
 
-		model.addAttribute("updateUser", "true");
+		model.addAttribute("userAction", "updateUser");
+		return "/result";
+	}
+	
+	@RequestMapping(value = "/findUserByUsername", method = RequestMethod.GET)
+	public String findUserByUsername(@RequestParam("userName") String userName,
+													Model model) {
+		User user = new User();
+		user.setUserName(userName);
+
+		user = userDAO.findUserByUsername(userName);
+		
+		model.addAttribute("user", user);
+		model.addAttribute("userAction", "findUserByUsername");
 		return "/result";
 	}
 }
