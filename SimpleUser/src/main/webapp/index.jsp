@@ -10,5 +10,6 @@
 <a href="addUser.jsp">Add a Person using Spring/Hibernate stuff.</a><br/>
 <a href="updateUser.jsp">Update a Person using Spring/Hibernate stuff.</a><br/>
 <a href="removeUser.jsp">Remove a Person using Spring/Hibernate stuff.</a><br/>
+<a href="findUserByUsername.jsp">Find a Person with their Username</a><br/>
 </body>
 </html>
