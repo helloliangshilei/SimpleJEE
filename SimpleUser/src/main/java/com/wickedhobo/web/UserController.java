@@ -1,5 +1,8 @@
 package com.wickedhobo.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.wickedhobo.object.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,4 +80,16 @@ public class UserController {
 		model.addAttribute("userAction", "findUserByUsername");
 		return "/result";
 	}
+	
+	@RequestMapping(value = "/listUsers", method = RequestMethod.GET)
+	public String listUsers(Model model) {
+		
+		List<User> userList = new ArrayList<User>();
+		userList = userDAO.listUsers();
+		
+		model.addAttribute("userList", userList);
+		model.addAttribute("userAction", "listUsers");
+		return "/result";
+	}
+	
 }
