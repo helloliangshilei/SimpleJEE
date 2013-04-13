@@ -17,5 +17,7 @@
 	<br />
 	<a href="user/listUsers">List All Users using Spring</a>
 	<br />
+	<a href="findUsersByRole.jsp">Find a list of people who have a certain role. Using Spring.</a>
+	<br />
 </body>
 </html>

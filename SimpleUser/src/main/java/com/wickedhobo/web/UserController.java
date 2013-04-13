@@ -21,11 +21,8 @@ public class UserController {
 	UserDAOHibSpringImpl userDAO;
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	public String addUser(@RequestParam("userName") String userName,
-													@RequestParam("password") String password,
-													@RequestParam("firstName") String firstName,
-													@RequestParam("lastName") String lastName, 
-													Model model) {
+	public String addUser(@RequestParam("userName") String userName, @RequestParam("password") String password,
+			@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, Model model) {
 		User user = new User();
 		user.setUserName(userName);
 		user.setPassword(password);
@@ -37,25 +34,21 @@ public class UserController {
 		model.addAttribute("userAction", "addUser");
 		return "/result";
 	}
-	
+
 	@RequestMapping(value = "/removeUser", method = RequestMethod.POST)
-	public String removeUser(@RequestParam("userName") String userName,
-													Model model) {
+	public String removeUser(@RequestParam("userName") String userName, Model model) {
 		User user = new User();
 		user.setUserName(userName);
 
 		userDAO.deleteUser(user);
-		
+
 		model.addAttribute("userAction", "removeUser");
 		return "/result";
 	}
-	
+
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
-	public String updateUser(@RequestParam("userName") String userName,
-													@RequestParam("password") String password,
-													@RequestParam("firstName") String firstName,
-													@RequestParam("lastName") String lastName, 
-													Model model) {
+	public String updateUser(@RequestParam("userName") String userName, @RequestParam("password") String password,
+			@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, Model model) {
 		User user = new User();
 		user.setUserName(userName);
 		user.setPassword(password);
@@ -67,29 +60,39 @@ public class UserController {
 		model.addAttribute("userAction", "updateUser");
 		return "/result";
 	}
-	
+
 	@RequestMapping(value = "/findUserByUsername", method = RequestMethod.GET)
-	public String findUserByUsername(@RequestParam("userName") String userName,
-													Model model) {
+	public String findUserByUsername(@RequestParam("userName") String userName, Model model) {
 		User user = new User();
 		user.setUserName(userName);
 
 		user = userDAO.findUserByUsername(userName);
-		
+
 		model.addAttribute("user", user);
 		model.addAttribute("userAction", "findUserByUsername");
 		return "/result";
 	}
-	
+
 	@RequestMapping(value = "/listUsers", method = RequestMethod.GET)
 	public String listUsers(Model model) {
-		
+
 		List<User> userList = new ArrayList<User>();
 		userList = userDAO.listUsers();
-		
+
 		model.addAttribute("userList", userList);
 		model.addAttribute("userAction", "listUsers");
 		return "/result";
 	}
-	
+
+	@RequestMapping(value = "/listUsersByRole", method = RequestMethod.GET)
+	public String listUsersByRoles(@RequestParam("roleName") String roleName, Model model) {
+
+		List<User> userList = new ArrayList<User>();
+		userList = userDAO.listUsersByRoles(roleName);
+
+		model.addAttribute("userList", userList);
+		model.addAttribute("userAction", "listUsersByRole");
+		return "/result";
+	}
+
 }

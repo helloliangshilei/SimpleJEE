@@ -15,7 +15,7 @@
 		<c:when test="${userAction eq 'addUser'}">User Was Added</c:when>
 		<c:when test="${userAction eq 'removeUser'}">User Was Removed</c:when>
 		<c:when test="${userAction eq 'updateUser'}">User Was Updated</c:when>
-		<c:when test="${userAction eq 'findUserByUsername' }">
+		<c:when test="${userAction eq 'findUserByUsername'}">
 			<c:choose>
 				<c:when test="${empty user}">
 					User not found.
@@ -28,6 +28,20 @@
 			</c:choose>
 		</c:when>
 		<c:when test="${userAction eq 'listUsers' }">
+			<table style="border: 1px solid black;">
+				<th style="border: 1px solid black;">First Name</th>
+				<th style="border: 1px solid black;">Last Name</th>
+				<th style="border: 1px solid black;">User Name</th>
+				<c:forEach items="${userList}" var="user">
+					<tr>
+						<td style="border: 1px solid black;"><c:out value="${user.firstName}" /></td>
+						<td style="border: 1px solid black;"><c:out value="${user.lastName}" /></td>
+						<td style="border: 1px solid black;"><c:out value="${user.userName}" /></td>
+					</tr>
+				</c:forEach>
+			</table>
+		</c:when>
+		<c:when test="${userAction eq 'listUsersByRole'}">
 			<table style="border: 1px solid black;">
 				<th style="border: 1px solid black;">First Name</th>
 				<th style="border: 1px solid black;">Last Name</th>
