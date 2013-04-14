@@ -39,8 +39,7 @@ import com.wickedhobo.object.Role;
 import com.wickedhobo.object.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/dispatcher-servlet.xml",
-		"classpath:applicationContext.xml" })
+@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/dispatcher-servlet.xml", "classpath:applicationContext.xml" })
 @WebAppConfiguration
 public class UserControllerTest {
 
@@ -60,11 +59,11 @@ public class UserControllerTest {
 	@Transactional()
 	// @Rollback(false) //Left here for debug purposes.
 	public void testAddUserController() throws Exception {
-		mockMvc
-				.perform(
-						post("/addUser").accept(MediaType.APPLICATION_FORM_URLENCODED)
-								.param("userName", "halgrena").param("firstName", "Anne")
-								.param("lastName", "Halgren").param("password", "password")).andDo(print())
+		mockMvc.perform(post("/addUser")
+				.accept(MediaType.APPLICATION_FORM_URLENCODED)
+				.param("userName", "halgrena").param("firstName", "Anne")
+				.param("lastName", "Halgren").param("password", "password"))
+				.andDo(print())
 				.andExpect(status().isOk()).andExpect(view().name("/result"))
 				.andExpect(forwardedUrl("/WEB-INF/JSP/result.jsp"))
 				.andExpect(model().attribute("userAction", "addUser"));
@@ -89,12 +88,15 @@ public class UserControllerTest {
 
 		userDAO.saveUser(user);
 
-		mockMvc
-				.perform(
-						post("/updateUser").accept(MediaType.APPLICATION_FORM_URLENCODED)
-								.param("userName", "halgrena").param("firstName", "Anne2")
-								.param("lastName", "Halgren2").param("password", "password2")).andDo(print())
-				.andExpect(status().isOk()).andExpect(view().name("/result"))
+		mockMvc.perform(post("/updateUser")
+				.accept(MediaType.APPLICATION_FORM_URLENCODED)
+				.param("userName", "halgrena")
+				.param("firstName", "Anne2")
+				.param("lastName", "Halgren2")
+				.param("password", "password2"))
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(view().name("/result"))
 				.andExpect(forwardedUrl("/WEB-INF/JSP/result.jsp"))
 				.andExpect(model().attribute("userAction", "updateUser"));
 
@@ -124,11 +126,13 @@ public class UserControllerTest {
 
 		userDAO.saveUser(user);
 
-		mockMvc
-				.perform(
-						post("/removeUser").accept(MediaType.APPLICATION_FORM_URLENCODED).param("userName",
-								"halgrena")).andDo(print()).andExpect(status().isOk())
-				.andExpect(view().name("/result")).andExpect(forwardedUrl("/WEB-INF/JSP/result.jsp"))
+		mockMvc.perform(post("/removeUser")
+				.accept(MediaType.APPLICATION_FORM_URLENCODED)
+				.param("userName", "halgrena"))
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(view().name("/result"))
+				.andExpect(forwardedUrl("/WEB-INF/JSP/result.jsp"))
 				.andExpect(model().attribute("userAction", "removeUser"));
 
 		User user2 = userDAO.findUserByUsername("halgrena");
@@ -155,8 +159,11 @@ public class UserControllerTest {
 
 		userDAO.saveUser(user);
 
-		mockMvc.perform(get("/findUserByUsername").param("userName", "halgrena")).andDo(print())
-				.andExpect(status().isOk()).andExpect(view().name("/result"))
+		mockMvc.perform(get("/findUserByUsername")
+				.param("userName", "halgrena"))
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(view().name("/result"))
 				.andExpect(forwardedUrl("/WEB-INF/JSP/result.jsp"))
 				.andExpect(model().attribute("userAction", "findUserByUsername"))
 				.andExpect(model().attribute("user", hasProperty("firstName", equalTo("Anne"))))
