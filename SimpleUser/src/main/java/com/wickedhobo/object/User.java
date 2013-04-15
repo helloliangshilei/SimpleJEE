@@ -39,7 +39,7 @@ public class User implements Serializable {
 	@Column(name="password", nullable=false, length=100)
 	private String password = null;
 	
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany //(fetch=FetchType.LAZY)
 	//@Cascade(CascadeType.ALL)
   @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_username") }, inverseJoinColumns = { @JoinColumn(name = "role_role") })
 	private Set<Role> roles = new HashSet<Role>(0);
