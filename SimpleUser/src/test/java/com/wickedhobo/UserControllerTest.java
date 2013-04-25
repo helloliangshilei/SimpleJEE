@@ -43,6 +43,7 @@ import com.wickedhobo.object.User;
 @WebAppConfiguration
 public class UserControllerTest {
 
+  
 	@Autowired
 	private WebApplicationContext ctx;
 	@Autowired
