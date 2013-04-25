@@ -63,11 +63,18 @@ public class UserControllerRestTest {
   public void testAddUserController() throws Exception {
     mockMvc
         .perform(
-            post("/addUser/userName/{userName}/firstName/{firstName}/lastName/{lastName}/password/{password}", 
-                "halgrena","Anne", "Halgren", "anne314")
+            post("/addUser/" +
+                "userName/{userName}/" +
+                "firstName/{firstName}/" +
+                "lastName/{lastName}/" +
+                "password/{password}",
+                "halgrena",
+                "Anne",
+                "Halgren",
+                "anne314")
                 .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk());
+        .andDo(print())
+        .andExpect(status().isOk());
 
     User user2 = userDAO.findUserByUsername("halgrena");
     assertNotNull(user2);
@@ -95,10 +102,9 @@ public class UserControllerRestTest {
 
     userDAO.saveUser(user);
 
-    mockMvc
-        .perform(
-            put("/updateUser/" + "userName/{userName}/" + "firstName/{firstName}/" + "lastName/{lastName}/" + "password/{password}", "halgrena",
-                "Anne2", "Halgren2", "anne3142").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
+    mockMvc.perform(put("/updateUser/" +
+        "userName/{userName}/" + "firstName/{firstName}/" + "lastName/{lastName}/" + "password/{password}", "halgrena",
+        "Anne2", "Halgren2", "anne3142").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
 
     User user2 = userDAO.findUserByUsername("halgrena");
     assertNotNull(user2);
