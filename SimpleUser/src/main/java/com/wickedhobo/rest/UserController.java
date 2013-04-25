@@ -17,7 +17,7 @@ public class UserController {
 	@Autowired
 	UserDAOHibSpringImpl userDAO;
 
-	@RequestMapping(value = "/userService/findUserByUsernameWithAction/{userName}", method = RequestMethod.GET)
+	@RequestMapping(value = "/findUserByUsernameWithAction/{userName}", method = RequestMethod.GET)
 	public String findUserByUsernameWithAction(@PathVariable String userName, Model model) {
 		User user = new User();
 		user = userDAO.findUserByUsername(userName);
@@ -27,11 +27,64 @@ public class UserController {
 		return "/result";
 	}
 	
-	@RequestMapping(value = "/userService/findUserByUsername/{userName}", method = RequestMethod.GET)
-	public @ResponseBody User findUserByUsername(@PathVariable String userName, Model model) {
+	@RequestMapping(value = "/findUserByUsername/{userName}", method = RequestMethod.GET)
+	public @ResponseBody User findUserByUsername(@PathVariable String userName) {
 		User user = new User();
 		user = userDAO.findUserByUsername(userName);
 		return user;
 	}
+	
+	@RequestMapping(value = "/addUser/" +
+													"userName/{userName}/" +
+													"firstName/{firstName}/" +
+													"lastName/{lastName}/" +
+													"password/{password}", 
+													method = RequestMethod.POST)
+	public @ResponseBody String addUser(@PathVariable String userName, 
+																			@PathVariable String firstName,
+																			@PathVariable String lastName,
+																			@PathVariable String password) {
+		User user = new User();
+		user.setUserName(userName);
+		user.setPassword(password);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		userDAO.saveUser(user);
+		
+		return "/result";
+	}
+	
+	@RequestMapping(value = "/updateUser/" +
+													"userName/{userName}/" +
+													"firstName/{firstName}/" +
+													"lastName/{lastName}/" +
+													"password/{password}", 
+													method = RequestMethod.POST)
+	public @ResponseBody String updateUser(@PathVariable String userName, 
+																				 @PathVariable String firstName,
+																				 @PathVariable String lastName,
+																				 @PathVariable String password) {
+		User user = new User();
+		user.setUserName(userName);
+		user.setPassword(password);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		userDAO.updateUser(user);
+
+		return "/result";
+	}
+	
+	@RequestMapping(value = "/removeUser/" +
+													"userName/{userName}/",
+													method = RequestMethod.POST)
+	public @ResponseBody String removeUser(@PathVariable String userName) {
+		User user = new User();
+		user.setUserName(userName);
+		userDAO.deleteUser(user);
+		
+		return "/result";
+	}
+	
+	
 	
 }
