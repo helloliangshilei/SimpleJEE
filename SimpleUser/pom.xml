@@ -260,7 +260,7 @@
 			<artifactId>json-path</artifactId>
 			<version>0.8.1</version>
 		</dependency>
-		
+
 	</dependencies>
 
 	<!-- mvn dependency:copy-dependencies, list, etc -->

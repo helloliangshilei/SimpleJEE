@@ -1,8 +1,6 @@
-<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="ehcache.xsd"
-    updateCheck="false" monitoring="autodetect"
-    dynamicConfig="true">
-    <defaultCache eternal="true" maxElementsInMemory="100" overflowToDisk="false" />
-    <cache name="messageCache" maxElementsInMemory="10" eternal="true" overflowToDisk="false" />
-    <cache name="messagesCache" maxElementsInMemory="10" eternal="true" overflowToDisk="false" />
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false" monitoring="autodetect"
+	dynamicConfig="true">
+	<defaultCache eternal="true" maxElementsInMemory="100" overflowToDisk="false" />
+	<cache name="messageCache" maxElementsInMemory="10" eternal="true" overflowToDisk="false" />
+	<cache name="messagesCache" maxElementsInMemory="10" eternal="true" overflowToDisk="false" />
 </ehcache>

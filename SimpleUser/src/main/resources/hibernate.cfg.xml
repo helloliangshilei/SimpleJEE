@@ -7,24 +7,23 @@
 	<session-factory>
 		<property name="show_sql">true</property>
 		<!-- Using MySQL pool -->
-		<!-- <property name="hibernate.connection.datasource">java:comp/env/jdbc/simpleapp</property>
-		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-		<property name="hibernate.current_session_context_class">thread</property> -->
-		
+		<!-- <property name="hibernate.connection.datasource">java:comp/env/jdbc/simpleapp</property> <property name="dialect">org.hibernate.dialect.MySQLDialect</property> 
+			<property name="hibernate.current_session_context_class">thread</property> -->
+
 
 		<!-- Using Hibernate pool -->
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/simpleapp?autoReconnect=true</property>
 		<property name="hibernate.connection.username">simpleapp</property>
-		<property name="hibernate.connection.password">simple314</property> 
+		<property name="hibernate.connection.password">simple314</property>
 		<property name="hibernate.current_session_context_class">thread</property>
-		<!-- property name="connection.release_mode">auto</property-->
+		<!-- property name="connection.release_mode">auto</property -->
 
 
 		<!-- Mapping files -->
-		<mapping resource="User.hbm.xml"/>
-		<mapping resource="Role.hbm.xml"/>
+		<mapping resource="User.hbm.xml" />
+		<mapping resource="Role.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>
 		

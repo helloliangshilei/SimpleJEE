@@ -6,8 +6,7 @@
 </head>
 <body>
 	<form action="user/removeUser" method="post">
-		User name: <input type="text" name="userName" value="testUserName">
-		<input type="submit" value="Delete">
+		User name: <input type="text" name="userName" value="testUserName"> <input type="submit" value="Delete">
 	</form>
 </body>
 </html>

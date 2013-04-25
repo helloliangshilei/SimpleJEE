@@ -6,8 +6,7 @@
 </head>
 <body>
 	<form action="user/findUserByUsername" method="GET">
-		User name: <input type="text" name="userName" value="">
-		<input type="submit" value="Find">
+		User name: <input type="text" name="userName" value=""> <input type="submit" value="Find">
 	</form>
 </body>
 </html>

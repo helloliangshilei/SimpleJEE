@@ -6,8 +6,7 @@
 </head>
 <body>
 	<form action="user/listUsersByRole" method="GET">
-		User name: <input type="text" name="roleName" value="">
-		<input type="submit" value="Find">
+		User name: <input type="text" name="roleName" value=""> <input type="submit" value="Find">
 	</form>
 </body>
 </html>

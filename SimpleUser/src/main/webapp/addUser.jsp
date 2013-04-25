@@ -6,11 +6,9 @@
 </head>
 <body>
 	<form action="user/addUser" method="post">
-		User name: <input type="text" name="userName" value="testUserName">
-		Password name: <input type="text" name="password" value="testPassword">
-		First name: <input type="text" name="firstName" value="testFirstName">
-		Last name: <input type="text" name="lastName" value="testLastName">
-		<input type="submit" value="Save">
+		User name: <input type="text" name="userName" value="testUserName"> Password name: <input type="text"
+			name="password" value="testPassword"> First name: <input type="text" name="firstName" value="testFirstName">
+		Last name: <input type="text" name="lastName" value="testLastName"> <input type="submit" value="Save">
 	</form>
 </body>
 </html>

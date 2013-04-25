@@ -34,7 +34,7 @@
 	</target>
 
 	<target name="war" depends="compile">
-		<input message="Please enter path to your tomcat webapps dir" addproperty="tomcat.dir" defaultvalue="."/>
+		<input message="Please enter path to your tomcat webapps dir" addproperty="tomcat.dir" defaultvalue="." />
 		<war destfile="${tomcat.dir}/SimpleApp.war" webxml="WebContent/WEB-INF/web.xml">
 			<fileset dir="WebContent" />
 			<lib dir="WebContent/WEB-INF/lib" />
