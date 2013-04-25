@@ -44,170 +44,142 @@ import com.wickedhobo.object.User;
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/rest-servlet.xml", "classpath:applicationContext.xml" })
 @WebAppConfiguration
 public class UserControllerRestTest {
-	
-	@Autowired
-	private WebApplicationContext ctx;
-	@Autowired
-	UserDAOHibSpringImpl userDAO;
-	private MockMvc mockMvc;
-	private static Logger log = LoggerFactory.getLogger(UserControllerTest.class);
-	
-	@Before
-	public void setUp() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
-	}
-	
-	@Test
-	@Transactional()
-	//@Rollback(false) //Left here for debug purposes.
-	public void testAddUserController() throws Exception {
-		mockMvc.perform(post("/addUser/" +
-												 "userName/{userName}/" +
-												 "firstName/{firstName}/" +
-												 "lastName/{lastName}/" +
-												 "password/{password}", 
-												 "halgrena", 
-												 "Anne", 
-												 "Halgren", 
-												 "anne314")
-				.accept(MediaType.APPLICATION_JSON))
-				.andDo(print())
-				.andExpect(status().isOk());
-		
-		User user2 = userDAO.findUserByUsername("halgrena");
-		assertNotNull(user2);
-		assertEquals("Halgren", user2.getLastName());
-		assertEquals("Anne", user2.getFirstName());
-		assertEquals("anne314", user2.getPassword());
-		log.debug("UserControllerRestTest.testAddUserController has passed all tests!");		
-	}
-	
-	@Test
-	@Transactional()
-	public void testUpdateUserController() throws Exception {
 
-		User user = new User();
+  @Autowired
+  private WebApplicationContext ctx;
+  @Autowired
+  UserDAOHibSpringImpl userDAO;
+  private MockMvc mockMvc;
+  private static Logger log = LoggerFactory.getLogger(UserControllerTest.class);
 
-		user.setFirstName("Anne");
-		user.setLastName("Halgren");
-		user.setUserName("halgrena");
-		user.setPassword("anne314");
-		Role role = new Role();
-		role.setRole("administrator");
-		Set<Role> roles = new HashSet<Role>();
-		roles.add(role);
-		user.setRoles(roles);
+  @Before
+  public void setUp() {
+    this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
+  }
 
-		userDAO.saveUser(user);
-		
-		mockMvc.perform(put("/updateUser/" +
-				 "userName/{userName}/" +
-				 "firstName/{firstName}/" +
-				 "lastName/{lastName}/" +
-				 "password/{password}", 
-				 "halgrena", 
-				 "Anne2", 
-				 "Halgren2", 
-				 "anne3142")
-				 .accept(MediaType.APPLICATION_JSON))
-				 .andDo(print())
-				 .andExpect(status().isOk());
+  @Test
+  @Transactional()
+  // @Rollback(false) //Left here for debug purposes.
+  public void testAddUserController() throws Exception {
+    mockMvc
+        .perform(
+            post("/addUser/" + "userName/{userName}/" + "firstName/{firstName}/" + "lastName/{lastName}/" + "password/{password}", "halgrena",
+                "Anne", "Halgren", "anne314").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
 
-		User user2 = userDAO.findUserByUsername("halgrena");
-		assertNotNull(user2);
-		assertEquals("Halgren2", user2.getLastName());
-		assertEquals("Anne2", user2.getFirstName());
-		assertEquals("anne3142", user2.getPassword());
-		log.debug("UserControllerRestTest.testUpdateUserController has passed all tests!");
-		
-	}
-	
-	@Test
-	public void testRemoveUserController() throws Exception {
+    User user2 = userDAO.findUserByUsername("halgrena");
+    assertNotNull(user2);
+    assertEquals("Halgren", user2.getLastName());
+    assertEquals("Anne", user2.getFirstName());
+    assertEquals("anne314", user2.getPassword());
+    log.debug("UserControllerRestTest.testAddUserController has passed all tests!");
+  }
 
-		User user = new User();
+  @Test
+  @Transactional()
+  public void testUpdateUserController() throws Exception {
 
-		user.setFirstName("Anne");
-		user.setLastName("Halgren");
-		user.setUserName("halgrena");
-		user.setPassword("anne314");
-		Role role = new Role();
-		role.setRole("administrator");
-		Set<Role> roles = new HashSet<Role>();
-		roles.add(role);
-		user.setRoles(roles);
+    User user = new User();
 
-		userDAO.saveUser(user);
-		
-		mockMvc.perform(delete("/removeUser/" +
-				 								 "userName/{userName}/",
-				 								 "halgrena") 
-												 .accept(MediaType.APPLICATION_JSON))
-												 .andDo(print())
-												 .andExpect(status().isOk());
-		
-		User user2 = userDAO.findUserByUsername("halgrena");
-		assertNull(user2);
-		log.debug("UserControllerRestTest.testRemoveUserController has passed all tests!");
-	}
-		
-	@Test
-	@Transactional()
-	public void testFindUserByUsernameController() throws Exception {
+    user.setFirstName("Anne");
+    user.setLastName("Halgren");
+    user.setUserName("halgrena");
+    user.setPassword("anne314");
+    Role role = new Role();
+    role.setRole("administrator");
+    Set<Role> roles = new HashSet<Role>();
+    roles.add(role);
+    user.setRoles(roles);
 
-		User user = new User();
+    userDAO.saveUser(user);
 
-		user.setFirstName("Anne");
-		user.setLastName("Halgren");
-		user.setUserName("halgrena");
-		user.setPassword("anne314");
-		Role role = new Role();
-		role.setRole("administrator");
-		Set<Role> roles = new HashSet<Role>();
-		roles.add(role);
-		user.setRoles(roles);
+    mockMvc
+        .perform(
+            put("/updateUser/" + "userName/{userName}/" + "firstName/{firstName}/" + "lastName/{lastName}/" + "password/{password}", "halgrena",
+                "Anne2", "Halgren2", "anne3142").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
 
-		userDAO.saveUser(user);
+    User user2 = userDAO.findUserByUsername("halgrena");
+    assertNotNull(user2);
+    assertEquals("Halgren2", user2.getLastName());
+    assertEquals("Anne2", user2.getFirstName());
+    assertEquals("anne3142", user2.getPassword());
+    log.debug("UserControllerRestTest.testUpdateUserController has passed all tests!");
 
-		mockMvc.perform(get("/findUserByUsername/{userName}", user.getUserName()).accept(MediaType.APPLICATION_JSON))
-				.andDo(print())
-				.andExpect(status().isOk())
-				.andExpect(content().contentType("application/json;charset=UTF-8"))
-				.andExpect(jsonPath("userName", equalTo("halgrena")))
-				.andExpect(jsonPath("firstName", equalTo("Anne")))
-				.andExpect(jsonPath("lastName", equalTo("Halgren")))
-				.andExpect(jsonPath("password", equalTo("anne314")));
-		log.debug("UserControllerRestTest.testFindUserByUsernameController has passed all tests!");
-	}
-	
-	@Test
-	@Transactional()
-	public void testFindUserByUsernameWithActionController() throws Exception {
+  }
 
-		User user = new User();
+  @Test
+  public void testRemoveUserController() throws Exception {
 
-		user.setFirstName("Anne");
-		user.setLastName("Halgren");
-		user.setUserName("halgrena");
-		user.setPassword("anne314");
-		Role role = new Role();
-		role.setRole("administrator");
-		Set<Role> roles = new HashSet<Role>();
-		roles.add(role);
-		user.setRoles(roles);
+    User user = new User();
 
-		userDAO.saveUser(user);
+    user.setFirstName("Anne");
+    user.setLastName("Halgren");
+    user.setUserName("halgrena");
+    user.setPassword("anne314");
+    Role role = new Role();
+    role.setRole("administrator");
+    Set<Role> roles = new HashSet<Role>();
+    roles.add(role);
+    user.setRoles(roles);
 
-		mockMvc.perform(get("/findUserByUsernameWithAction/{userName}", user.getUserName())
-				.accept(MediaType.APPLICATION_JSON))
-				.andDo(print())
-				.andExpect(status().isOk())
-				.andExpect(content().contentType("application/json"))
-				.andExpect(view().name("/result"))
-				.andExpect(model().attribute("userAction", "findUserByUsername"))
-				.andExpect(model().attribute("user", hasProperty("firstName", equalTo("Anne"))))
-				.andExpect(model().attribute("user", hasProperty("lastName", equalTo("Halgren"))))
-				.andExpect(model().attribute("user", hasProperty("password", equalTo("anne314"))));
-		log.debug("UserControllerRestTest.testFindUserByUsernameWithActionController has passed all tests!");
-	}
+    userDAO.saveUser(user);
+
+    mockMvc.perform(delete("/removeUser/" + "userName/{userName}/", "halgrena").accept(MediaType.APPLICATION_JSON)).andDo(print())
+        .andExpect(status().isOk());
+
+    User user2 = userDAO.findUserByUsername("halgrena");
+    assertNull(user2);
+    log.debug("UserControllerRestTest.testRemoveUserController has passed all tests!");
+  }
+
+  @Test
+  @Transactional()
+  public void testFindUserByUsernameController() throws Exception {
+
+    User user = new User();
+
+    user.setFirstName("Anne");
+    user.setLastName("Halgren");
+    user.setUserName("halgrena");
+    user.setPassword("anne314");
+    Role role = new Role();
+    role.setRole("administrator");
+    Set<Role> roles = new HashSet<Role>();
+    roles.add(role);
+    user.setRoles(roles);
+
+    userDAO.saveUser(user);
+
+    mockMvc.perform(get("/findUserByUsername/{userName}", user.getUserName()).accept(MediaType.APPLICATION_JSON)).andDo(print())
+        .andExpect(status().isOk()).andExpect(content().contentType("application/json;charset=UTF-8"))
+        .andExpect(jsonPath("userName", equalTo("halgrena"))).andExpect(jsonPath("firstName", equalTo("Anne")))
+        .andExpect(jsonPath("lastName", equalTo("Halgren"))).andExpect(jsonPath("password", equalTo("anne314")));
+    log.debug("UserControllerRestTest.testFindUserByUsernameController has passed all tests!");
+  }
+
+  @Test
+  @Transactional()
+  public void testFindUserByUsernameWithActionController() throws Exception {
+
+    User user = new User();
+
+    user.setFirstName("Anne");
+    user.setLastName("Halgren");
+    user.setUserName("halgrena");
+    user.setPassword("anne314");
+    Role role = new Role();
+    role.setRole("administrator");
+    Set<Role> roles = new HashSet<Role>();
+    roles.add(role);
+    user.setRoles(roles);
+
+    userDAO.saveUser(user);
+
+    mockMvc.perform(get("/findUserByUsernameWithAction/{userName}", user.getUserName()).accept(MediaType.APPLICATION_JSON)).andDo(print())
+        .andExpect(status().isOk()).andExpect(content().contentType("application/json")).andExpect(view().name("/result"))
+        .andExpect(model().attribute("userAction", "findUserByUsername"))
+        .andExpect(model().attribute("user", hasProperty("firstName", equalTo("Anne"))))
+        .andExpect(model().attribute("user", hasProperty("lastName", equalTo("Halgren"))))
+        .andExpect(model().attribute("user", hasProperty("password", equalTo("anne314"))));
+    log.debug("UserControllerRestTest.testFindUserByUsernameWithActionController has passed all tests!");
+  }
 }
