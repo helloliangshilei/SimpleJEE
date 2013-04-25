@@ -102,9 +102,20 @@ public class UserControllerRestTest {
 
     userDAO.saveUser(user);
 
-    mockMvc.perform(put("/updateUser/" +
-        "userName/{userName}/" + "firstName/{firstName}/" + "lastName/{lastName}/" + "password/{password}", "halgrena",
-        "Anne2", "Halgren2", "anne3142").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
+    mockMvc
+        .perform(
+            put("/updateUser/" +
+                "userName/{userName}/" +
+                "firstName/{firstName}/" +
+                "lastName/{lastName}/" +
+                "password/{password}",
+                "halgrena",
+                "Anne2",
+                "Halgren2",
+                "anne3142").
+                accept(MediaType.APPLICATION_JSON)).
+        andDo(print()).
+        andExpect(status().isOk());
 
     User user2 = userDAO.findUserByUsername("halgrena");
     assertNotNull(user2);
@@ -132,7 +143,13 @@ public class UserControllerRestTest {
 
     userDAO.saveUser(user);
 
-    mockMvc.perform(delete("/removeUser/" + "userName/{userName}/", "halgrena").accept(MediaType.APPLICATION_JSON)).andDo(print())
+    mockMvc
+        .perform(
+            delete("/removeUser/" +
+                "userName/{userName}/",
+                "halgrena").
+                accept(MediaType.APPLICATION_JSON))
+        .andDo(print())
         .andExpect(status().isOk());
 
     User user2 = userDAO.findUserByUsername("halgrena");
@@ -158,10 +175,17 @@ public class UserControllerRestTest {
 
     userDAO.saveUser(user);
 
-    mockMvc.perform(get("/findUserByUsername/{userName}", user.getUserName()).accept(MediaType.APPLICATION_JSON)).andDo(print())
-        .andExpect(status().isOk()).andExpect(content().contentType("application/json;charset=UTF-8"))
-        .andExpect(jsonPath("userName", equalTo("halgrena"))).andExpect(jsonPath("firstName", equalTo("Anne")))
-        .andExpect(jsonPath("lastName", equalTo("Halgren"))).andExpect(jsonPath("password", equalTo("anne314")));
+    mockMvc
+        .perform(get("/findUserByUsername/{userName}",
+            user.getUserName())
+            .accept(MediaType.APPLICATION_JSON))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(content().contentType("application/json;charset=UTF-8"))
+        .andExpect(jsonPath("userName", equalTo("halgrena")))
+        .andExpect(jsonPath("firstName", equalTo("Anne")))
+        .andExpect(jsonPath("lastName", equalTo("Halgren")))
+        .andExpect(jsonPath("password", equalTo("anne314")));
     log.debug("UserControllerRestTest.testFindUserByUsernameController has passed all tests!");
   }
 
@@ -183,8 +207,15 @@ public class UserControllerRestTest {
 
     userDAO.saveUser(user);
 
-    mockMvc.perform(get("/findUserByUsernameWithAction/{userName}", user.getUserName()).accept(MediaType.APPLICATION_JSON)).andDo(print())
-        .andExpect(status().isOk()).andExpect(content().contentType("application/json")).andExpect(view().name("/result"))
+    mockMvc
+        .perform(
+            get("/findUserByUsernameWithAction/{userName}",
+                user.getUserName())
+                .accept(MediaType.APPLICATION_JSON))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(content().contentType("application/json"))
+        .andExpect(view().name("/result"))
         .andExpect(model().attribute("userAction", "findUserByUsername"))
         .andExpect(model().attribute("user", hasProperty("firstName", equalTo("Anne"))))
         .andExpect(model().attribute("user", hasProperty("lastName", equalTo("Halgren"))))
