@@ -1,3 +1,6 @@
+TODO: Clean this whole thing up to maven.  Converge webapp and rest controllers and UI, fix/eliminate ant build.
+
+
 SimpleApp is a simple application to show various conventions for using JEE technologies and patterns.
 
 TODO: NEED TO REWRITE THIS WHOLE THING SINCE MAVEN CONVERSION.  EITHER ELIMINATE OR FIX ANT BUILD.
@@ -99,5 +102,6 @@ OTHER
  - Move everything to a standard JEE directory structure for Maven
  - Tests for Spring stuff servlet stuff.
  
- MavenRefactor1.0
+
+
   	
