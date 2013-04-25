@@ -126,7 +126,7 @@ public class UserControllerTest {
 
 		userDAO.saveUser(user);
 
-		mockMvc.perform(post("/removeUser")
+    mockMvc.perform(post("/removeUser")
 				.accept(MediaType.APPLICATION_FORM_URLENCODED)
 				.param("userName", "halgrena"))
 				.andDo(print())
