@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -39,7 +40,8 @@ public class User implements Serializable {
 	@Column(name="password", nullable=false, length=100)
 	private String password = null;
 	
-	@ManyToMany //(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JsonIgnore
 	//@Cascade(CascadeType.ALL)
   @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_username") }, inverseJoinColumns = { @JoinColumn(name = "role_role") })
 	private Set<Role> roles = new HashSet<Role>(0);
