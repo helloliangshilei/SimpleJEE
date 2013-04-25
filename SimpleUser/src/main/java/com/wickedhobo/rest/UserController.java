@@ -59,7 +59,7 @@ public class UserController {
 													"firstName/{firstName}/" +
 													"lastName/{lastName}/" +
 													"password/{password}", 
-													method = RequestMethod.POST)
+													method = RequestMethod.PUT)
 	public @ResponseBody String updateUser(@PathVariable String userName, 
 																				 @PathVariable String firstName,
 																				 @PathVariable String lastName,
@@ -76,7 +76,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/removeUser/" +
 													"userName/{userName}/",
-													method = RequestMethod.POST)
+													method = RequestMethod.DELETE)
 	public @ResponseBody String removeUser(@PathVariable String userName) {
 		User user = new User();
 		user.setUserName(userName);

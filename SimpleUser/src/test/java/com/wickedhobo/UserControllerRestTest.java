@@ -7,6 +7,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
@@ -98,7 +100,7 @@ public class UserControllerRestTest {
 
 		userDAO.saveUser(user);
 		
-		mockMvc.perform(post("/updateUser/" +
+		mockMvc.perform(put("/updateUser/" +
 				 "userName/{userName}/" +
 				 "firstName/{firstName}/" +
 				 "lastName/{lastName}/" +
@@ -121,7 +123,6 @@ public class UserControllerRestTest {
 	}
 	
 	@Test
-	@Transactional()
 	public void testRemoveUserController() throws Exception {
 
 		User user = new User();
@@ -138,7 +139,7 @@ public class UserControllerRestTest {
 
 		userDAO.saveUser(user);
 		
-		mockMvc.perform(post("/removeUser/" +
+		mockMvc.perform(delete("/removeUser/" +
 				 								 "userName/{userName}/",
 				 								 "halgrena") 
 												 .accept(MediaType.APPLICATION_JSON))
@@ -209,7 +210,4 @@ public class UserControllerRestTest {
 				.andExpect(model().attribute("user", hasProperty("password", equalTo("anne314"))));
 		log.debug("UserControllerRestTest.testFindUserByUsernameWithActionController has passed all tests!");
 	}
-	
-	
-	
 }
