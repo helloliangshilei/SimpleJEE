@@ -63,8 +63,11 @@ public class UserControllerRestTest {
   public void testAddUserController() throws Exception {
     mockMvc
         .perform(
-            post("/addUser/" + "userName/{userName}/" + "firstName/{firstName}/" + "lastName/{lastName}/" + "password/{password}", "halgrena",
-                "Anne", "Halgren", "anne314").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
+            post("/addUser/userName/{userName}/firstName/{firstName}/lastName/{lastName}/password/{password}", 
+                "halgrena","Anne", "Halgren", "anne314")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
 
     User user2 = userDAO.findUserByUsername("halgrena");
     assertNotNull(user2);
