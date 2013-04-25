@@ -67,7 +67,7 @@ public class UserControllerTest {
 				.andExpect(status().isOk()).andExpect(view().name("/result"))
 				.andExpect(forwardedUrl("/WEB-INF/JSP/result.jsp"))
 				.andExpect(model().attribute("userAction", "addUser"));
-		log.debug("testAddUserController has passed all tests!");
+		log.debug("UserControllerTest.testAddUserController has passed all tests!");
 	}
 
 	@Test
@@ -106,7 +106,7 @@ public class UserControllerTest {
 		assertEquals("Halgren2", user2.getLastName());
 		assertEquals("Anne2", user2.getFirstName());
 		assertEquals("password2", user2.getPassword());
-		log.debug("testUpdateUserController has passed all tests!");
+		log.debug("UserControllerTest.testUpdateUserController has passed all tests!");
 	}
 
 	@Test
@@ -138,7 +138,7 @@ public class UserControllerTest {
 		User user2 = userDAO.findUserByUsername("halgrena");
 
 		assertNull(user2);
-		log.debug("testRemoveUserController has passed all tests!");
+		log.debug("UserControllerTest.testRemoveUserController has passed all tests!");
 	}
 
 	@Test
@@ -169,7 +169,7 @@ public class UserControllerTest {
 				.andExpect(model().attribute("user", hasProperty("firstName", equalTo("Anne"))))
 				.andExpect(model().attribute("user", hasProperty("lastName", equalTo("Halgren"))))
 				.andExpect(model().attribute("user", hasProperty("password", equalTo("anne314"))));
-		log.debug("testFindUserByUsernameController has passed all tests!");
+		log.debug("UserControllerTest.testFindUserByUsernameController has passed all tests!");
 	}
 
 	@Test
@@ -194,7 +194,7 @@ public class UserControllerTest {
                         																		 	 hasProperty("userName", equalTo("gordond")),
                         																		 	 hasProperty("firstName", equalTo("Dexter")),
                         																		 	 hasProperty("lastName", equalTo("Gordon"))))));
-		log.debug("testListUsersController has passed all tests!");
+		log.debug("UserControllerTest.testListUsersController has passed all tests!");
 	}
 	
 	@Test
@@ -248,6 +248,6 @@ public class UserControllerTest {
                    															 						 	 hasProperty("userName", equalTo("gordond")),
                    															 						 	 hasProperty("firstName", equalTo("Dexter")),
                    															 						 	 hasProperty("lastName", equalTo("Gordon"))))));
-		log.debug("testListUsersByRoleController has passed all tests!");
+		log.debug("UserControllerTest.testListUsersByRoleController has passed all tests!");
 	}
 }
