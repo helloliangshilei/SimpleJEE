@@ -17,8 +17,8 @@ public class UserController {
 	@Autowired
 	UserDAOHibSpringImpl userDAO;
 
-	@RequestMapping(value = "/getUserWithAction/{userName}", method = RequestMethod.GET)
-	public String findUserByUsername(@PathVariable String userName, Model model) {
+	@RequestMapping(value = "/userService/findUserByUsernameWithAction/{userName}", method = RequestMethod.GET)
+	public String findUserByUsernameWithAction(@PathVariable String userName, Model model) {
 		User user = new User();
 		user = userDAO.findUserByUsername(userName);
 
@@ -27,11 +27,11 @@ public class UserController {
 		return "/result";
 	}
 	
-	@RequestMapping(value = "/getUser/{userName}", method = RequestMethod.GET)
-	public @ResponseBody User findUserByUsername2(@PathVariable String userName, Model model) {
+	@RequestMapping(value = "/userService/findUserByUsername/{userName}", method = RequestMethod.GET)
+	public @ResponseBody User findUserByUsername(@PathVariable String userName, Model model) {
 		User user = new User();
 		user = userDAO.findUserByUsername(userName);
-
 		return user;
 	}
+	
 }
