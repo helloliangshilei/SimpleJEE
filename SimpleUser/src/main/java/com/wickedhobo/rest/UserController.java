@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wickedhobo.DAO.hibernateDAO.UserDAOHibSpringImpl;
@@ -20,7 +21,7 @@ public class UserController {
   @Autowired
   UserDAOHibSpringImpl userDAO;
 
-  @RequestMapping(value = "/findUserByUsernameWithAction/{userName}", method = RequestMethod.GET)
+  @RequestMapping(value = "/findUserByUsernameWithAction/userName/{userName}", method = RequestMethod.GET)
   public String findUserByUsernameWithAction(@PathVariable String userName, Model model) {
     User user = new User();
     user = userDAO.findUserByUsername(userName);
@@ -30,9 +31,8 @@ public class UserController {
     return "/result";
   }
 
-  @RequestMapping(value = "/findUserByUsername/{userName}", method = RequestMethod.GET)
-  public @ResponseBody
-  User findUserByUsername(@PathVariable String userName) {
+  @RequestMapping(value = "/findUserByUsername/userName/{userName}", method = RequestMethod.GET)
+  public @ResponseBody User findUserByUsername(@PathVariable String userName) {
     User user = new User();
     user = userDAO.findUserByUsername(userName);
     return user;
@@ -43,9 +43,8 @@ public class UserController {
       "firstName/{firstName}/" +
       "lastName/{lastName}/" +
       "password/{password}",
-                  method = RequestMethod.POST)
-  public @ResponseBody
-  String addUser(@PathVariable String userName,
+      method = RequestMethod.POST)
+  public @ResponseBody String addUser(@PathVariable String userName,
       @PathVariable String firstName,
       @PathVariable String lastName,
       @PathVariable String password) {
@@ -64,9 +63,8 @@ public class UserController {
       "firstName/{firstName}/" +
       "lastName/{lastName}/" +
       "password/{password}",
-                  method = RequestMethod.PUT)
-  public @ResponseBody
-  String updateUser(@PathVariable String userName,
+      method = RequestMethod.PUT)
+  public @ResponseBody String updateUser(@PathVariable String userName,
       @PathVariable String firstName,
       @PathVariable String lastName,
       @PathVariable String password) {
@@ -81,8 +79,7 @@ public class UserController {
   }
 
   @RequestMapping(value = "/removeUser/userName/{userName}/", method = RequestMethod.DELETE)
-  public @ResponseBody
-  String removeUser(@PathVariable String userName) {
+  public @ResponseBody String removeUser(@PathVariable String userName) {
     User user = new User();
     user.setUserName(userName);
     userDAO.deleteUser(user);
@@ -91,11 +88,19 @@ public class UserController {
   }
 
   @RequestMapping(value = "/listUsers", method = RequestMethod.GET)
-  public @ResponseBody
-  List<User> listUsers() {
+  public @ResponseBody List<User> listUsers() {
 
     List<User> userList = new ArrayList<User>();
     userList = userDAO.listUsers();
+    return userList;
+  }
+
+  @RequestMapping(value = "/listUsersByRole/roleName/{roleName}", method = RequestMethod.GET)
+  public @ResponseBody List<User> listUsersByRoles(@PathVariable String roleName, Model model) {
+
+    List<User> userList = new ArrayList<User>();
+    userList = userDAO.listUsersByRoles(roleName);
+
     return userList;
   }
 }

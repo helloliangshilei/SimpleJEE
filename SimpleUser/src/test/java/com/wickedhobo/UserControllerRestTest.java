@@ -63,18 +63,16 @@ public class UserControllerRestTest {
   @Transactional()
   // @Rollback(false) //Left here for debug purposes.
   public void testAddUserController() throws Exception {
-    mockMvc
-        .perform(
-            post("/addUser/" +
-                "userName/{userName}/" +
-                "firstName/{firstName}/" +
-                "lastName/{lastName}/" +
-                "password/{password}",
-                "halgrena",
-                "Anne",
-                "Halgren",
-                "anne314")
-                .accept(MediaType.APPLICATION_JSON))
+    mockMvc.perform(post("/addUser/" +
+        "userName/{userName}/" +
+        "firstName/{firstName}/" +
+        "lastName/{lastName}/" +
+        "password/{password}",
+        "halgrena",
+        "Anne",
+        "Halgren",
+        "anne314")
+        .accept(MediaType.APPLICATION_JSON))
         .andDo(print())
         .andExpect(status().isOk());
 
@@ -104,18 +102,16 @@ public class UserControllerRestTest {
 
     userDAO.saveUser(user);
 
-    mockMvc
-        .perform(
-            put("/updateUser/" +
-                "userName/{userName}/" +
-                "firstName/{firstName}/" +
-                "lastName/{lastName}/" +
-                "password/{password}",
-                "halgrena",
-                "Anne2",
-                "Halgren2",
-                "anne3142").
-                accept(MediaType.APPLICATION_JSON)).
+    mockMvc.perform(put("/updateUser/" +
+        "userName/{userName}/" +
+        "firstName/{firstName}/" +
+        "lastName/{lastName}/" +
+        "password/{password}",
+        "halgrena",
+        "Anne2",
+        "Halgren2",
+        "anne3142").
+        accept(MediaType.APPLICATION_JSON)).
         andDo(print()).
         andExpect(status().isOk());
 
@@ -145,12 +141,10 @@ public class UserControllerRestTest {
 
     userDAO.saveUser(user);
 
-    mockMvc
-        .perform(
-            delete("/removeUser/" +
-                "userName/{userName}/",
-                "halgrena").
-                accept(MediaType.APPLICATION_JSON))
+    mockMvc.perform(delete("/removeUser/" +
+        "userName/{userName}/",
+        "halgrena").
+        accept(MediaType.APPLICATION_JSON))
         .andDo(print())
         .andExpect(status().isOk());
 
@@ -177,10 +171,8 @@ public class UserControllerRestTest {
 
     userDAO.saveUser(user);
 
-    mockMvc
-        .perform(get("/findUserByUsername/{userName}",
-            user.getUserName())
-            .accept(MediaType.APPLICATION_JSON))
+    mockMvc.perform(get("/findUserByUsername/userName/{userName}", user.getUserName())
+        .accept(MediaType.APPLICATION_JSON))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -209,11 +201,8 @@ public class UserControllerRestTest {
 
     userDAO.saveUser(user);
 
-    mockMvc
-        .perform(
-            get("/findUserByUsernameWithAction/{userName}",
-                user.getUserName())
-                .accept(MediaType.APPLICATION_JSON))
+    mockMvc.perform(get("/findUserByUsernameWithAction/userName/{userName}", user.getUserName())
+        .accept(MediaType.APPLICATION_JSON))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(content().contentType("application/json"))
@@ -227,7 +216,6 @@ public class UserControllerRestTest {
   @Test
   @Transactional
   public void testListUsersController() throws Exception {
-    log.debug("asdfasdfasdfasd");
     mockMvc.perform(get("/listUsers").accept(MediaType.APPLICATION_JSON))
         .andDo(print())
         .andExpect(status().isOk())
@@ -237,6 +225,42 @@ public class UserControllerRestTest {
         .andExpect(jsonPath("$..firstName", containsInAnyOrder("Jason", "Dexter")))
         .andExpect(jsonPath("$..lastName", containsInAnyOrder("Gordon", "McKerr")))
         .andExpect(jsonPath("$..password", containsInAnyOrder("gordond314", "mckerrj314")));
-    log.debug("UserControllerTest.testListUsersController has passed all tests!");
+    log.debug("UserControllerRestTest.testListUsersController has passed all tests!");
+  }
+
+  @Test
+  @Transactional
+  public void testListUsersByRoleController() throws Exception {
+    mockMvc.perform(get("/listUsersByRole/roleName/{roleName}", "administrator").accept(MediaType.APPLICATION_JSON))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(content().contentType("application/json;charset=UTF-8"))
+        .andExpect(jsonPath("$.", hasSize(2)))
+        .andExpect(jsonPath("$..userName", containsInAnyOrder("mckerrj", "gordond")))
+        .andExpect(jsonPath("$..firstName", containsInAnyOrder("Jason", "Dexter")))
+        .andExpect(jsonPath("$..lastName", containsInAnyOrder("Gordon", "McKerr")))
+        .andExpect(jsonPath("$..password", containsInAnyOrder("gordond314", "mckerrj314")));
+
+    mockMvc.perform(get("/listUsersByRole/roleName/{roleName}", "developer").accept(MediaType.APPLICATION_JSON))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(content().contentType("application/json;charset=UTF-8"))
+        .andExpect(jsonPath("$.", hasSize(1)))
+        .andExpect(jsonPath("$..userName", containsInAnyOrder("mckerrj")))
+        .andExpect(jsonPath("$..firstName", containsInAnyOrder("Jason")))
+        .andExpect(jsonPath("$..lastName", containsInAnyOrder("McKerr")))
+        .andExpect(jsonPath("$..password", containsInAnyOrder("mckerrj314")));
+
+    mockMvc.perform(get("/listUsersByRole/roleName/{roleName}", "saxplayer").accept(MediaType.APPLICATION_JSON))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(content().contentType("application/json;charset=UTF-8"))
+        .andExpect(jsonPath("$.", hasSize(1)))
+        .andExpect(jsonPath("$..userName", containsInAnyOrder("gordond")))
+        .andExpect(jsonPath("$..firstName", containsInAnyOrder("Dexter")))
+        .andExpect(jsonPath("$..lastName", containsInAnyOrder("Gordon")))
+        .andExpect(jsonPath("$..password", containsInAnyOrder("gordond314")));
+
+    log.debug("UserControllerRestTest.testListUsersByRoleController has passed all tests!");
   }
 }
