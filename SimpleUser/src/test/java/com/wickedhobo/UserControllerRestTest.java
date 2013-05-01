@@ -1,25 +1,28 @@
 package com.wickedhobo;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +30,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -215,11 +217,26 @@ public class UserControllerRestTest {
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(content().contentType("application/json"))
-        .andExpect(view().name("/result"))
         .andExpect(model().attribute("userAction", "findUserByUsername"))
         .andExpect(model().attribute("user", hasProperty("firstName", equalTo("Anne"))))
         .andExpect(model().attribute("user", hasProperty("lastName", equalTo("Halgren"))))
         .andExpect(model().attribute("user", hasProperty("password", equalTo("anne314"))));
     log.debug("UserControllerRestTest.testFindUserByUsernameWithActionController has passed all tests!");
+  }
+
+  @Test
+  @Transactional
+  public void testListUsersController() throws Exception {
+    log.debug("asdfasdfasdfasd");
+    mockMvc.perform(get("/listUsers").accept(MediaType.APPLICATION_JSON))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(content().contentType("application/json;charset=UTF-8"))
+        .andExpect(jsonPath("$.", hasSize(2)))
+        .andExpect(jsonPath("$..userName", containsInAnyOrder("mckerrj", "gordond")))
+        .andExpect(jsonPath("$..firstName", containsInAnyOrder("Jason", "Dexter")))
+        .andExpect(jsonPath("$..lastName", containsInAnyOrder("Gordon", "McKerr")))
+        .andExpect(jsonPath("$..password", containsInAnyOrder("gordond314", "mckerrj314")));
+    log.debug("UserControllerTest.testListUsersController has passed all tests!");
   }
 }
