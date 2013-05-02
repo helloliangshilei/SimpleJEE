@@ -12,6 +12,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name="role", schema="simpleapp")
@@ -25,6 +27,7 @@ public class Role implements Serializable {
 	private String description = null;
 	
 	@ManyToMany //(mappedBy="roles") 
+	@JsonBackReference //Need this to prevent infinite loading of bidirectional relationship 
   @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "role_role") }, inverseJoinColumns = { @JoinColumn(name = "user_username") })
 	private Set<User> users = new HashSet<User>(0);
 	
