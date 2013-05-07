@@ -260,6 +260,4 @@ public class UserControllerRestTest {
 
     log.debug("UserControllerRestTest.testListUsersByRoleController has passed all tests!");
   }
-  
-  //TODO Do a user and list marshalling from JSON test
 }
