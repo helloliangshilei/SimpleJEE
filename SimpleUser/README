@@ -12,17 +12,13 @@ is setup as a MySQL database using InnoDB:
 
 Building:
 	- Download the project using git clone. <Address>
-	- You'll need to run Maven to get the required dependencies.  Assuming some unix like environment, go to the 
-  	"SimpleUser" directory and run "mvn dependency:copy-dependencies" which will download the necessary JAR files for
-  	the application.  I'm using Maven for repository and dependency management only, not for build function.   
-	- In the same directory, run "ant createdb".  Assuming you're MySQL is localhost, it'll create the required database artifacts and insert some records. 
-	- Use ant to build to build the project <command and dir>
-	- Drop into your tomcate webapps
-  - Go to:
+	- Maven options that you need are "mvn test", will run all tests, and "mvn tomcat:run" to run tomcat for playing with webapp, rest stuff.
+	  Run these commands from the SimpleJEE/SimpleUser directory.
+	- **ANT build broken at the moment.  You'll need to setup mysql, and use the source command to get the right stuff in the DB.
 
 1) Simple JDBC
 First example is a simple JDBC application that stores, changes, retrieves data in a single table SIMPLEAPP.USER.
-All actions are based on the base objects in the "classes/object" package.  There are two primary classes, 
+All actions are based on the base objects in the "src/main/java/com/wickedhobo/object" package.  There are two primary classes, 
 User and Role following conventional Javabean standards with the addition of an constructors added simply 
 for me to mess around.
 	- I use simple DAO pattern for this found in classes/DAO.simpleDAO: "UserDAO"(interface) and "UserDAOImplSimple"
@@ -70,7 +66,7 @@ The third and default example show's use of JPA annotations for the implementati
 as the one above.   I know it's not a true JPA application since I'm using Hibernate's session stuff rather than EntityManager convention.  So it's not a 
 truly portable JPA application. 
 
-Run the same test test in sample two but using the default code in HibUtil.java.
+Run the same test in sample two but using the default code in HibUtil.java.
  
  ****Note, the reason for Hibutil.java is to actually load the correct Hibernate configuration file at startup time inside a web container. 
  That's why it's a little painful for testing purposes.  Sorry.
@@ -84,10 +80,8 @@ The test file is src/test/java/com/wickedhobo/UserSpringHibernateTest/java/
 
 5) MVC Sample and Simple Web Sample
 
-To run the tests, run "mvn test" in the SimpleeJEE/SimplaApp directory
-
 I also wrote a simple Spring MVC sample.  You can see the controller at src/main/java/com/web/UserController and the Spring Test
-at /src/test/java/com/wickedhobo/UserControllerTest/. It has a fairly comprehensive set of Spring Tests for the
+at /src/test/java/com/wickedhobo/UserControllerTest.java. It has a fairly comprehensive set of Spring Tests for the
 REST methods in the controller using Hamcrest for Matchers.
 
 Also, if you deploy or run maven tomcat:run you can go to localhost:8080/SimpleApp and see a list of links for a VERY simple
@@ -96,7 +90,7 @@ that gets data from the Model and displays.
 
 6) Rest Sample: 
 
-To run the tests, run "mvn test" in the SimpleeJEE/SimplaApp directory
+To run the tests, run "mvn test" in the SimpleeJEE/SimpleUser directory
 
 Lastly, there is a rest example that show's two different ways of sending JSON back to the caller.  One using the
 Spring MVC Model and View type method and one that uses Jackson to serialize objects and pushes the JSON back using the @ResponseBody.
@@ -109,7 +103,7 @@ REST methods in the controller using Hamcrest for Matchers.
 
 7) Webapp:  
 
-To Run the webapp, run "mvn tomcat:run" from the SimpleJEE/SimpleApp directory.  You then have some cool things todo:
+To Run the webapp, run "mvn tomcat:run" from the SimpleJEE/SimpleUser directory.  You then have some cool things todo:
 
 1) Simple webapp is here: http://localhost:8080/SimpleApp/    
 It has no real error checking, but does the basics.
