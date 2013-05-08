@@ -71,7 +71,6 @@ as the one above.   I know it's not a true JPA application since I'm using Hiber
 truly portable JPA application. 
 
 Run the same test test in sample two but using the default code in HibUtil.java.
-
  
  ****Note, the reason for Hibutil.java is to actually load the correct Hibernate configuration file at startup time inside a web container. 
  That's why it's a little painful for testing purposes.  Sorry.
@@ -83,18 +82,23 @@ use the CommonDAO and UserDAO just as the last two examples did.
 
 The test file is src/test/java/com/wickedhobo/UserSpringHibernateTest/java/
 
-5) MVC Sample
+5) MVC Sample and Simple Web Sample
+I also wrote a simple Spring MVC sample.  You can see the controller at src/main/java/com/web/UserController and the Spring Test
+at /src/test/java/com/wickedhobo/UserControllerTest/. It has a fairly comprehensive set of Spring Tests for the
+REST methods in the controller using Hamcrest for Matchers.
 
-6) Rest Sample
+Also, if you deploy or run maven tomcat:run you can go to localhost:8080/SimpleApp and see a list of links for a VERY simple
+webapp that uses the MVC and maps to /result (src/main/resources/webapp/WEB-INF/JSP/result.jsp) which has some simple JEE EL
+that gets data from the Model and displays.
 
-7) Simple weball.
+6) Rest Sample: Lastly, there is a rest example that show's two different ways of sending JSON back to the caller.  One using the
+Spring MVC Model and View type method and one that uses Jackson to serialize objects and pushes the JSON back using the @ResponseBody.
 
+The REST Controller is at src/main/java/com/wickedhobo/rest/UserController.java.  Most methods use the @ResponseBody, but 
+findByUserNameWithAction shows how you can also use a Spring Model And View pattern to return JSON/REST.
 
-	  
+The test is at src/test/java/com/wickedhobo/UserControllerRestTest.java and has a fairly comprehensive set of Spring Tests for the
+REST methods in the controller using Hamcrest for Matchers.
+
 OTHER
   - I use Logback for logging.  right now it's a very simple setup to send everything to the console.
-  	
- 
-
-
-  	
