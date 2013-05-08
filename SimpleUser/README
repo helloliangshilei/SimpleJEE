@@ -12,7 +12,7 @@ is setup as a MySQL database using InnoDB:
 
 Building:
 	- Download the project using git clone. <Address>
-	- Maven options that you need are "mvn test", will run all tests, and "mvn tomcat:run" to run tomcat for playing with webapp, rest stuff.
+	- Maven options that you need are "mvn test", will run all tests, and "mvn tomcat:run" or "mvn tomcat7:run" for tomcat 7x to run tomcat for playing with webapp, rest stuff.
 	  Run these commands from the SimpleJEE/SimpleUser directory.
 	- **ANT build broken at the moment.  You'll need to setup mysql, and use the source command to get the right stuff in the DB.
 
@@ -84,7 +84,7 @@ I also wrote a simple Spring MVC sample.  You can see the controller at src/main
 at /src/test/java/com/wickedhobo/UserControllerTest.java. It has a fairly comprehensive set of Spring Tests for the
 REST methods in the controller using Hamcrest for Matchers.
 
-Also, if you deploy or run maven tomcat:run you can go to localhost:8080/SimpleApp and see a list of links for a VERY simple
+Also, if you deploy or run maven tomcat7:run you can go to localhost:8080/SimpleApp and see a list of links for a VERY simple
 webapp that uses the MVC and maps to /result (src/main/resources/webapp/WEB-INF/JSP/result.jsp) which has some simple JEE EL
 that gets data from the Model and displays.
 
@@ -103,7 +103,7 @@ REST methods in the controller using Hamcrest for Matchers.
 
 7) Webapp:  
 
-To Run the webapp, run "mvn tomcat:run" from the SimpleJEE/SimpleUser directory.  You then have some cool things todo:
+To Run the webapp, run "mvn tomcat:run" or "mvn tomcat7:run" (for tomcat 7x) from the SimpleJEE/SimpleUser directory.  You then have some cool things todo:
 
 1) Simple webapp is here: http://localhost:8080/SimpleApp/    
 It has no real error checking, but does the basics.
