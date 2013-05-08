@@ -57,7 +57,7 @@ public class UserSpringHibernateTest {
 
 	@Test
 	@Transactional()
-	public void testUserUpdatee() {
+	public void testUserUpdate() {
 		User user = new User();
 
 		user.setFirstName("Anne");
