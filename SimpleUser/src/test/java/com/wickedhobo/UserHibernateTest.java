@@ -46,7 +46,7 @@ public class UserHibernateTest {
 		HibUtil.closeSession();
 
 		assertNotNull(user2);
-		assertEquals("halgrena2", user2.getUserName());
+		assertEquals("halgrena", user2.getUserName());
 		log.debug("testUserSave has passed all tests!");
 
 		userDAO.deleteUser(user);
