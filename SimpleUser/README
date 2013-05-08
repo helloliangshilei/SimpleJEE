@@ -123,3 +123,7 @@ It has no real error checking, but does the basics.
 
 OTHER
   - I use Logback for logging.  right now it's a very simple setup to send everything to the console.
+  - It's been tested on OSX using java 6, and linux using java 7.
+  - ** I've got the java level set in pom..xml to 1.7, so if on something else either remove or change.
+  
+  
