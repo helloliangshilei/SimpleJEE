@@ -20,8 +20,7 @@
 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<!-- <property name="packagesToScan" value="DAO, object" /> -->
-		<property name="annotatedClasses"><!-- not sure if this should be classesToBeBound -->
+		<property name="annotatedClasses">
 			<list>
 				<value>com.wickedhobo.object.User</value>
 				<value>com.wickedhobo.object.Role</value>
