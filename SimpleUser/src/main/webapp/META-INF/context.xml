@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context antiJARLocking="true" path="" debug="1" reloadable="true">
 	<!-- JDBC datasource -->
-	<!-- <ResourceLink global="jdbc/simpleapp" name="jdbc/simpleapp" type="javax.sql.DataSource" /> -->
-	<Resource name="jdbc/simpleapp" auth="Container" type="javax.sql.DataSource" username="simpleapp" password="simple314" driverClassName="com.mysql.jdbc.Driver"
-		url="jdbc:mysql://localhost:3306/simpleapp?autoReconnect=true" validationQuery="select 1" maxActive="10" maxIdle="4" maxWait="1000" />
-
-
-	<!-- Security realm and location of the users file <Realm className="org.apache.catalina.realm.MemoryRealm" pathname="/tomcat/webapps/ROOT/WEB-INF/users.xml" 
+	<!-- <ResourceLink global="jdbc/simpleapp" name="jdbc/simpleapp" type="javax.sql.DataSource" 
 		/> -->
+	<Resource name="jdbc/simpleapp" auth="Container" type="javax.sql.DataSource"
+		username="simpleapp" password="simple314" driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/simpleapp?autoReconnect=true"
+		validationQuery="select 1" maxActive="10" maxIdle="4" maxWait="1000" />
 </Context>
