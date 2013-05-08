@@ -115,6 +115,8 @@ It has no real error checking, but does the basics.
 - http://localhost:8080/SimpleApp/userService/findUserByUsernameWithAction/userName/mckerrj.json
 - http://localhost:8080/SimpleApp/userService/findUserByUsername/userName/mckerrj.json
 
+You will also see all of the REST requests and results printed out on the command line when running "mvn test"
+
 OTHER
   - I use Logback for logging.  right now it's a very simple setup to send everything to the console.
   - It's been tested on OSX using java 6, and linux using java 7.
