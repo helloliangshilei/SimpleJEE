@@ -254,7 +254,7 @@ public class UserControllerRestTest {
         .andExpect(content().contentType("application/json;charset=UTF-8"))
         .andExpect(jsonPath("$.", hasSize(1)))
         .andExpect(jsonPath("$..userName", containsInAnyOrder("gordond")))
-        .andExpect(jsonPath("$..firstName", containsInAnyOrder("Dexter")))
+        .andExpect(jsonPath("$..firstName", containsInAnyOrder("Dexteraaaaaaaaaa")))
         .andExpect(jsonPath("$..lastName", containsInAnyOrder("Gordon")))
         .andExpect(jsonPath("$..password", containsInAnyOrder("gordond314")));
 
