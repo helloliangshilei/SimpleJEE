@@ -122,7 +122,7 @@ It has no real error checking, but does the basics.
 - http://localhost:8080/SimpleApp/userService/findUserByUsername/userName/mckerrj.json
 
 OTHER
-  - I use Logback for logging.  right now it's a very simple setup to send everything to the console.
+  - I use Logback for logging.  right now it's a very simple setup to send everything to the console.aaa
   - It's been tested on OSX using java 6, and linux using java 7.
   - ** I've got the java level set in pom..xml to 1.7, so if on something else either remove or change.
   
