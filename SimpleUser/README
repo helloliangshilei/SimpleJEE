@@ -1,17 +1,14 @@
-TODO: Clean this whole thing up to maven.  Converge webapp and rest controllers and UI, fix/eliminate ant build.
-
-
 SimpleApp is a simple application to show various conventions for using JEE technologies and patterns.
-
-TODO: NEED TO REWRITE THIS WHOLE THING SINCE MAVEN CONVERSION.  EITHER ELIMINATE OR FIX ANT BUILD.
 
 CONFIGURATION:  The application has been tested and run on Tomcat 7.  So you'll need that or something similar.  The database
 is setup as a MySQL database using InnoDB:
   - You'll need a schema called "simpleapp" 
   - A user called "simpleapp", password: "simple314"
-  - You'll need to run the database DDL script using the file "WebContent/database/createstuff.sql"
+  - You'll need to run the database DDL script using the file "src/main/resources/database/createstuff.sql"
   - JDBC Connections are assumed to use "localhost:3306" for mysql database.  If you want something else, you'll need to change,
-  	"META-INF/context.xml." Everything in Spring, JDBC, and Hibernate uses the JNDI datasource from context.xml  
+  	applicationContext.xml, hibernate.cfg.xml, hibernateAnnotations.cfg.xml, and src/main/webapp/MET-INF/context.xml
+  	- The reason there are so many is that I'm not using a JNDI pool, and I'm individually testing JDBC, Hibernate using xml configuration,
+  	  hibernate using Annotations, and Hibernate/Spring. 
 
 Building:
 	- Download the project using git clone. <Address>
@@ -32,20 +29,18 @@ for me to mess around.
 		(implementation).  
 	- There's also a simple Factory pattern show in "classes/commonDAO"
 	- Connections to the database are managed through the "DBConnection" class in the "simpleJDBC" package.
-	- Once you've set everything up and are ready to run it, go to <yourhost:port>/SimpleApp
-	- There are a set of links to the sample apps, which run a set of cactus servlet tests to make sure it all works
-	  and displays the status.  You can see the test implementations (which shows use of various patterns and
-	  implementation) in "classes/test/<classes>".  For example they'll show calls to the factory and creation
-	  of DAO objects.  For this one, click the "Go to the Simple JDBC Tests" link.
-	- The test servlet is test.SimpleDAOTestServlet
+	- The JDBC Stuff I originally wrote cactus tests for, but switched to Maven/Spring tests, so there are no tests.  
+	  but you can have fun reading the code, or you can write some simple tests.
 	  
 2) Put on the fancy shoes: Hibernate, DAO, Generics 
 The second example is sort of two examples combined into one.  The fist one is standard Hibernate using the
-standard hibernate.cfg.xml style of development with mappings included in the related files.  To use the example, 
-you need to edit the WEB-INF/web.xml file and remove the VALUE of the HibernateConfigFile param.  So you'd have
-the param set and the value should be blank: "<param-value></param-value>".  Then run it and click the 
-"Go to the DAO Hibernate Tests."  This tests all of the primary methods in DAO.hibernateDAO.UserDAOImpl with the
-following method signatures:
+standard hibernate.cfg.xml style of development with mappings included in the related files.  The default is NOT
+to use this, since I like annotations better.  So to use it with the tests, go to com.wickedhobo.DAO.hibernateDAO.HibUtil
+and change the NOCONTEXTCONFIG variable to hibernate.cfg.xml and the tests will use the xml mappings.  Otherwise run
+the UserHibernateTest and it'll use the annotations on the User.java and Role.java classes.  For any web examples I'm using
+the annotations version and that is loaded in web.xml.
+
+The methods tested are
 - public void saveUser(User user) {...}
 - public void updateUser(User user) {...}
 - public User findUserByUsername(String username) {...}
@@ -53,6 +48,8 @@ following method signatures:
 - public List<User> listUsers() {...}
 - public List<User> listUsersByRoles(String role) {...} (This one is to show successful implementation of the 
 Many-to-Many relationship and the use of HQL and the HQL Entity facility and adding functionality subclasses).
+
+You can see the test file at src/test/java/com/wickedhobo/UserHibernateTest
 
 You can understand the database structure by looking at the createstuff.sql file, the hibernate config files, or the 
 object.User and object.Role files by looking at the JPA annotations.
@@ -68,39 +65,35 @@ I'm also using DAO.hibernateDAO.HibUtil to manage sessions, transactions, that s
 I know some people like to use a "Manager" style DAO as another level of indirection, but I figured I'd gone far 
 enough for my purposes.
 
-The test servlet is test.HibernateDAOTestServlet.
-
 3) Fancy shoes with @ signs.  JPA/Annotations
-The third example show's use of JPA annotations for the implementation, but in all other ways is exactly the same
-as the one above.  If you changed it, you need to change the web.xml file back to it's original state using the
-<param-value>hibernateAnnotations.cfg.xml</param-value>.  Then a different hibernate config file will be loaded at
-runtime which tells the system to use annotations instead of standard hibernate config.  I know it's not a true
-JPA application since I'm using Hibernate's session stuff rather than EntityManager convention.  So it's not a 
+The third and default example show's use of JPA annotations for the implementation, but in all other ways is exactly the same
+as the one above.   I know it's not a true JPA application since I'm using Hibernate's session stuff rather than EntityManager convention.  So it's not a 
 truly portable JPA application. 
 
-Run the same test servlet as in example 2.  Fun. 
+Run the same test test in sample two but using the default code in HibUtil.java.
+
+ 
+ ****Note, the reason for Hibutil.java is to actually load the correct Hibernate configuration file at startup time inside a web container. 
+ That's why it's a little painful for testing purposes.  Sorry.
 
 4) Shoes with a Spring in your step.  
 The Spring sample is built using the sample DAO structure and inheritance structure as the Hibernate ones.  It's just using Spring
 injection to manage the session, transactions, all that sort of thing.  You can see the samples in CommonDAOSpringImpl, UserDAOHibSpringImpl which
 use the CommonDAO and UserDAO just as the last two examples did.
 
-This example also uses Entity Manager for true javax.persistence rather than hibernate's SessionFactory.
+The test file is src/test/java/com/wickedhobo/UserSpringHibernateTest/java/
 
-The link to run the cactus tests for this is on the index page and the Servlet is test.HibernateSpringDAOTestServlet.
+5) MVC Sample
 
-I also wrote a simple servlet using Spring MVC to show a sample of that as well both running and using annotation.  That's the
-"Add a Person..." link on the index page.
+6) Rest Sample
+
+7) Simple weball.
+
+
 	  
 OTHER
   - I use Logback for logging.  right now it's a very simple setup to send everything to the console.
-    It's also set at debug.  You can change the log level if you want.
-  - I know my tests aren't traditional setup/teardown style.  They're really just servlets using Cactus/JUnit
-  	to make sure stuff works and show the concepts of DAO, Factory, Hibernate, stuff like that.
   	
- HUGE TODO's
- - Move everything to a standard JEE directory structure for Maven
- - Tests for Spring stuff servlet stuff.
  
 
 
