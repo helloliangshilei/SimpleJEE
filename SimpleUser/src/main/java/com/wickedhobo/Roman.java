@@ -17,10 +17,11 @@ public class Roman {
   }
 
   /*
-   * Notes for Ryan: 
+   * Notes for Ryan:
+   * Understand java.util.hashmap (google search will give lots of good stuff here) 
    * Remember length/iteration starts at zero 
    * i++ 
-   * understand for loop logic/boolean: initialize, boolean logic/termination, increment
+   * understand for loop logic: initialize, boolean logic/termination, increment
    * +=/-= syntax 
    * why toUpperCase 
    * Understand hashmap behavior
