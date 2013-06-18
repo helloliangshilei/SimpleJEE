@@ -118,7 +118,6 @@ public class UserControllerRestTest {
     assertEquals("Anne2", user2.getFirstName());
     assertEquals("anne3142", user2.getPassword());
     log.debug("UserControllerRestTest.testUpdateUserController has passed all tests!");
-
   }
 
   @Test
@@ -161,9 +160,12 @@ public class UserControllerRestTest {
     user.setUserName("halgrena");
     user.setPassword("anne314");
     Role role = new Role();
+    Role role2 = new Role();
     role.setRole("administrator");
+    role2.setRole("developer");
     Set<Role> roles = new HashSet<Role>();
     roles.add(role);
+    roles.add(role2);
     user.setRoles(roles);
 
     userDAO.saveUser(user);
@@ -176,7 +178,9 @@ public class UserControllerRestTest {
         .andExpect(jsonPath("userName", equalTo("halgrena")))
         .andExpect(jsonPath("firstName", equalTo("Anne")))
         .andExpect(jsonPath("lastName", equalTo("Halgren")))
-        .andExpect(jsonPath("password", equalTo("anne314")));
+        .andExpect(jsonPath("password", equalTo("anne314")))
+        .andExpect(jsonPath("$.roles", hasSize(2)))
+        .andExpect(jsonPath("$.roles..role", containsInAnyOrder("administrator", "developer")));
     log.debug("UserControllerRestTest.testFindUserByUsernameController has passed all tests!");
   }
 
