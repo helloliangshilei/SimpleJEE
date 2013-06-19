@@ -210,7 +210,9 @@ public class UserControllerRestTest {
         .andExpect(model().attribute("userAction", "findUserByUsername"))
         .andExpect(model().attribute("user", hasProperty("firstName", equalTo("Anne"))))
         .andExpect(model().attribute("user", hasProperty("lastName", equalTo("Halgren"))))
-        .andExpect(model().attribute("user", hasProperty("password", equalTo("anne314"))));
+        .andExpect(model().attribute("user", hasProperty("password", equalTo("anne314"))))
+        .andExpect(jsonPath("$.user.roles", hasSize(1)))
+        .andExpect(jsonPath("$.user.roles[0].role", equalTo("administrator"))); //Doing this one different than in testFindByUsernameController just for giggles, show to different ways of traversing using Json Path
     log.debug("UserControllerRestTest.testFindUserByUsernameWithActionController has passed all tests!");
   }
 
