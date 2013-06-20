@@ -56,7 +56,7 @@ public class Roman {
     							//A: the hashmap class allows for null value and the null key. 
     							//I added 'romansMap.put("", 0)' to the hashmap
     							//Also I think that runningValue = 0 is denoting that at LP=0 the running value is 0 
-
+//so the problem with going forward is that LP^0 can either be a + or - value, where as going backwards the last roman numeral could only be positive
     try {
       for (int i = romansIn.length() - 1; i >= 0; i++) { // change this to the
                                                          // other direction, fix
