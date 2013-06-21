@@ -27,7 +27,7 @@ public class Roman {
    * why toUpperCase 
    * Understand hashmap behavior
    */
-  /*public Integer returnNumbersBackwards(String romansIn) {
+  public Integer returnNumbersBackwards(String romansIn) {
     int lastPosition = 0;
     Integer runningValue = 0;
 
@@ -46,7 +46,7 @@ public class Roman {
     }
     return runningValue;
   }
-*/
+
   // TODO: Fix the Zero problem below. Test for null.
   // TODO: Switch the string indexing from backwards to forwards and fix.
   public Integer returnNumbersForwards(String romansIn) {
@@ -58,11 +58,12 @@ public class Roman {
     							//Also I think that runningValue = 0 is denoting that at LP=0 the running value is 0 
 //so the problem with going forward is that LP^0 can either be a + or - value, where as going backwards the last roman numeral could only be positive
     try {
-      for (int i = romansIn.length() - 1; i >= 0; i++) { // change this to the
+      for (int i=0; i <= romansIn.length()-1; i++) { // change this to the
                                                          // other direction, fix
                                                          // method to work.
         char c = romansIn.toUpperCase().charAt(i);
-        int charVal = romansMap.get(Character.toString(c));
+        System.out.println("C is: " + c);
+        /*int charVal = romansMap.get(Character.toString(c));
 
         if (lastPosition <= charVal) {
           runningValue -= charVal;
@@ -71,7 +72,7 @@ public class Roman {
         else {
           runningValue += charVal;
           lastPosition = charVal;
-        }
+        }*/
       }
     }
     catch (Exception e) {
