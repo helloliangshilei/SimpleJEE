@@ -11,9 +11,9 @@
 	<name>simpleapp</name>
 
 	<properties>
-		<spring.version>3.2.3.RELEASE</spring.version>
-		<hibernate.version>4.2.2.Final</hibernate.version>
-		<jackson.version>1.9.12</jackson.version>
+		<spring.version>3.2.6.RELEASE</spring.version>
+		<hibernate.version>4.2.8.Final</hibernate.version>
+		<jackson.version>1.9.13</jackson.version>
 		<app.libdir>./WebContent/WEB-INF/lib</app.libdir>
 	</properties>
 
