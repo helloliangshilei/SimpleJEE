@@ -11,10 +11,9 @@ is setup as a MySQL database using InnoDB:
   	  hibernate using Annotations, and Hibernate/Spring. 
 
 Building:
-	- Download the project using git clone. <Address>
-	- Maven options that you need are "mvn test", will run all tests, and "mvn tomcat:run" or "mvn tomcat7:run" for tomcat 7x to run tomcat for playing with webapp, rest stuff.
-	  Run these commands from the SimpleJEE/SimpleUser directory.
-	- **ANT build broken at the moment.  You'll need to setup mysql, and use the source command to get the right stuff in the DB.
+  - Download the project using git clone. 
+  - Maven options that you need are "mvn test", will run all tests, and "mvn tomcat:run" or "mvn tomcat7:run" for tomcat 7x to run tomcat for playing with webapp, rest stuff. Run these commands from the SimpleJEE/SimpleUser directory.
+  - **ANT build broken at the moment. I didn't update it after setting up maven.  You'll need to setup mysql, and use the source command to get the right stuff in the DB.
 
 1) Simple JDBC
 First example is a simple JDBC application that stores, changes, retrieves data in a single table SIMPLEAPP.USER.
