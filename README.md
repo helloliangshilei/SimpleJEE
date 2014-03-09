@@ -13,21 +13,19 @@ is setup as a MySQL database using InnoDB:
 Building:
   - Download the project using git clone. 
   - Maven options that you need are "mvn test", will run all tests, and "mvn tomcat:run" or "mvn tomcat7:run" for tomcat 7x to run tomcat for playing with webapp, rest stuff. Run these commands from the SimpleJEE/SimpleUser directory.
-  - **ANT build broken at the moment. I didn't update it after setting up maven.  You'll need to setup mysql, and use the source command to get the right stuff in the DB.
+  - ANT build broken at the moment. I didn't update it after setting up maven.  You'll need to setup mysql, and use the source command to get the right stuff in the DB.
 
-1) Simple JDBC
+### Simple JDBC
 First example is a simple JDBC application that stores, changes, retrieves data in a single table SIMPLEAPP.USER.
 All actions are based on the base objects in the "src/main/java/com/wickedhobo/object" package.  There are two primary classes, 
 User and Role following conventional Javabean standards with the addition of an constructors added simply 
 for me to mess around.
-	- I use simple DAO pattern for this found in classes/DAO.simpleDAO: "UserDAO"(interface) and "UserDAOImplSimple"
-		(implementation).  
-	- There's also a simple Factory pattern show in "classes/commonDAO"
-	- Connections to the database are managed through the "DBConnection" class in the "simpleJDBC" package.
-	- The JDBC Stuff I originally wrote cactus tests for, but switched to Maven/Spring tests, so there are no tests.  
-	  but you can have fun reading the code, or you can write some simple tests.
+  - I use simple DAO pattern for this found in classes/DAO.simpleDAO: "UserDAO"(interface) and "UserDAOImplSimple"(implementation).  
+  - There's also a simple Factory pattern show in "classes/commonDAO"
+  - Connections to the database are managed through the "DBConnection" class in the "simpleJDBC" package.
+  - The JDBC Stuff I originally wrote cactus tests for, but switched to Maven/Spring tests, so there are no tests. Mostly just doing some straight JDBC stuff to remember how things work there. :)
 	  
-2) Put on the fancy shoes: Hibernate, DAO, Generics 
+### Getting a little fancier: Hibernate, DAO, Generics 
 The second example is sort of two examples combined into one.  The fist one is standard Hibernate using the
 standard hibernate.cfg.xml style of development with mappings included in the related files.  The default is NOT
 to use this, since I like annotations better.  So to use it with the tests, go to com.wickedhobo.DAO.hibernateDAO.HibUtil
