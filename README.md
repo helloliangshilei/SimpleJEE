@@ -66,7 +66,7 @@ truly portable JPA application.
 Run the same test in sample two but using the default code in HibUtil.java. NOTE:the reason for Hibutil.java is to actually load the correct Hibernate configuration file at startup time inside a web container. 
  That's why it's a little painful for testing purposes.  Sorry.
 
-### Adding Spring in your step.  
+### Adding Spring.  
 The Spring sample is built using the sample DAO structure and inheritance structure as the Hibernate ones.  It's just using Spring
 injection to manage the session, transactions, all that sort of thing.  You can see the samples in CommonDAOSpringImpl, UserDAOHibSpringImpl which
 use the CommonDAO and UserDAO just as the last two examples did.
