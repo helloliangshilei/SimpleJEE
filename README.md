@@ -58,24 +58,22 @@ I'm also using DAO.hibernateDAO.HibUtil to manage sessions, transactions, that s
 I know some people like to use a "Manager" style DAO as another level of indirection, but I figured I'd gone far 
 enough for my purposes.
 
-3) Fancy shoes with @ signs.  JPA/Annotations
+### Adding JPA/Annotations
 The third and default example show's use of JPA annotations for the implementation, but in all other ways is exactly the same
 as the one above.   I know it's not a true JPA application since I'm using Hibernate's session stuff rather than EntityManager convention.  So it's not a 
 truly portable JPA application. 
 
-Run the same test in sample two but using the default code in HibUtil.java.
- 
- ****Note, the reason for Hibutil.java is to actually load the correct Hibernate configuration file at startup time inside a web container. 
+Run the same test in sample two but using the default code in HibUtil.java. NOTE:the reason for Hibutil.java is to actually load the correct Hibernate configuration file at startup time inside a web container. 
  That's why it's a little painful for testing purposes.  Sorry.
 
-4) Shoes with a Spring in your step.  
+### Adding Spring in your step.  
 The Spring sample is built using the sample DAO structure and inheritance structure as the Hibernate ones.  It's just using Spring
 injection to manage the session, transactions, all that sort of thing.  You can see the samples in CommonDAOSpringImpl, UserDAOHibSpringImpl which
 use the CommonDAO and UserDAO just as the last two examples did.
 
 The test file is src/test/java/com/wickedhobo/UserSpringHibernateTest/java/
 
-5) MVC Sample and Simple Web Sample
+### MVC Sample and Simple Web Sample
 
 I also wrote a simple Spring MVC sample.  You can see the controller at src/main/java/com/web/UserController and the Spring Test
 at /src/test/java/com/wickedhobo/UserControllerTest.java. It has a fairly comprehensive set of Spring Tests for the
@@ -85,7 +83,7 @@ Also, if you deploy or run maven tomcat7:run you can go to localhost:8080/Simple
 webapp that uses the MVC and maps to /result (src/main/resources/webapp/WEB-INF/JSP/result.jsp) which has some simple JEE EL
 that gets data from the Model and displays.
 
-6) Rest Sample: 
+### Rest Sample: 
 
 To run the tests, run "mvn test" in the SimpleeJEE/SimpleUser directory
 
@@ -98,23 +96,22 @@ findByUserNameWithAction shows how you can also use a Spring Model And View patt
 The test is at src/test/java/com/wickedhobo/UserControllerRestTest.java and has a fairly comprehensive set of Spring Tests for the
 REST methods in the controller using Hamcrest for Matchers.
 
-7) Webapp:  
+### Webapp:  
 
 To Run the webapp, run "mvn tomcat:run" or "mvn tomcat7:run" (for tomcat 7x) from the SimpleJEE/SimpleUser directory.  You then have some cool things todo:
 
-1) Simple webapp is here: http://localhost:8080/SimpleApp/    
-It has no real error checking, but does the basics.
+  - Simple webapp is here: http://localhost:8080/SimpleApp/    
+  - It has no real error checking, but does the basics.
 
-2) You can also make calls to the various REST interfaces using http or curl.  You're on your own for curl.  But some working calls:
-
-- http://localhost:8080/SimpleApp/userService/listUsersByRole/roleName/administrator.json
-- http://localhost:8080/SimpleApp/userService/listUsers.json
-- http://localhost:8080/SimpleApp/userService/findUserByUsernameWithAction/userName/mckerrj.json
-- http://localhost:8080/SimpleApp/userService/findUserByUsername/userName/mckerrj.json
+  - You can also make calls to the various REST interfaces using http or curl.  You're on your own for curl.  But some working calls:
+     - http://localhost:8080/SimpleApp/userService/listUsersByRole/roleName/administrator.json
+     - http://localhost:8080/SimpleApp/userService/listUsers.json
+     - http://localhost:8080/SimpleApp/userService/findUserByUsernameWithAction/userName/mckerrj.json
+     - http://localhost:8080/SimpleApp/userService/findUserByUsername/userName/mckerrj.json
 
 You will also see all of the REST requests and results printed out on the command line when running "mvn test"
 
-OTHER
+### OTHER
   - I use Logback for logging.  right now it's a very simple setup to send everything to the console.
   - It's been tested on OSX using java 6, and linux using java 7.
   - ** I've got the java level set in pom.xml to 1.7, so if on something else either remove or change.
